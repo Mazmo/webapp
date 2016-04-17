@@ -1,0 +1,14 @@
+@import "neat-helpers";
+
+// Neat settings
+$visual-grid: false;
+$grid-columns: 2;
+
+// Define your breakpoints
+$tablet-container: $main-width + ($aside-collapsed-width * 2);
+$tablet: new-breakpoint(min-width $tablet-container 8);
+
+$desktop-container: $main-width + ($aside-expanded-width * 2);
+$desktop: new-breakpoint(min-width $desktop-container 12);
+
+$max-width: $desktop-container;

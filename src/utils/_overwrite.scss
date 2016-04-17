@@ -1,0 +1,35 @@
+// Copiado casi tal cual de .profile
+.forums {
+    &-widget {
+        padding: $spacing-big;
+
+        &-title {
+            font-size: 1em;
+            font-weight: $font-bold;
+            margin-bottom: $spacing-medium * 1.5;
+        }
+    }
+
+    &-more {
+        &-forum {
+            margin-bottom: $spacing-medium;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &-link {
+                display: inline-block;
+                font-size: .85em;
+                margin-left: $spacing-small / 2;
+                font-weight: $font-bold;
+                color: $primary-color;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.hide {
+  display: none;
+}

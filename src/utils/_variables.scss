@@ -1,0 +1,72 @@
+// Colors
+$main-red:      #ff3b30;
+$main-dark:     #212121;
+$main-grey:     #2f2f2f;
+$main-red-alt:  #e91e63;
+
+// Sizes
+$main-width:            650px;
+$aside-collapsed-width: 60px;
+$aside-expanded-width:  300px;
+$nav-width:             75%;
+$header-height:         46px;
+
+
+
+
+
+
+
+
+
+
+
+/* wrappers */
+$width-wide:  650px;
+$width-small: 300px;
+
+/* spacings */
+$spacing-small:  4px;
+$spacing-medium: 10px;
+$spacing-big:    20px;
+
+/* media queries */
+$s-mobile:     "(max-width: 400px)";
+$mobile:       "(max-width: 649px)";
+/*$tablet:       "(min-width: 650px) and (max-width: 869px)";*/
+$not-desktop:  "(max-width: 869px)";
+$s-desktop:    "(min-width: 870px)";
+$m-desktop:    "(min-width: 1170px)";
+$b-desktop:    "(min-width: 1600px)";
+
+$bright-red:               	#FF3B30;
+//$primary-color:            	$bright-red;
+$primary-color:				#ff3b30;
+$main-dark: 	#212121;
+$light-grey:               	#EEEEEE;
+$almost-black:             	#404040;
+$attention-color:           	#7F30FF;
+$online-color:             	#76BA4D;
+$idle-color:               	orange;
+$charcoal:					#444;
+
+/* urls */
+$cdn: "//mazmocdn.com";
+$logo: "/img/logos/header.png";
+
+/* font-families */
+$base-font-family: "Lato";
+
+/* font-weights */
+$font-light: 	300;
+$font-regular: 	400;
+$font-bold:		700;
+
+/* header */
+$header-bar-element-size: 28px;
+$header-bar-avatar-size:  $header-bar-element-size;
+$header-bar-icon-size:    18px;
+
+/* aside */
+$aside-width:           250px;
+$aside-background-color: #2F2F2F;

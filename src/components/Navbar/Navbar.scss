@@ -1,0 +1,56 @@
+@import '../../utils/styles';
+
+.header {
+	@include display(flex);
+	@include justify-content(center);
+	@include size(100% $header-height);
+	position: fixed;
+	z-index: 10;
+	background: $main-red;
+	height: $header-height;
+}
+
+.container {
+	@include display(flex);
+	@include flex-grow(1);
+	width: 100%;
+	max-width: $main-width + $aside-expanded-width + $aside-collapsed-width;
+}
+
+.icon_nav {
+	@include size(24px $header-height);
+	fill: white;
+	display: inline-block;
+
+	@include media($tablet) {
+		display: none;
+	}
+}
+
+.icon_back {
+	@include size(24px auto);
+	fill: white;
+	margin: 0 15px;
+	display: inline-block;
+	padding: 0;
+
+	@include media($tablet) {
+		display: none;
+	}
+}
+
+button.header-icon-button	{
+		background: transparent;
+		border:0;
+		padding: 2px 12px;
+		margin: 0;
+		outline: 0;
+}
+
+.logo {
+	@include display(flex);
+	@include flex(0 0);
+	@include size(200px auto);
+	background: url($logo) left no-repeat;
+	background-size: 55%;
+}
