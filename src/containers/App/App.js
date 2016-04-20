@@ -58,7 +58,7 @@ export default class App extends Component {
   };
 
   render() {
-    const {user} = this.props;
+    const { user } = this.props;
     const styles = require('./App.scss');
 
     return (
@@ -66,7 +66,7 @@ export default class App extends Component {
         <div className={styles.app}>
           <Helmet {...config.app.head}/>
           {user &&
-          <Navbar />}
+          <Navbar user={user} />}
 
           <div className={styles.appContent}>
             {this.props.children}

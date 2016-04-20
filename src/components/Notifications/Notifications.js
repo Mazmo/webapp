@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Icon, NotificationsList } from '../';
 
 export default class Notifications extends Component {
+  static propTypes = {
+    unread: PropTypes.number.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +45,7 @@ export default class Notifications extends Component {
           <div onClick={this.toggle}>
               <Icon name="bell" />
           </div>
-          <span className={styles.notificationsCounter}></span>
+          <span className={styles.notificationsCounter}>{this.props.unread}</span>
           <NotificationsList visible={this.state.active} />
       </div>
     );

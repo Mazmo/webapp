@@ -6,7 +6,8 @@ import {
 
 export default class Navbar extends Component {
   static propTypes = {
-    hasBack: PropTypes.bool
+    hasBack: PropTypes.bool,
+    user: PropTypes.object
   };
 
   goBack = () => {
@@ -31,7 +32,7 @@ export default class Navbar extends Component {
           }
           <a className={styles.logo}></a>
           <div className={styles.bar}>
-            <Notifications />
+            <Notifications unread={this.props.user.alerts_unread} />
             {/* <Messages /> */}
             <div className={styles.bar_menu}>
                 {/* <Avatar context="header-bar-menu-avatar" size="32" user={this.props.user} /> */}
