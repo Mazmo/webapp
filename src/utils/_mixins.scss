@@ -317,3 +317,187 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@mixin header-bar-element($size, $spacing: $spacing-big) {
+
+	position: relative;
+	float: right;
+	padding: 10px;
+	font-size: $header-bar-icon-size;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+	cursor: pointer;
+	line-height: 40px;
+
+	&:last-child {
+		margin-right: $spacing;
+	}
+
+	&-counter::after {
+		content: attr(data-counter);
+		position: absolute;
+		top: 3px;
+		left: 20px;
+		font-size: 0.7rem;
+		color: $main-red;
+		background: #fff;
+		border: solid 2px $main-red;
+		border-radius: 5px;
+		line-height: 15px;
+		padding: 0 5px;
+		font-weight: $font-bold;
+		text-shadow: none;
+
+		@include transition(all .3s ease-in-out);
+	}
+
+	&-counter[data-counter=""]::after,
+	&-counter[data-counter="0"]::after {
+		opacity: 0;
+	}
+
+	.icon {
+		@include size(24px);
+	}
+}
+
+@mixin header-bar-dropdown($context) {
+	display: none;
+	@include position(fixed, $header-height 0 auto 0);
+	width: 100%;
+	min-height: $header-bar-element-size + ($spacing-medium * 2);
+	max-height: 80%;
+	background-color: white;
+	color: $almost-black;
+	text-shadow: none;
+	font-size: .65em;
+	text-align: left;
+
+	@include media($tablet) {
+		@include position(absolute, $header-height 0 auto auto);
+		width: 300px;
+		border-radius: 3px;
+	}
+
+	&.visible {
+		display: block;
+	}
+
+	&:after {
+		@include position(absolute, -15px $spacing-medium * 1.5 auto auto);
+		@include size(0px);
+		border: solid transparent;
+		content: " ";
+		pointer-events: none;
+		border-color: rgba(136, 183, 213, 0);
+		border-bottom-color: white;
+		border-width: 8px;
+
+		@if $context == 'notifications' {
+			right: 59px;
+
+			@include media($tablet) {
+				right: 15px;
+			}
+		}
+	}
+
+	&-header {
+		font-size: 1.2em;
+		font-weight: $font-bold;
+		color: $primary-color;
+		padding: 0 $spacing-medium;
+	}
+
+	&-container {
+		position: relative;
+		height: 264px;
+		overflow: hidden;
+		background: inherit;
+	}
+
+	&-goto {
+		width: 100%;
+		padding: 0 $spacing-medium;
+		display: inline-block;
+		text-align: right;
+		text-decoration: none;
+		color: black;
+		font-weight: $font-bold;
+	}
+
+	&-item {
+		border-bottom: solid 1px $light-grey;
+		position: relative;
+
+		&.unread {
+			background: rgba(0, 0, 0, .05);
+			padding-right: $spacing-big * 1.5;
+
+			&:after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: $spacing-medium * 1.5;
+				bottom: 0;
+				margin: auto;
+				width: 8px;
+				height: 8px;
+				background: $primary-color;
+				border-radius: 100%;
+				opacity: .7;
+			}
+		}
+
+		&:hover {
+			background: rgba(0, 0, 0, .05);
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		&-link {
+			display: block;
+			padding: $spacing-medium;
+			text-decoration: none;
+		}
+
+		&-avatar {
+			float: left;
+			display: block;
+			border-radius: $spacing-small;
+			margin-right: $spacing-medium;
+		}
+
+		&-action {
+			line-height: 1.3em;
+			color: #979797;
+			height: 32px;
+		  text-overflow: ellipsis;
+		  overflow: hidden;
+
+			@if $context == 'notifications' {
+
+				strong {
+					font-weight: $font-bold;
+					color: #666;
+				}
+
+			} @else if $context == 'messages' {
+
+				strong {
+					font-weight: $font-bold;
+					color: black;
+				}
+
+				& > strong {
+					display: block;
+					color: $primary-color;
+				}
+
+			}
+
+		}
+	}
+}

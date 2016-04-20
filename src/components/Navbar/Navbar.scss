@@ -8,6 +8,7 @@
 	z-index: 10;
 	background: $main-red;
 	height: $header-height;
+  top: 0;
 }
 
 .container {
@@ -17,17 +18,7 @@
 	max-width: $main-width + $aside-expanded-width + $aside-collapsed-width;
 }
 
-.icon_nav {
-	@include size(24px $header-height);
-	fill: white;
-	display: inline-block;
-
-	@include media($tablet) {
-		display: none;
-	}
-}
-
-.icon_back {
+.icon-back {
 	@include size(24px auto);
 	fill: white;
 	margin: 0 15px;
@@ -39,18 +30,28 @@
 	}
 }
 
-button.header-icon-button	{
-		background: transparent;
-		border:0;
-		padding: 2px 12px;
-		margin: 0;
-		outline: 0;
+button.icon-button	{
+	background: transparent;
+	border:0;
+	padding: 2px 12px;
+	margin: 0;
+	outline: 0;
+
+	svg {
+		@include size(24px $header-height);
+		fill: white;
+		display: inline-block;
+
+		@include media($tablet) {
+			display: none;
+		}
+	}
 }
 
 .logo {
 	@include display(flex);
 	@include flex(0 0);
 	@include size(200px auto);
-	background: url($logo) left no-repeat;
+	background: url('./Logo.png') left no-repeat;
 	background-size: 55%;
 }
