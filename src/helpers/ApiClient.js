@@ -21,6 +21,13 @@ function formatUrl(path) {
  */
 class _ApiClient {
   constructor(req) {
+    this.getReq = () => req;
+    this.authorization = null;
+
+    this.setAuthorization = (auth) => {
+      this.authorization = auth;
+    };
+
     methods.forEach((method) =>
       this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
@@ -32,6 +39,10 @@ class _ApiClient {
 
         if (__SERVER__ && req.get('cookie')) {
           request.set('cookie', req.get('cookie'));
+        }
+
+        if (__CLIENT__ && this.authorization) {
+          request.set('sessid', this.authorization);
         }
 
         if (data) {

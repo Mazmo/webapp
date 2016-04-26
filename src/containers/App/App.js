@@ -52,11 +52,6 @@ export default class App extends Component {
     }
   }
 
-  handleLogout = (event) => {
-    event.preventDefault();
-    this.props.logout();
-  };
-
   render() {
     const { user } = this.props;
     const styles = require('./App.scss');
@@ -71,6 +66,10 @@ export default class App extends Component {
           <div className={styles.appContent}>
             {this.props.children}
           </div>
+
+          {user &&
+            <button onClick={this.props.logout}>Logout</button>
+          }
         </div>
       </IntlProvider>
     );

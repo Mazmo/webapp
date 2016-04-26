@@ -82,8 +82,10 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: () => Promise.resolve()
-    // promise: (client) => client.get('/loadAuth')
+    promise: (client) => {
+      const cookieAuth = client.getReq().cookies.auth ? JSON.parse(client.getReq().cookies.auth) : null;
+      return Promise.resolve(cookieAuth);
+    }
   };
 }
 
@@ -95,6 +97,9 @@ export function login(username, password) {
         username,
         password
       }
+    }).then((result) => {
+      document.cookie = 'auth=' + JSON.stringify(result);
+      return result;
     })
   };
 }
@@ -102,7 +107,9 @@ export function login(username, password) {
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: () => Promise.resolve()
-    // promise: (client) => client.get('/logout')
+    promise: () => {
+      document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+      return Promise.resolve();
+    }
   };
 }

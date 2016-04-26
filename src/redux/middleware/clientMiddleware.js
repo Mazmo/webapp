@@ -13,6 +13,11 @@ export default function clientMiddleware(client) {
       const [REQUEST, SUCCESS, FAILURE] = types;
       next({...rest, type: REQUEST});
 
+      const state = getState();
+      if (__CLIENT__ && state.auth && state.auth.user) {
+        client.setAuthorization(state.auth.user.sessid);
+      }
+
       const actionPromise = promise(client);
       actionPromise.then(
         (result) => next({...rest, result, type: SUCCESS}),

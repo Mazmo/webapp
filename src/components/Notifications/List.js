@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import * as notificationsActions from 'redux/modules/notifications';
+import { Loading } from '../';
+import Notification from './Notification';
 
 @connect(
   state => ({
@@ -38,8 +40,14 @@ export default class List extends Component {
       <div className={classNames(classes)}>
 				<h2 className={styles.notificationsListHeader}>Notificaciones</h2>
 				<div className={styles.notificationsListContainer}>
-					{this.props.loading && <div>LOADING</div>}
-					{this.props.loaded && <div>LOADED!!!</div>}
+					{this.props.loading && <Loading />}
+					{this.props.loaded &&
+            <ul>
+              {this.props.notifications.map((notification, i) => {
+                return <Notification key={i} data={notification} />;
+              })}
+            </ul>
+          }
 				</div>
 			</div>
     );
