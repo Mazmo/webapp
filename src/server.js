@@ -23,6 +23,16 @@ const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 
+if (global.Intl) {
+  if (!areIntlLocalesSupported(localesMyAppSupports)) {
+    var IntlPolyfill    = require('intl');
+    Intl.NumberFormat   = IntlPolyfill.NumberFormat;
+    Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
+  }
+} else {
+  global.Intl = require('intl');
+}
+
 app.use(cookieParser());
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
