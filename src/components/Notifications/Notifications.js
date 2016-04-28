@@ -4,7 +4,7 @@ import { Icon, NotificationsList } from '../';
 
 export default class Notifications extends Component {
   static propTypes = {
-    unread: PropTypes.number.isRequired
+    unread: PropTypes.number
   };
 
   constructor(props) {

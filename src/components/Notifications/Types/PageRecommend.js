@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Avatar } from '../../';
 
-export default class Following extends Component {
+export default class PageRecommend extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired
   };
@@ -9,9 +8,9 @@ export default class Following extends Component {
   render() {
     return (
       <div className="notifications-list-item-link">
-				<Avatar size={32} user={this.props.data.interact_user} />
+				<img src={this.props.data.page.avatar} alt={this.props.data.page.name} />
 				<p className="notifications-list-item-action">
-					<strong>{this.props.data.interact_user.displayname}</strong> ahora te está siguiendo
+					<strong>{this.props.data.interact_user.display_name}</strong> te recomienda que sigas la página <strong>{this.props.data.page.name}</strong>
 				</p>
 			</div>
     );

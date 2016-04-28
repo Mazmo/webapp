@@ -23,13 +23,7 @@ const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 
-if (global.Intl) {
-  if (!areIntlLocalesSupported(localesMyAppSupports)) {
-    var IntlPolyfill    = require('intl');
-    Intl.NumberFormat   = IntlPolyfill.NumberFormat;
-    Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
-  }
-} else {
+if (!global.Intl) {
   global.Intl = require('intl');
 }
 
