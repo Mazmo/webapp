@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Icon,
-  Notifications
+  Avatar,
+  Notifications,
+  Messages
 } from '../';
 
 export default class Navbar extends Component {
@@ -33,9 +35,9 @@ export default class Navbar extends Component {
           <a className={styles.logo}></a>
           <div className={styles.bar}>
             <Notifications unread={this.props.user.alerts_unread} />
-            {/* <Messages /> */}
+            <Messages />
             <div className={styles.bar_menu}>
-                {/* <Avatar context="header-bar-menu-avatar" size="32" user={this.props.user} /> */}
+                <Avatar context="header-bar-menu-avatar" size={32} user={this.props.user} />
             </div>
           </div>
         </div>

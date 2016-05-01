@@ -9,7 +9,7 @@ export default class UserKnows extends Component {
   render() {
     return (
       <div className="notifications-list-item-link">
-				<Avatar context="notifications-list-item-avatar" size="32" user={this.props.data.interact_user} />
+				<Avatar context="notifications-list-item-avatar" size={32} user={this.props.data.interact_user} />
 				<p className="notifications-list-item-action">
 					<strong>{this.props.data.interact_user.displayname}</strong> ha indicado que te conoce personalmente
 				</p>
