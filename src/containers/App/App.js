@@ -9,7 +9,8 @@ import es from 'react-intl/locale-data/es';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import locales from '../../utils/locales';
 import {
-  Navbar
+  Navbar,
+  Aside
 } from '../../components';
 
 const locale = 'es';
@@ -60,8 +61,8 @@ export default class App extends Component {
       <IntlProvider locale={locale} messages={messages}>
         <div className={styles.app}>
           <Helmet {...config.app.head}/>
-          {user &&
-          <Navbar user={user} />}
+          {user && <Navbar user={user} />}
+          {user && <Aside user={user} />}
 
           <div className={styles.appContent}>
             {this.props.children}
