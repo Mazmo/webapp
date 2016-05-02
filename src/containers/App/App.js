@@ -63,7 +63,7 @@ export default class App extends Component {
           {user &&
           <Navbar user={user} />}
 
-          <div className={styles.appContent}>
+          <div className={styles.app.content}>
             {this.props.children}
           </div>
 

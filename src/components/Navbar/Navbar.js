@@ -23,7 +23,7 @@ export default class Navbar extends Component {
 
     return (
       <header className={styles.header}>
-        <div className={styles.container}>
+        <div className={styles.header.container}>
           {this.props.hasBack &&
             <button className={styles.iconButton} onClick={this.goBack}><Icon className={styles.iconNav} name="back" /></button>
           }
