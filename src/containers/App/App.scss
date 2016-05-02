@@ -1,7 +1,12 @@
-@import '../../utils/styles';
+@import '../../utils/variables';
+@import "bourbon";
+@import '../../utils/grid-settings';
+@import "neat";
+@import '../../utils/base';
 
 .app {
-  @include size(100%);
+  width: 100%;
+  height: 100%;
   background: blue;
 
   .content {

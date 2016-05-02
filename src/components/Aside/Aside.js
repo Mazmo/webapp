@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 //   Avatar
 // } from '../';
 
-export default class Navbar extends Component {
+export default class Aside extends Component {
   static propTypes = {
     user: PropTypes.object
   };
