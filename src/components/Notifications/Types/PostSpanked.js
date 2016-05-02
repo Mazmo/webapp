@@ -9,7 +9,7 @@ export default class PostSpanked extends Component {
   render() {
     return (
       <a className="notifications-list-item-link" href="#">
-				<Avatar context="notifications-list-item-avatar" size="32" user={this.props.data.interact_user} />
+				<Avatar context="notifications-list-item-avatar" size={32} user={this.props.data.interact_user} />
 				<p className="notifications-list-item-action">
 					<strong>{this.props.data.interact_user.displayname}</strong> te spankeó un post
 				</p>
