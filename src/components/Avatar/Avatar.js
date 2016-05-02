@@ -10,9 +10,7 @@ export default class Avatar extends Component {
     const size = this.props.size ? this.props.size : 32;
     const src = this.props.user.avatar.replace('150x150', size + 'x' + size);
     return (
-      <div>
-				<img src={src} width={size} height={size} />
-			</div>
+			<img src={src} width={size} height={size} />
     );
   }
 }

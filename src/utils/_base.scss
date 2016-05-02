@@ -3,7 +3,7 @@ html, html a {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
-body, html, #app {
+body, html {
 	position: relative;
 	height: 100%;
 }
@@ -20,78 +20,6 @@ textarea, input {
 	font-size: 0.8em
 }
 
-
-/* perdón por no saber donde poner esto aún :'c */
-.loader {
-  -webkit-animation: load8 1.1s infinite linear;
-  animation: load8 1.1s infinite linear;
-}
-
-.loader-small {
-	font-size: 2px;
-}
-
-.loader-medium {
-	font-size: 3px;
-}
-
-.loader-big {
-	font-size: 5px;
-}
-
-.loader-light {
-	border-top: 1.1em solid rgba(255, 255, 255, 0.2);
-	border-right: 1.1em solid rgba(255, 255, 255, 0.2);
-	border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
-	border-left: 1.1em solid #ffffff;
-}
-
-.loader-dark {
-	border-top: 1.1em solid rgba(0, 0, 0, 0.2);
-	border-right: 1.1em solid rgba(0, 0, 0, 0.2);
-	border-bottom: 1.1em solid rgba(0, 0, 0, 0.2);
-	border-left: 1.1em solid rgba(0, 0, 0, 0.4);
-}
-
-.loader-pos-abs {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	margin: auto;
-}
-
-.loader-pos-rel {
-	position: relative;
-	margin: 20px auto;
-}
-
-.loader,
-.loader:after {
-  border-radius: 50%;
-  width: 10em;
-  height: 10em;
-}
-@-webkit-keyframes load8 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes load8 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
 
 
 /*
