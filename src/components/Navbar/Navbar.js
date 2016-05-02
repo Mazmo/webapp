@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import {
   Icon,
   Avatar,
-  Notifications,
-  Messages
+  Messages,
+  Notifications
 } from '../';
 
 export default class Navbar extends Component {
@@ -25,12 +25,12 @@ export default class Navbar extends Component {
 
     return (
       <header className={styles.header}>
-        <div className={styles.header.container}>
+        <div className={styles.container}>
           {this.props.hasBack &&
-            <button className={styles.iconButton} onClick={this.goBack}><Icon className={styles.iconNav} name="back" /></button>
+            <button className={styles.button} onClick={this.goBack}><Icon className={styles.buttonIcon} name="back" /></button>
           }
           {!this.props.hasBack &&
-            <button className={styles.iconButton} onClick={this.goNav}><Icon className={styles.iconNav} name="nav" /></button>
+            <button className={styles.button} onClick={this.goNav}><Icon className={styles.buttonIcon} name="nav" /></button>
           }
           <a className={styles.logo}></a>
           <div className={styles.bar}>

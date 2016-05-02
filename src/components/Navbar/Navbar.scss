@@ -1,4 +1,7 @@
-@import '../../utils/styles';
+@import '../../utils/variables';
+@import 'bourbon';
+@import '../../utils/grid-settings';
+@import 'neat';
 
 .header {
 	@include display(flex);
@@ -13,8 +16,45 @@
 	.container {
 		@include display(flex);
 		@include flex-grow(1);
+		@include flex-direction(flex-start);
 		width: 100%;
 		max-width: $main-width + $aside-expanded-width + $aside-collapsed-width;
+	}
+
+	.button {
+		background: transparent;
+		border:0;
+		padding: 0 12px;
+		margin: 0;
+		outline: 0;
+
+		svg {
+			@include size(24px $header-height);
+			fill: white;
+			display: inline-block;
+
+			@include media($tablet) {
+				display: none;
+			}
+		}
+	}
+
+	.button-icon {
+		@include size(24px $header-height);
+		fill: white;
+		display: inline-block;
+
+		@include media($tablet) {
+			display: none;
+		}
+	}
+
+	.logo {
+		@include display(flex);
+		@include flex(1 0);
+		@include size(200px auto);
+		background: url('./Logo.png') left no-repeat;
+		background-size: 40%;
 	}
 
 }
@@ -29,30 +69,4 @@
 	@include media($tablet) {
 		display: none;
 	}
-}
-
-button.icon-button	{
-	background: transparent;
-	border:0;
-	padding: 0 12px;
-	margin: 0;
-	outline: 0;
-
-	svg {
-		@include size(24px $header-height);
-		fill: white;
-		display: inline-block;
-
-		@include media($tablet) {
-			display: none;
-		}
-	}
-}
-
-.logo {
-	@include display(flex);
-	@include flex(0 0);
-	@include size(200px auto);
-	background: url('./Logo.png') left no-repeat;
-	background-size: 45%;
 }
