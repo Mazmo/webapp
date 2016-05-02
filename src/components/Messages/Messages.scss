@@ -1,0 +1,6 @@
+@import '../../utils/styles';
+
+.messages svg {
+	@include header-bar-element($header-bar-element-size);
+	fill: white;
+}

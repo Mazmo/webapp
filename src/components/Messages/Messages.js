@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Icon } from '../';
-import NotificationsList from './List';
+import MessagesList from './List';
 
-export default class Notifications extends Component {
+export default class Messages extends Component {
   static propTypes = {
     unread: PropTypes.number
   };
@@ -39,15 +39,15 @@ export default class Notifications extends Component {
   }
 
   render() {
-    const styles = require('./Notifications.scss');
+    const styles = require('./Messages.scss');
 
     return (
-      <div className={styles.notifications} title="Notificaciones">
-          <div onClick={this.toggle}>
-              <Icon name="bell" />
-          </div>
-          <span className={styles.notificationsCounter}>{this.props.unread}</span>
-          <NotificationsList visible={this.state.active} />
+      <div className={styles.messages} title="Mensajes">
+        <div onClick={this.toggle}>
+            <Icon name="message" />
+        </div>
+        <span className={styles.notificationsCounter}>{this.props.unread}</span>
+        <MessagesList visible={this.state.active} />
       </div>
     );
   }
