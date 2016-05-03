@@ -1,0 +1,97 @@
+@import '../../utils/variables';
+@import 'bourbon';
+@import '../../utils/grid-settings';
+@import 'neat';
+
+.aside {
+	@include display(flex);
+	@include flex(0 1);
+	width: 100%;
+	background: $main-grey;
+
+	&.right {
+		display: none;
+
+		@include media($tablet) {
+			@include display(flex);
+			@include justify-content(flex-start);
+			@include size($aside-expanded-width auto);
+			padding: 10px;
+		}
+	}
+
+	@include media($tablet) {
+		@include justify-content(flex-end);
+		@include flex-grow(1);
+		width: auto;
+	}
+
+	.nav.on-aside {
+		@include display(flex);
+		@include flex-direction(row);
+		@include justify-content(center);
+		@include fill-parent;
+		background: $main-red;
+
+		@include media($tablet) {
+			@include display(flex);
+			@include flex-direction(column);
+			@include justify-content(flex-start);
+			padding: 20px 10px;
+			background: transparent;
+		}
+
+		.nav-link {
+			@include display(flex);
+			@include align-self(flex-end);
+			@include flex-grow(1);
+			padding: 10px;
+			border-bottom: 2px solid transparent;
+
+			@include media($tablet) {
+				@include flex-grow(0);
+			}
+
+			.icon {
+				@include transition(opacity 150ms);
+				@include size(25px);
+				margin: 0 auto;
+				opacity: 0.55;
+				fill: black;
+					@include media($tablet) {
+						fill: white;
+				}
+
+				&:hover {
+					opacity: 0.75;
+				}
+			}
+
+			&.active {
+				border-bottom: 2px solid white;
+
+				@include media($tablet) {
+					border-bottom: none;
+				}
+
+				.icon {
+					opacity: 1;
+					fill: white;
+				}
+			}
+
+		}
+	}
+
+	.widget {
+
+		&-title {
+			margin: 0 0 $spacing-medium;
+		}
+
+		+ .widget {
+			margin-top: $spacing-big;
+		}
+	}
+
+}
