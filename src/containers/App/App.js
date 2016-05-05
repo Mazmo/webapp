@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { chgIcon as chgNavIcon } from 'redux/modules/nav';
+import { chgIcon as chgNavIcon, chgTitle as chgNavTitle, chgAction as chgNavAction } from 'redux/modules/nav';
 import { routeActions } from 'react-router-redux';
 import config from '../../config';
 import { asyncConnect } from 'redux-async-connect';
@@ -34,7 +34,7 @@ const messages = locales(locale);
     user: state.auth.user,
     nav: state.nav
   }),
-  {logout, chgNavIcon, pushState: routeActions.push})
+  {logout, chgNavIcon, chgNavTitle, chgNavAction, pushState: routeActions.push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -42,12 +42,21 @@ export default class App extends Component {
     nav: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
     chgNavIcon: PropTypes.func.isRequired,
+    chgNavTitle: PropTypes.func.isRequired,
+    chgNavAction: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
 
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      aside: false
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
@@ -57,11 +66,21 @@ export default class App extends Component {
       // logout
       this.props.pushState('/');
     }
+
+    if (!this.props.nav.action && nextProps.nav.action && this.state.aside) {
+      // Hide aside if another nav icon is triggered
+      this.setState({ aside: false });
+    }
+  }
+
+  toggleAside = () => {
+    this.setState({ aside: !this.state.aside });
   }
 
   render() {
     const { user } = this.props;
     const styles = require('./App.scss');
+    const navAction = this.props.nav.action ? this.props.nav.action : this.toggleAside;
 
     return (
       <IntlProvider locale={locale} messages={messages}>
@@ -73,9 +92,16 @@ export default class App extends Component {
               icon={this.props.nav.icon}
               title={this.props.nav.title}
               logo={this.props.nav.logo}
-              chgIcon={this.props.chgNavIcon} />
+              action={navAction}
+              chgTitle={this.props.chgNavTitle}
+              chgIcon={this.props.chgNavIcon}
+              chgAction={this.props.chgNavAction} />
           }
-          {user && <Aside user={user} />}
+          {user &&
+            <Aside
+              user={user}
+              visible={this.state.aside} />
+          }
 
           <div className={styles.app.content}>
             {this.props.children}

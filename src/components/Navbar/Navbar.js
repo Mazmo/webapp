@@ -12,30 +12,12 @@ export default class Navbar extends Component {
   static propTypes = {
     user: PropTypes.object,
     icon: PropTypes.string.isRequired,
-    logo: PropTypes.bool.isRequired,
     title: PropTypes.string,
-    chgIcon: PropTypes.func.isRequired
+    action: PropTypes.func.isRequired,
+    chgIcon: PropTypes.func.isRequired,
+    chgTitle: PropTypes.func.isRequired,
+    chgAction: PropTypes.func.isRequired
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      hasBack: false,
-      title: ''
-    };
-  }
-
-  updateState = (state) => {
-    this.setState(state);
-  }
-
-  goBack = () => {
-    // this.history.goBack();
-  }
-
-  goNav = () => {
-    // this.props.toggleNav();
-  }
 
   render() {
     const styles = require('./Navbar.scss');
@@ -44,16 +26,23 @@ export default class Navbar extends Component {
       <header className={styles.header}>
         <div className={styles.container}>
 
-          <button className={styles.button} onClick={this.goBack}><Icon className={styles.icon} name={this.props.icon} /></button>
+          <button className={styles.button} onClick={this.props.action}><Icon className={styles.icon} name={this.props.icon} /></button>
 
           <div className={styles.bar}>
-            {this.state.title &&
-              <div className={styles.title}>{this.state.title}</div>
+            {this.props.title &&
+              <div className={styles.title}>{this.props.title}</div>
             }
-            {!this.state.title &&
+            {!this.props.title &&
               <div className={styles.logo}></div>
             }
-            <Dropdown name="notifications" icon="bell" counter={this.props.user.alerts_unread} updateState={this.updateState}>
+            <Dropdown
+              name="notifications"
+              title="Notificaciones"
+              icon="bell"
+              counter={this.props.user.alerts_unread}
+              chgNavIcon={this.props.chgIcon}
+              chgNavTitle={this.props.chgTitle}
+              chgNavAction={this.props.chgAction}>
               <Notification />
             </Dropdown>
             <div className={styles.messages}></div>

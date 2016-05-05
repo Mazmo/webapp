@@ -5,8 +5,11 @@ import { Icon } from '../../';
 export default class Dropdown extends Component {
   static propTypes = {
     icon: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     children: PropTypes.object.isRequired,
-    updateState: PropTypes.func
+    chgNavIcon: PropTypes.func.isRequired,
+    chgNavTitle: PropTypes.func.isRequired,
+    chgNavAction: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -17,11 +20,15 @@ export default class Dropdown extends Component {
   }
 
   toggle = () => {
-    this.props.updateState({
-      title: (!this.state.active ? 'Notificaciones' : ''),
-      hasBack: !this.state.active
-    });
-    this.setState({ active: !this.state.active });
+    const active = !this.state.active;
+    const icon = active ? 'back' : 'nav';
+    const title = active ? this.props.title : null;
+    const action = active ? this.toggle : null;
+
+    this.props.chgNavIcon(icon);
+    this.props.chgNavTitle(title);
+    this.props.chgNavAction(action);
+    this.setState({ active });
   }
 
   render() {
