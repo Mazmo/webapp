@@ -75,6 +75,22 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+function doLogin(client, username, password) {
+  return client.post('/login', {
+    data: {
+      username,
+      password
+    }
+  }).then((result) => {
+    if (__CLIENT__) {
+      document.cookie = 'auth=' + JSON.stringify(result);
+      document.cookie = 'username=' + username;
+      document.cookie = 'password=' + password;
+    }
+    return result;
+  });
+}
+
 export function isLoaded(globalState) {
   return globalState.auth && globalState.auth.loaded;
 }
@@ -83,8 +99,16 @@ export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => {
-      const cookieAuth = client.getReq().cookies.auth ? JSON.parse(client.getReq().cookies.auth) : null;
-      return Promise.resolve(cookieAuth);
+      if (client.getReq()) {
+        const username = client.getReq().cookies.username;
+        const password = client.getReq().cookies.password;
+
+        if (username && password) {
+          return doLogin(client, username, password);
+        }
+      }
+
+      return Promise.resolve();
     }
   };
 }
@@ -92,15 +116,7 @@ export function load() {
 export function login(username, password) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/login', {
-      data: {
-        username,
-        password
-      }
-    }).then((result) => {
-      document.cookie = 'auth=' + JSON.stringify(result);
-      return result;
-    })
+    promise: (client) => doLogin(client, username, password)
   };
 }
 
@@ -108,7 +124,11 @@ export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
     promise: () => {
-      document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+      if (__CLIENT__) {
+        document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        document.cookie = 'password=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+      }
       return Promise.resolve();
     }
   };

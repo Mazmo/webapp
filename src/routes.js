@@ -3,8 +3,7 @@ import {IndexRoute, Route} from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
     App,
-    Home,
-    Landing,
+    Index,
     NotFound,
   } from 'containers';
 
@@ -32,14 +31,7 @@ export default (store) => {
   return (
     <Route path="/" component={App}>
       { /* Home (main) route */ }
-      <IndexRoute getComponents={(location, cb) => {
-        const { auth: { user }} = store.getState();
-        if (!user) {
-          cb(null, {children: Landing});
-        } else {
-          cb(null, {children: Home});
-        }
-      }} />
+      <IndexRoute component={Index} />
 
       { /* Routes requiring login */ }
       <Route onEnter={requireLogin}>

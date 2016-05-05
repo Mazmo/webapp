@@ -31,7 +31,7 @@ class Landing extends Component {
     const { intl } = this.props;
 
     return (
-      <div className="container">
+      <div className="container LANDING">
         <div className={styles.login_form}>
           <input ref="username" type="text" placeholder={intl.formatMessage({ id: 'app.Landing.username' })} required autoFocus />
           <input ref="password" type="password" placeholder={intl.formatMessage({ id: 'app.Landing.password' })} required />
