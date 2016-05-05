@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Icon extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    onClick: PropTypes.func
   };
 
   render() {
@@ -132,7 +133,7 @@ export default class Icon extends Component {
 
     const className = `icon icon_${this.props.name}`;
     return (
-      <svg className={className} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+      <svg className={className} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" onClick={this.props.onClick}>
         <path d={path} />
       </svg>
     );

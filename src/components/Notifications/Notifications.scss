@@ -1,6 +1,12 @@
 @import '../../utils/styles';
 
-.notifications svg {
-	@include header-bar-element($header-bar-element-size);
-	fill: white;
+.notifications {
+	@include display(flex);
+	width: $header-height;
+	background: blue;
+
+	svg {
+		fill: white;
+	}
+
 }

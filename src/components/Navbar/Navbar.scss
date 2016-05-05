@@ -37,24 +37,46 @@
 				display: none;
 			}
 		}
+
+		.icon {
+			@include size(24px $header-height);
+			fill: white;
+			display: inline-block;
+
+			@include media($tablet) {
+				display: none;
+			}
+		}
+
 	}
 
-	.button-icon {
-		@include size(24px $header-height);
-		fill: white;
-		display: inline-block;
+	.bar {
+		@include display(flex);
+		width: 100%;
 
-		@include media($tablet) {
-			display: none;
+		.logo {
+			@include display(flex);
+			@include flex-grow(1);
 		}
+
+		.messages {
+			@include display(flex);
+			width: $header-height;
+		}
+
+		.menu {
+			@include display(flex);
+			width: $header-height;
+		}
+
 	}
 
 	.logo {
-		@include display(flex);
+		@include display(none);
 		@include flex(1 0);
-		@include size(200px auto);
+		width: 100%;
 		background: url('./Logo.png') left no-repeat;
-		background-size: 40%;
+		background-size: 100px;
 	}
 
 }

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Icon } from '../';
-import NotificationsList from './List';
+/* import NotificationsList from './List'; */
 
 export default class Notifications extends Component {
   static propTypes = {
@@ -43,11 +43,11 @@ export default class Notifications extends Component {
 
     return (
       <div className={styles.notifications} title="Notificaciones">
-          <div onClick={this.toggle}>
-              <Icon name="bell" />
-          </div>
-          <span className={styles.notificationsCounter}>{this.props.unread}</span>
-          <NotificationsList visible={this.state.active} />
+        <div className={styles.toggle} onClick={this.toggle}>
+          <Icon name="bell" />
+        </div>
+        {/* <span className={styles.notificationsCounter}>{this.props.unread}</span>
+        <NotificationsList visible={this.state.active} /> */}
       </div>
     );
   }

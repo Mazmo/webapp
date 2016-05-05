@@ -1,0 +1,42 @@
+@import '../../../utils/variables';
+@import 'bourbon';
+@import '../../../utils/grid-settings';
+@import 'neat';
+
+.dropdown {
+  @include display(flex);
+  @include justify-content(center);
+  @include align-items(center);
+  @include transition(box-shadow 150ms ease-in-out);
+  width: $header-height;
+  cursor: pointer;
+
+  svg {
+    @include display(flex);
+    @include size($header-height);
+    padding: $header-height/4;
+    fill: rgba(white, .75);
+  }
+
+  &:hover svg {
+    fill: white;
+  }
+
+  .content {
+    @include display(flex);
+    @include position(absolute, $header-height 0 0 auto);
+    @include size(100vw 0);
+    @include transition(height 250ms ease-in-out);
+    background: white;
+  }
+
+  &.active {
+    box-shadow: inset 0 -4px 0 white;
+
+    .content {
+      height: 100vh;
+    }
+
+  }
+
+}
