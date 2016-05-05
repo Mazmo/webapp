@@ -18,7 +18,7 @@ export default class Dropdown extends Component {
 
   toggle = () => {
     this.props.updateState({
-      title: 'Notificaciones',
+      title: (!this.state.active ? 'Notificaciones' : ''),
       hasBack: !this.state.active
     });
     this.setState({ active: !this.state.active });
