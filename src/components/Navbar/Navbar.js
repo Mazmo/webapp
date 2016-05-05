@@ -11,8 +11,10 @@ import Notification from './Notification/Notification';
 export default class Navbar extends Component {
   static propTypes = {
     user: PropTypes.object,
-    hasBack: PropTypes.bool,
-    title: PropTypes.string
+    icon: PropTypes.string.isRequired,
+    logo: PropTypes.bool.isRequired,
+    title: PropTypes.string,
+    chgIcon: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -42,12 +44,7 @@ export default class Navbar extends Component {
       <header className={styles.header}>
         <div className={styles.container}>
 
-          {this.state.hasBack &&
-            <button className={styles.button} onClick={this.goBack}><Icon className={styles.icon} name="back" /></button>
-          }
-          {!this.state.hasBack &&
-            <button className={styles.button} onClick={this.goNav}><Icon className={styles.icon} name="nav" /></button>
-          }
+          <button className={styles.button} onClick={this.goBack}><Icon className={styles.icon} name={this.props.icon} /></button>
 
           <div className={styles.bar}>
             <div className={styles.logo}></div>

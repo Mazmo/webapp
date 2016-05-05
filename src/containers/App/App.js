@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
+import { chgIcon as chgNavIcon } from 'redux/modules/nav';
 import { routeActions } from 'react-router-redux';
 import config from '../../config';
 import { asyncConnect } from 'redux-async-connect';
@@ -29,13 +30,18 @@ const messages = locales(locale);
   }
 }])
 @connect(
-  state => ({user: state.auth.user}),
-  {logout, pushState: routeActions.push})
+  state => ({
+    user: state.auth.user,
+    nav: state.nav
+  }),
+  {logout, chgNavIcon, pushState: routeActions.push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
+    nav: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
+    chgNavIcon: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
 
@@ -61,7 +67,14 @@ export default class App extends Component {
       <IntlProvider locale={locale} messages={messages}>
         <div className={styles.app}>
           <Helmet {...config.app.head}/>
-          {user && <Navbar user={user} />}
+          {user &&
+            <Navbar
+              user={user}
+              icon={this.props.nav.icon}
+              title={this.props.nav.title}
+              logo={this.props.nav.logo}
+              chgIcon={this.props.chgNavIcon} />
+          }
           {user && <Aside user={user} />}
 
           <div className={styles.app.content}>
