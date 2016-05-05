@@ -8,7 +8,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="HOME">
         <Helmet title="Home"/>
 
         <h1>This is home</h1>
