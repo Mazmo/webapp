@@ -50,7 +50,12 @@ export default class Navbar extends Component {
           }
 
           <div className={styles.bar}>
-            <div className={styles.logo}></div>
+            {this.state.title &&
+              <div className={styles.title}>{this.state.title}</div>
+            }
+            {!this.state.title &&
+              <div className={styles.logo}></div>
+            }
             <Dropdown name="notifications" icon="bell" counter={this.props.user.alerts_unread} updateState={this.updateState}>
               <Notification />
             </Dropdown>

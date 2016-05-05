@@ -59,6 +59,12 @@
 			@include flex-grow(1);
 		}
 
+		.title {
+			@include display(flex);
+			@include flex-grow(1);
+			@include align-items(center);
+		}
+
 		.messages {
 			@include display(flex);
 			width: $header-height;

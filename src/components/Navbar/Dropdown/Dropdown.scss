@@ -15,10 +15,6 @@
     @include display(flex);
     @include size($header-height);
     padding: $header-height/4;
-    fill: rgba(white, .75);
-  }
-
-  &:hover svg {
     fill: white;
   }
 
