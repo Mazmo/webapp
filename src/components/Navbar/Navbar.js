@@ -44,18 +44,24 @@ export default class Navbar extends Component {
               chgNavTitle={this.props.chgTitle}
               chgNavAction={this.props.chgAction}>
               <Notification />
+              <Notification />
+              <Notification />
+              <Notification />
             </Dropdown>
-            <div className={styles.messages}></div>
-            <div className={styles.menu}></div>
+            <Dropdown
+              name="messages"
+              title="Mensajes"
+              icon="message"
+              counter={this.props.user.messages_unread}
+              chgNavIcon={this.props.chgIcon}
+              chgNavTitle={this.props.chgTitle}
+              chgNavAction={this.props.chgAction}>
+              <Notification />
+              <Notification />
+              <Notification />
+              <Notification />
+            </Dropdown>
           </div>
-
-          {/* <div className={styles.bar}>
-            <Notifications unread={this.props.user.alerts_unread} />
-            <Messages />
-            <div className={styles.bar_menu}>
-              <Avatar context="header-bar-menu-avatar" size={32} user={this.props.user} />
-            </div>
-          </div> */}
 
         </div>
     	</header>
