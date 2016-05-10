@@ -1,54 +1,47 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import { Icon } from '../';
-/* import NotificationsList from './List'; */
+import { connect } from 'react-redux';
+import * as notificationsActions from 'redux/modules/notifications';
+import { Loading } from '../';
+import Notification from './Notification';
+
+@connect(
+  state => ({
+    loaded: state.notifications.loaded,
+    loading: state.notifications.loading,
+    notifications: state.notifications.data,
+    error: state.notifications.error
+  }),
+  notificationsActions)
 
 export default class Notifications extends Component {
   static propTypes = {
-    unread: PropTypes.number
+    loaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    notifications: PropTypes.array,
+    error: PropTypes.string,
+    load: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false
-    };
-  }
-
   componentDidMount = () => {
-    if (__CLIENT__) {
-      document.addEventListener('click', this.handleClickOutside, true);
+    if (!this.props.loaded && !this.props.loading) {
+      this.props.load();
     }
-  }
-
-  componentWillUnmount = () => {
-    if (__CLIENT__) {
-      document.removeEventListener('click', this.handleClickOutside, true);
-    }
-  }
-
-  handleClickOutside = (evnt) => {
-    const domNode = ReactDOM.findDOMNode(this);
-    if (this.state.active && (!domNode || !domNode.contains(evnt.target))) {
-      this.toggle();
-    }
-  }
-
-  toggle = () => {
-    this.setState({ active: !this.state.active });
   }
 
   render() {
     const styles = require('./Notifications.scss');
 
     return (
-      <div className={styles.notifications} title="Notificaciones">
-        <div className={styles.toggle} onClick={this.toggle}>
-          <Icon name="bell" />
-        </div>
-        {/* <span className={styles.notificationsCounter}>{this.props.unread}</span>
-        <NotificationsList visible={this.state.active} /> */}
-      </div>
+			<div>
+				{this.props.loading && <Loading />}
+				{this.props.loaded &&
+          <ul className={styles.notificationsListContainer}>
+            {this.props.notifications.map((notification, i) => {
+              return <Notification key={i} data={notification} />;
+            })}
+          </ul>
+        }
+			</div>
     );
   }
 }

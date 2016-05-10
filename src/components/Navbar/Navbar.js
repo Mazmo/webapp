@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  Icon /* ,
-  Avatar,
-  Notifications,
-  Messages */
+  Icon,
+  Notifications
 } from '../';
 import Dropdown from './Dropdown/Dropdown';
-import Notification from './Notification/Notification';
 
 export default class Navbar extends Component {
   static propTypes = {
@@ -43,10 +40,7 @@ export default class Navbar extends Component {
               chgNavIcon={this.props.chgIcon}
               chgNavTitle={this.props.chgTitle}
               chgNavAction={this.props.chgAction}>
-              <Notification />
-              <Notification />
-              <Notification />
-              <Notification />
+              <Notifications />
             </Dropdown>
             <Dropdown
               name="messages"
@@ -55,12 +49,7 @@ export default class Navbar extends Component {
               counter={this.props.user.messages_unread}
               chgNavIcon={this.props.chgIcon}
               chgNavTitle={this.props.chgTitle}
-              chgNavAction={this.props.chgAction}>
-              <Notification />
-              <Notification />
-              <Notification />
-              <Notification />
-            </Dropdown>
+              chgNavAction={this.props.chgAction} />
           </div>
 
         </div>

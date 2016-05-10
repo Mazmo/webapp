@@ -1,12 +1,10 @@
 @import '../../utils/styles';
 
-.notifications {
-	@include display(flex);
-	width: $header-height;
-	background: blue;
+.notifications-list {
+  @include header-bar-dropdown('notifications');
+}
 
-	svg {
-		fill: white;
-	}
-
+.notificationsListContainer {
+  margin: 0;
+  padding: 0;
 }
