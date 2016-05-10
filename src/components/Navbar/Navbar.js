@@ -40,7 +40,7 @@ export default class Navbar extends Component {
               chgNavIcon={this.props.chgIcon}
               chgNavTitle={this.props.chgTitle}
               chgNavAction={this.props.chgAction}>
-              <Notifications />
+              <Notifications user={this.props.user} />
             </Dropdown>
             <Dropdown
               name="messages"

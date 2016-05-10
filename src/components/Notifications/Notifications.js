@@ -19,7 +19,8 @@ export default class Notifications extends Component {
     loading: PropTypes.bool.isRequired,
     notifications: PropTypes.array,
     error: PropTypes.string,
-    load: PropTypes.func.isRequired
+    load: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   componentDidMount = () => {
@@ -37,7 +38,12 @@ export default class Notifications extends Component {
 				{this.props.loaded &&
           <ul className={styles.notificationsListContainer}>
             {this.props.notifications.map((notification, i) => {
-              return <Notification key={i} data={notification} />;
+              return (
+                <Notification
+                  key={i}
+                  data={notification}
+                  user={this.props.user} />
+              );
             })}
           </ul>
         }

@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Notification extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   render() {
@@ -18,7 +19,7 @@ export default class Notification extends Component {
         Alert = require('./Types/PublicationSpanked');
         break;
       case 4:
-        Alert = require('./Types/PublicationSpanked');
+        Alert = require('./Types/PublicationComment');
         break;
       case 5:
         Alert = require('./Types/ForumModerator');
@@ -75,6 +76,10 @@ export default class Notification extends Component {
         Alert = require('./Types/Unknown');
     }
 
-    return <Alert data={this.props.data} />;
+    return (
+      <Alert
+        data={this.props.data}
+        user={this.props.user} />
+    );
   }
 }
