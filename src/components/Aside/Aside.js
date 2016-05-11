@@ -7,14 +7,17 @@ import {
 
 export default class Aside extends Component {
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    visible: PropTypes.bool.isRequired
   };
 
   render() {
     const styles = require('./Aside.scss');
+    const classes = {};
+    classes[styles.visible] = this.props.visible;
 
     return (
-      <aside className={classnames(styles.aside, styles.left)}>
+      <aside className={classnames(styles.aside, styles.left, classes)}>
 				<nav className="nav on-aside">
 					<Link className="nav-link home" to="home">
 						<Icon name="home" />
