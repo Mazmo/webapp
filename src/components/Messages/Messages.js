@@ -1,54 +1,48 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import { Icon } from '../';
-import MessagesList from './List';
+import { connect } from 'react-redux';
+import * as messagesActions from 'redux/modules/messages';
+import { Loading } from '../';
+import Message from './Message';
 
-export default class Messages extends Component {
+@connect(
+  state => ({
+    loaded: state.messages.loaded,
+    loading: state.messages.loading,
+    messages: state.messages.data,
+    error: state.messages.error
+  }),
+  messagesActions)
+
+export default class List extends Component {
   static propTypes = {
-    unread: PropTypes.number
+    loaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    messages: PropTypes.array,
+    error: PropTypes.string,
+    load: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false
-    };
-  }
-
   componentDidMount = () => {
-    if (__CLIENT__) {
-      document.addEventListener('click', this.handleClickOutside, true);
+    if (!this.props.loaded && !this.props.loading) {
+      this.props.load();
     }
-  }
-
-  componentWillUnmount = () => {
-    if (__CLIENT__) {
-      document.removeEventListener('click', this.handleClickOutside, true);
-    }
-  }
-
-  handleClickOutside = (evnt) => {
-    const domNode = ReactDOM.findDOMNode(this);
-    if (this.state.active && (!domNode || !domNode.contains(evnt.target))) {
-      this.toggle();
-    }
-  }
-
-  toggle = () => {
-    this.setState({ active: !this.state.active });
   }
 
   render() {
     const styles = require('./Messages.scss');
 
     return (
-      <div className={styles.messages} title="Mensajes">
-        <div onClick={this.toggle}>
-            <Icon name="message" />
-        </div>
-        <span className={styles.notificationsCounter}>{this.props.unread}</span>
-        <MessagesList visible={this.state.active} />
-      </div>
+			<div className={styles.messagesListContainer}>
+				{this.props.loading && <Loading />}
+				{this.props.loaded &&
+          <ul>
+            {this.props.messages.map((message, i) => {
+              return <Message key={i} data={message} user={this.props.user} />;
+            })}
+          </ul>
+        }
+			</div>
     );
   }
 }

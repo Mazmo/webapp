@@ -4,7 +4,8 @@ import { Avatar } from '../';
 
 export default class Message extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   subscribers = (subscribers) => {
@@ -13,9 +14,9 @@ export default class Message extends Component {
     let j = 0;
     for (let i = 0; i < subscribers.length; i++) {
       const subscriber = subscribers[i];
-      // if (subscriber.user.id == AuthStore.getState().currentUser.id) {
-      //     continue;
-      // }
+      if (subscriber.user.id === this.props.user.id) {
+        continue;
+      }
 
       con[j] = subscriber.user.displayname;
       j++;
@@ -25,10 +26,10 @@ export default class Message extends Component {
   }
 
   render() {
-    // const styles = require('./Message.scss');
+    const styles = require('./Message.scss');
 
     return (
-      <li>
+      <li className={styles.message}>
         <Link className="messages-list-item-link" to="message" params={{message_id: this.props.data.id}}>
   				<Avatar context="messages-list-item-avatar" size={32} user={this.props.data.author} />
   				<p className="messages-list-item-action">

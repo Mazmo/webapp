@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Icon,
-  Notifications
+  Notifications,
+  Messages
 } from '../';
 import Dropdown from './Dropdown/Dropdown';
 
@@ -49,7 +50,9 @@ export default class Navbar extends Component {
               counter={this.props.user.messages_unread}
               chgNavIcon={this.props.chgIcon}
               chgNavTitle={this.props.chgTitle}
-              chgNavAction={this.props.chgAction} />
+              chgNavAction={this.props.chgAction}>
+              <Messages user={this.props.user} />
+            </Dropdown>
           </div>
 
         </div>
