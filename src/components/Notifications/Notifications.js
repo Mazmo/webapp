@@ -27,25 +27,34 @@ export default class Notifications extends Component {
     if (!this.props.loaded && !this.props.loading) {
       this.props.load();
     }
+
+    this.refs.main.addEventListener('scroll', (e) => {
+      if (!this.props.loading && e.target.scrollTop + e.target.offsetHeight > e.target.scrollHeight - 40) {
+        this.props.load();
+      }
+    });
   }
 
   render() {
     const styles = require('./Notifications.scss');
 
     return (
-			<div>
-				{this.props.loading && <Loading />}
-				{this.props.loaded &&
-          <ul className={styles.notificationsListContainer}>
-            {this.props.notifications.map((notification, i) => {
-              return (
-                <Notification
-                  key={i}
-                  data={notification}
-                  user={this.props.user} />
-              );
-            })}
-          </ul>
+			<div className={styles.container} ref="main">
+        <ul className={styles.notificationsListContainer}>
+          {this.props.notifications.map((notification, i) => {
+            return (
+              <Notification
+                key={i}
+                data={notification}
+                user={this.props.user} />
+            );
+          })}
+        </ul>
+
+        {this.props.loading &&
+        <div className={styles.loadingContainer}>
+          <Loading theme="dark" size="medium" />
+        </div>
         }
 			</div>
     );

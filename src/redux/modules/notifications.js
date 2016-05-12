@@ -1,10 +1,13 @@
+import { app as config } from '../../config';
+
 const LOAD = 'redux-example/notifications/LOAD';
 const LOAD_SUCCESS = 'redux-example/notifications/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/notifications/LOAD_FAIL';
 
 const initialState = {
   loaded: false,
-  loading: false
+  loading: false,
+  data: []
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -19,13 +22,12 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        data: action.result
+        data: state.data.concat(action.result)
       };
     case LOAD_FAIL:
       return {
         ...state,
         loading: false,
-        loaded: false,
         error: action.error
       };
     default:
@@ -38,8 +40,26 @@ export function isLoaded(globalState) {
 }
 
 export function load() {
-  return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/users/alerts')
+  return (dispatch, getState) => {
+    return dispatch({
+      types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+      promise: (client) => {
+        const notifications = getState().notifications.data;
+        let query = {
+          q: config.notifications.q
+        };
+
+        if (notifications.length) {
+          query = {
+            ...query,
+            after: notifications[notifications.length - 1].id,
+          };
+        }
+
+        return client.get('/users/alerts', {
+          params: query
+        });
+      }
+    });
   };
 }

@@ -1,9 +1,14 @@
 @import '../../utils/styles';
 
-.notifications-list {
-  @include header-bar-dropdown('notifications');
+.container {
+  overflow: scroll;
 }
 
+.loading-container {
+  margin: 10px auto;
+  text-align: center;
+  height: 100px;
+}
 .notificationsListContainer {
   margin: 0;
   padding: 0;
