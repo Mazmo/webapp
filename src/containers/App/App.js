@@ -73,8 +73,11 @@ export default class App extends Component {
     }
   }
 
-  toggleAside = () => {
+  toggleAside = (e) => {
     this.setState({ aside: !this.state.aside });
+    if (e) {
+      e.preventDefault();
+    }
   }
 
   render() {
@@ -100,7 +103,8 @@ export default class App extends Component {
           {user &&
             <Aside
               user={user}
-              visible={this.state.aside} />
+              visible={this.state.aside}
+              toggle={this.toggleAside} />
           }
 
           <div className={styles.app.content}>

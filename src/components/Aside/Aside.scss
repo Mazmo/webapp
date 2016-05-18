@@ -3,95 +3,76 @@
 @import '../../utils/grid-settings';
 @import 'neat';
 
-.aside {
-	@include display(flex);
-	@include flex(0 1);
-	width: 100%;
-	background: $main-grey;
+.nav.on-side {
+  @include position(fixed, 0 auto 0 0);
+  @include size($nav-width 100%);
+  margin: auto;
+  z-index: 20;
+  background: white;
+  color: #333;
+  will-change: transform;
+  @include transform(translateX(-100%));
+  @include transition(transform 150ms);
 
-	&.right {
-		display: none;
+	&.nav-open {
+    @include transform(translateX(0));
+  }
 
-		@include media($tablet) {
-			@include display(flex);
-			@include justify-content(flex-start);
-			@include size($aside-expanded-width auto);
-			padding: 10px;
+	.header-profile {
+		padding: 30px 0 5px 0;
+		background: #111;
+		img {
+			width: 75px;
+  		height: 75px;
+  		margin: 0 auto 10px auto;
+  		display: block;
+	    border-radius: 5px;
 		}
-	}
-
-	@include media($tablet) {
-		@include justify-content(flex-end);
-		@include flex-grow(1);
-		width: auto;
-	}
-
-	.nav.on-aside {
-		@include display(flex);
-		@include flex-direction(row);
-		@include justify-content(center);
-		@include fill-parent;
-		background: $main-red;
-
-		@include media($tablet) {
-			@include display(flex);
-			@include flex-direction(column);
-			@include justify-content(flex-start);
-			padding: 20px 10px;
-			background: transparent;
-		}
-
-		.nav-link {
-			@include display(flex);
-			@include align-self(flex-end);
-			@include flex-grow(1);
-			padding: 10px;
-			border-bottom: 2px solid transparent;
-
-			@include media($tablet) {
-				@include flex-grow(0);
-			}
-
-			.icon {
-				@include transition(opacity 150ms);
-				@include size(25px);
-				margin: 0 auto;
-				opacity: 0.55;
-				fill: black;
-					@include media($tablet) {
-						fill: white;
+		ul {
+			li {
+				color: #FFF;
+				font-weight: bold;
+				text-align: center;
+				width: 33%;
+				padding: 20px 0;
+				display: inline-block;
+				font-size: 18px;
+				i {
+					font-size: 11px;
+					display: block;
+					opacity: 0.5
 				}
-
+			}
+		}
+	}
+	ul.nav-links {
+		li {
+			a {
+				display: block;
+				width: 100%;
+				color: #333;
+				font-size: 14px;
+				text-decoration: none;
+				font-weight: bold;
+				padding: 0 12px 0 20px;
+				height: 48px;
+				line-height: 50px;
+				display: flex;
 				&:hover {
-					opacity: 0.75;
+					background: #eee;
+				}
+				svg {
+					width: 22px;
+					height: 22px;
+					fill: #757575;
+					margin-top: 14px;
+					font-weight: 300;
+			    margin-right: 22px;
+			    -webkit-box-flex: none;
+			    -webkit-flex: none;
+			    flex: none;
 				}
 			}
-
-			&.active {
-				border-bottom: 2px solid white;
-
-				@include media($tablet) {
-					border-bottom: none;
-				}
-
-				.icon {
-					opacity: 1;
-					fill: white;
-				}
-			}
-
 		}
 	}
-
-	.widget {
-
-		&-title {
-			margin: 0 0 $spacing-medium;
-		}
-
-		+ .widget {
-			margin-top: $spacing-big;
-		}
-	}
-
 }
