@@ -23,21 +23,12 @@ export default class Aside extends Component {
   componentDidMount = () => {
     const el = this.refs.aside;
 
-    el.addEventListener('transitionend', () => {
-      console.log('transition end');
-      this.setState({ transitioning: false });
-    });
-    el.addEventListener('transitionstart', () => {
-      console.log('transition start');
-      this.setState({ transitioning: true });
-    });
-
     document.addEventListener('click', (event) => {
       const isClickInside = el.contains(event.target);
+      const matrix = getComputedStyle(el).transform.split(', ');
 
-      if (!isClickInside && this.props.visible && !this.state.transitioning) {
-        console.log(el.style);
-        // this.props.toggle();
+      if (!isClickInside && this.props.visible && parseInt(matrix[4], 10) === 0) {
+        this.props.toggle();
       }
     });
   }
