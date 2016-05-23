@@ -73,11 +73,8 @@ export default class App extends Component {
     }
   }
 
-  toggleAside = (e) => {
+  toggleAside = () => {
     this.setState({ aside: !this.state.aside });
-    if (e) {
-      e.preventDefault();
-    }
   }
 
   render() {

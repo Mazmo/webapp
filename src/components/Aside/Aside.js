@@ -36,7 +36,8 @@ export default class Aside extends Component {
       const isClickInside = el.contains(event.target);
 
       if (!isClickInside && this.props.visible && !this.state.transitioning) {
-        this.props.toggle();
+        console.log(el.style);
+        // this.props.toggle();
       }
     });
   }
@@ -47,7 +48,7 @@ export default class Aside extends Component {
     classes[styles.navOpen] = this.props.visible;
 
     return (
-      <nav className={classnames(styles.nav, styles.onSide, classes)} ref="aside">
+      <nav className={classnames(styles.nav, classes)} ref="aside">
 				<div className={styles.headerProfile}>
 					<Avatar size={100} user={this.props.user} />
 					<ul className={styles.stats}>
