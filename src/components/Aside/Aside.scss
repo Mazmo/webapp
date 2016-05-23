@@ -11,7 +11,7 @@
   color: #333;
   will-change: transform;
   @include transform(translateX(-100%));
-  @include transition(transform 150ms);
+  @include transition(all 150ms);
 
 	&.nav-open {
     @include transform(translateX(0));
