@@ -89,36 +89,3 @@
     }
 
   }
-
-	ul.nav-links {
-    list-style-type: none;
-		li {
-			a {
-				display: block;
-				width: 100%;
-				color: #333;
-				font-size: 14px;
-				text-decoration: none;
-				font-weight: bold;
-				padding: 0 12px 0 20px;
-				height: 48px;
-				line-height: 50px;
-				display: flex;
-				&:hover {
-					background: #eee;
-				}
-				svg {
-					width: 22px;
-					height: 22px;
-					fill: #757575;
-					margin-top: 14px;
-					font-weight: 300;
-			    margin-right: 22px;
-			    -webkit-box-flex: none;
-			    -webkit-flex: none;
-			    flex: none;
-				}
-			}
-		}
-	}
-}
