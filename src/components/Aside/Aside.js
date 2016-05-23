@@ -49,34 +49,29 @@ export default class Aside extends Component {
 
     return (
       <nav className={classnames(styles.nav, classes)} ref="aside">
-				<div className={styles.headerProfile}>
-					<Avatar size={100} user={this.props.user} />
+				<div className={styles.header}>
+					<Avatar className={styles.avatar} size={100} user={this.props.user} />
 					<ul className={styles.stats}>
-						<li>NaN <i>Seguidores</i></li>
-						<li>NaN <i>Siguiendo</i></li>
-						<li>NaN <i>Conocidos</i></li>
+						<li className={styles.item}>{this.props.user.followed_count} <i>Seguidores</i></li>
+						<li className={styles.item}>{this.props.user.following_count} <i>Siguiendo</i></li>
+						<li className={styles.item}>{this.props.user.known} <i>Conocidos</i></li>
 					</ul>
 				</div>
-				<ul className={styles.navLinks}>
+				<ul className={styles.list}>
 					<li>
-						<Link className={classnames(styles.navLink, styles.home)} to="/">
+						<Link className={classnames(styles.link, styles.home)} to="/">
 							<Icon name="home" />
-							<span className="">Inicio</span>
+							<span className={styles.label}>Inicio</span>
 						</Link>
 
-						<Link className={classnames(styles.navLink, styles.home)} to="/forums">
+						<Link className={classnames(styles.link, styles.forums)} to="/forums">
 							<Icon name="forums" />
-							<span className="">Foros</span>
+							<span className={styles.label}>Foros</span>
 						</Link>
 
-						<Link className={classnames(styles.navLink, styles.home)} to="/home">
+						<Link className={classnames(styles.link, styles.events)} to="/events">
 							<Icon name="events" />
-							<span className="">Eventos</span>
-						</Link>
-
-						<Link className={classnames(styles.navLink, styles.home)} to="/home">
-							<Icon name="contacts" />
-							<span className="">Tu vieja</span>
+							<span className={styles.label}>Eventos</span>
 						</Link>
 					</li>
 				</ul>
