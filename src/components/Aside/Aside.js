@@ -10,7 +10,8 @@ export default class Aside extends Component {
   static propTypes = {
     user: PropTypes.object,
     visible: PropTypes.bool.isRequired,
-    toggle: PropTypes.func.isRequired
+    toggle: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -66,6 +67,10 @@ export default class Aside extends Component {
 							<Icon name="events" />
 							<span className={styles.label}>Eventos</span>
 						</Link>
+					</li>
+          <li className={classnames(styles.link, styles.logout)}>
+						<Icon name="logout" />
+						<span className={styles.label} onClick={this.props.logout}>Cerrar sesión</span>
 					</li>
 				</ul>
 

@@ -101,16 +101,13 @@ export default class App extends Component {
             <Aside
               user={user}
               visible={this.state.aside}
-              toggle={this.toggleAside} />
+              toggle={this.toggleAside}
+              logout={this.props.logout} />
           }
 
           <div className={styles.app.content}>
             {this.props.children}
           </div>
-
-          {user &&
-            <button onClick={this.props.logout}>Logout</button>
-          }
         </div>
       </IntlProvider>
     );
