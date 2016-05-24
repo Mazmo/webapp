@@ -1,8 +1,8 @@
 import { app as config } from '../../config';
 
-const LOAD = 'mazmo/notifications/LOAD';
-const LOAD_SUCCESS = 'mazmo/notifications/LOAD_SUCCESS';
-const LOAD_FAIL = 'mazmo/notifications/LOAD_FAIL';
+const LOAD = 'mazmo/publications/LOAD';
+const LOAD_SUCCESS = 'mazmo/publications/LOAD_SUCCESS';
+const LOAD_FAIL = 'mazmo/publications/LOAD_FAIL';
 
 const initialState = {
   loaded: false,
@@ -36,7 +36,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState) {
-  return globalState.notifications && globalState.notifications.loaded;
+  return globalState.publications && globalState.publications.loaded;
 }
 
 export function load() {
@@ -44,19 +44,19 @@ export function load() {
     return dispatch({
       types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
       promise: (client) => {
-        const notifications = getState().notifications.data;
+        const publications = getState().publications.data;
         let query = {
-          q: config.notifications.q
+          q: config.publications.q
         };
 
-        if (notifications.length) {
+        if (publications.length) {
           query = {
             ...query,
-            after: notifications[notifications.length - 1].id,
+            id: publications[publications.length - 1].id
           };
         }
 
-        return client.get('/users/alerts', {
+        return client.get('/feed', {
           params: query
         });
       }

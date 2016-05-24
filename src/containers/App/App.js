@@ -104,7 +104,7 @@ export default class App extends Component {
               toggle={this.toggleAside} />
           }
 
-          <div className={styles.app.content}>
+          <div className={styles.content}>
             {this.props.children}
           </div>
 

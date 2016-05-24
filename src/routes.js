@@ -3,11 +3,18 @@ import {IndexRoute, Route} from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
     App,
-    Index,
+    Home,
+    Landing,
+    Profile,
     NotFound,
   } from 'containers';
 
 export default (store) => {
+  const isLogged = () => {
+    const { auth: { user }} = store.getState();
+    return user !== null;
+  };
+
   const requireLogin = (nextState, replace, cb) => {
     function checkAuth() {
       const { auth: { user }} = store.getState();
@@ -31,7 +38,13 @@ export default (store) => {
   return (
     <Route path="/" component={App}>
       { /* Home (main) route */ }
-      <IndexRoute component={Index} />
+      <IndexRoute getComponent={(nextState, cb) => {
+        if (isLogged()) {
+          cb(null, Home);
+        } else {
+          cb(null, Landing);
+        }
+      }} />
 
       { /* Routes requiring login */ }
       <Route onEnter={requireLogin}>
@@ -39,12 +52,7 @@ export default (store) => {
       </Route>
 
       { /* Routes */ }
-      { /*
-      <Route path="about" component={About}/>
-      <Route path="login" component={Login}/>
-      <Route path="survey" component={Survey}/>
-      <Route path="widgets" component={Widgets}/>
-      */ }
+      <Route path=":username" component={Profile} />
 
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />

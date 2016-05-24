@@ -1,6 +1,6 @@
-const LOAD = 'redux-example/messages/LOAD';
-const LOAD_SUCCESS = 'redux-example/messages/LOAD_SUCCESS';
-const LOAD_FAIL = 'redux-example/messages/LOAD_FAIL';
+const LOAD = 'mazmo/messages/LOAD';
+const LOAD_SUCCESS = 'mazmo/messages/LOAD_SUCCESS';
+const LOAD_FAIL = 'mazmo/messages/LOAD_FAIL';
 
 const initialState = {
   loaded: false,
