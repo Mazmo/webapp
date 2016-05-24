@@ -45,6 +45,12 @@
 
     &-link {
       font-weight: $font-bold;
+      color: $main-red;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
 
       &.user {
         color: $primary-color;
