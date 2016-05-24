@@ -36,11 +36,13 @@ export default class Aside extends Component {
   render() {
     const styles = require('./Aside.scss');
     const classes = {};
+    const coverImage = {backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%,rgba(26,26,26,1) 100%,rgba(0,0,0,0.5) 100%), url(' + this.props.user.cover + ')'};
+
     classes[styles.navOpen] = this.props.visible;
 
     return (
       <nav className={classnames(styles.nav, classes)} ref="aside">
-				<div className={styles.header}>
+				<div className={styles.header} style={coverImage}>
 					<Avatar className={styles.avatar} size={100} user={this.props.user} />
 					<ul className={styles.stats}>
 						<li className={styles.item}>{this.props.user.followed_count} <i>Seguidores</i></li>

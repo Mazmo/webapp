@@ -23,12 +23,15 @@
     @include align-items(center);
     @include justify-content(center);
     padding: 20px;
-    background: #111;
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
 
     .avatar {
       @include display(flex);
       @include size(75px);
       margin-bottom: 10px;
+      border-radius: 4px;
     }
 
     .stats {
@@ -89,3 +92,4 @@
     }
 
   }
+}
