@@ -1,0 +1,15 @@
+@import 'bourbon';
+@import 'neat';
+@import '../../utils/variables';
+
+.feed-list {
+  padding: $spacing-big;
+
+  @media #{$tablet} {
+    padding: $spacing-big 15%;
+  }
+
+  @media #{$mobile} {
+    padding: $spacing-big $spacing-medium;
+  }
+}

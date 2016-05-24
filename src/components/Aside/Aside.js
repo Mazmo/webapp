@@ -28,6 +28,8 @@ export default class Aside extends Component {
       const matrix = getComputedStyle(el).transform.split(', ');
 
       if (!isClickInside && this.props.visible && parseInt(matrix[4], 10) === 0) {
+        event.preventDefault();
+        event.stopPropagation();
         this.props.toggle();
       }
     });

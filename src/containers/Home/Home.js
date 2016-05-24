@@ -28,11 +28,13 @@ export default class Home extends Component {
   };
 
   render() {
+    const styles = require('./Home.scss');
+
     return (
       <div>
         <Helmet title="Home"/>
 
-        <div className="feedList">
+        <div className={styles.feedList}>
           {this.props.publications.map((publication, i) => {
             return (
               <Publication

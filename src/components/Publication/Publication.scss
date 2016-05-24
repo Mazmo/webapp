@@ -27,7 +27,8 @@
     float: left;
     display: block;
     margin: $spacing-medium;
-    // border-radius: 4px; // disabled for testing purposes ;)
+    @include size($avatar-size);
+    border-radius: 4px;
   }
 
   &-prompt {
