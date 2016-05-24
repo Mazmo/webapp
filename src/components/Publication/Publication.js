@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { injectIntl, intlShape, FormattedRelative } from 'react-intl';
 import {
-  Avatar,
-  Icon,
-  ContextMenu
+  Avatar
 } from '../';
 
-export default class Publication extends Component {
+class Publication extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    intl: intlShape.isRequired
   };
 
 
@@ -17,25 +17,20 @@ export default class Publication extends Component {
     const publication = this.props.data;
 
     return (
-      <div>
+      <div className={styles.feedItem}>
         <div className={styles.feedItemHeader}>
-          <Avatar className={styles.feedItemAvatar} size={48} user={publication.author} />
-          <span className="feed-item-prompt">
-            <Link className="feedItemPromptLink user" to={`/${publication.author.username}`}>{publication.author.displayname}</Link>
-            {/* <Link className="feed-item-prompt-date" to="publication" params={{id: publication.id}}>{moment(publication.created_at.date).fromNow()}</Link> */}
+          <Avatar className={styles.feedItemAvatar} size={60} user={publication.author} />
+          <span className={styles.feedItemPrompt}>
+            <Link className={styles.feedItemPromptLink} to={`/${this.props.data.author.username}`}>{this.props.data.author.displayname}</Link>
+            <Link className={styles.feedItemPromptDate} to={`/${this.props.data.id}`}><FormattedRelative value={publication.created_at.date} /></Link>
           </span>
-          <div className="feed-item-options">
-            <Icon context="feed-item-options-icon" name="dots-vertical" />
-            <ContextMenu>
-              <a className="context-menu-item">Ver spanks</a>
-              <a className="context-menu-item">Editar</a>
-              <a className="context-menu-item important">Borrar</a>
-            </ContextMenu>
-          </div>
         </div>
-        <div className="feed-item-content">
+        <div className={styles.feedItemContent}>
+          <p className={styles.feedItemContentText} dangerouslySetInnerHTML={{__html: (publication.message + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br />' + '$2')}}></p>
         </div>
       </div>
     );
   }
 }
+
+export default injectIntl(Publication);
