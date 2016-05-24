@@ -1,6 +1,6 @@
-const CHG_ICON = 'redux-example/nav/CHG_ICON';
-const CHG_TITLE = 'redux-example/nav/CHG_TITLE';
-const CHG_ACTION = 'redux-example/nav/CHG_ACTION';
+const CHG_ICON = 'mazmo/nav/CHG_ICON';
+const CHG_TITLE = 'mazmo/nav/CHG_TITLE';
+const CHG_ACTION = 'mazmo/nav/CHG_ACTION';
 
 const initialState = {
   icon: 'nav',

@@ -6,9 +6,8 @@
 
 .app {
   @include size(100vw 100vh);
+}
 
-  .content {
-    padding-top: $header-height;
-  }
-
+.content {
+  padding-top: $header-height;
 }

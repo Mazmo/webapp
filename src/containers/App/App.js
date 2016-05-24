@@ -105,7 +105,7 @@ export default class App extends Component {
               logout={this.props.logout} />
           }
 
-          <div className={styles.app.content}>
+          <div className={styles.content}>
             {this.props.children}
           </div>
         </div>

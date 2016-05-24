@@ -35,6 +35,9 @@ module.exports = Object.assign({
     },
     notifications: {
       q: 10
+    },
+    publications: {
+      q: 20
     }
   },
 

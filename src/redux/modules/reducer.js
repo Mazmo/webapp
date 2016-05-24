@@ -6,6 +6,7 @@ import nav from './nav';
 import auth from './auth';
 import notifications from './notifications';
 import messages from './messages';
+import publications from './publications';
 
 export default combineReducers({
   routing: routeReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   auth,
   notifications,
   messages,
+  publications
 });
