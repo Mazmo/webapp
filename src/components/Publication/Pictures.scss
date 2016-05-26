@@ -1,0 +1,11 @@
+@import '../../../utils/variables';
+
+.photo {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+
+  & + div {
+    margin-top: $spacing-medium;
+  }
+}
