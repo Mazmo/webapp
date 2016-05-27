@@ -1,0 +1,38 @@
+@import 'bourbon';
+@import 'neat';
+
+.context-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: #EEE;
+  min-width: 100px;
+  padding: 10px 0;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  @include transform(translateY(40px));
+  @include transition(transform 300ms, opacity 200ms 100ms);
+
+  &.visible {
+    @include transform(translateY(0));
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &-item {
+    display: block;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: bold;
+
+    &.important {
+      color: red;
+    }
+
+    &:hover {
+      background: rgba(black, .05);
+    }
+  }
+
+}

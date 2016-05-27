@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 import { injectIntl, intlShape, FormattedRelative } from 'react-intl';
-import { Avatar } from '../';
+import { Avatar, Icon, ContextMenu } from '../';
 import { Rsvp, LinkImage, Pictures, Video } from './';
 
 class Publication extends Component {
@@ -11,6 +11,18 @@ class Publication extends Component {
     intl: intlShape.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showContext: false
+    };
+  }
+
+  toggleContext = () => {
+    this.setState({
+      showContext: !this.state.showContext
+    });
+  }
 
   render() {
     const styles = require('./Publication.scss');
@@ -27,6 +39,18 @@ class Publication extends Component {
             }
             <Link className={styles.feedItemPromptDate} to={`/${this.props.data.id}`}><FormattedRelative value={publication.created_at.date} /></Link>
           </span>
+          <div className={styles.feedItemOptions}>
+            <Icon
+              className={styles.feedItemOptionsIcon}
+              name="dots-vertical"
+              onClick={this.toggleContext}
+            />
+            <ContextMenu visible={this.state.showContext}>
+              <a className={styles.contextMenuItem}>Ver spanks</a>
+              <a className={styles.contextMenuItem}>Editar</a>
+              <a className={classnames(styles.contextMenuItem, styles.important)}>Borrar</a>
+            </ContextMenu>
+          </div>
         </div>
         <div className={styles.feedItemContent}>
           {publication.rsvp && <Rsvp data={publication} />}

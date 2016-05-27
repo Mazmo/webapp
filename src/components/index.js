@@ -4,5 +4,6 @@ export Icon from './Icon/Icon';
 export Notifications from './Notifications/Notifications';
 export Loading from './Loading/Loading';
 export Avatar from './Avatar/Avatar';
+export ContextMenu from './ContextMenu/ContextMenu';
 export Messages from './Messages/Messages';
 export Publication from './Publication/Publication';
