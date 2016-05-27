@@ -10,7 +10,7 @@ export default class Pictures extends Component {
     const publication = this.props.data;
 
     return (
-      <ul>
+      <ul className={styles.container}>
         {publication.pictures.map((image, i) => {
           return (
             <li key={i}>

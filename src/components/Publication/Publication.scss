@@ -142,63 +142,6 @@
       }
     }
 
-    &-video {
-
-      &-container {
-        position: relative;
-        cursor: pointer;
-
-        &:after {
-          @include position(absolute, 0 0 0 0);
-          @include size(100%);
-          background: rgba(black, .45);
-          content: "";
-        }
-      }
-
-      &-embed {
-        @include position(absolute, 0 0 0 0);
-        @include size(100%);
-
-        &-wrapper {
-          position: relative;
-          padding-bottom: 56.25%; /* 16:9 */
-          padding-top: 25px;
-          height: 0;
-        }
-
-      }
-
-      &-title {
-        @include position(absolute, 0 0 0 0);
-        padding: 10px;
-        z-index: 10;
-        font-weight: bold;
-        color: white;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-
-      &-play {
-        @include position(absolute, 0 0 0 0);
-        @include size(50px);
-        margin: auto;
-        z-index: 10;
-
-        path {
-          fill: white;
-        }
-      }
-
-      &-image {
-        display: block;
-        max-width: 100%;
-        width: 100%;
-      }
-
-    }
-
     &-actions {
       padding: $spacing-medium;
       text-align: right;
