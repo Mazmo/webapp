@@ -46,9 +46,9 @@ class Publication extends Component {
               onClick={this.toggleContext}
             />
             <ContextMenu visible={this.state.showContext}>
-              <a className={styles.contextMenuItem}>Ver spanks</a>
-              <a className={styles.contextMenuItem}>Editar</a>
-              <a className={classnames(styles.contextMenuItem, styles.important)}>Borrar</a>
+              <a>Ver spanks</a>
+              <a>Editar</a>
+              <a className="important">Borrar</a>
             </ContextMenu>
           </div>
         </div>

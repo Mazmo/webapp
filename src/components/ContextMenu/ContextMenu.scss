@@ -20,13 +20,13 @@
     pointer-events: all;
   }
 
-  &-item {
+  a, span {
     display: block;
     padding: 10px 15px;
     font-size: 12px;
     font-weight: bold;
 
-    &.important {
+    &:global(.important) {
       color: red;
     }
 
