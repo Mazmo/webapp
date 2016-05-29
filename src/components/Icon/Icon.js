@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 export default class Icon extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    className: PropTypes.string,
     onClick: PropTypes.func
   };
 
@@ -135,7 +136,7 @@ export default class Icon extends Component {
         break;
     }
 
-    const className = `icon icon_${this.props.name}`;
+    const className = `icon icon_${this.props.name} ${this.props.className}`;
     return (
       <svg className={className} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" onClick={this.props.onClick}>
         <path d={path} />

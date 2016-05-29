@@ -1,0 +1,23 @@
+@import '../../utils/variables';
+
+.comments {
+  background: $light-grey;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &-load-more {
+    display: block;
+    padding: ($spacing-medium * 1.5) $spacing-big;
+    background: white;
+    color: $primary-color;
+    text-decoration: none;
+    font-size: .8em;
+    font-weight: $font-bold;
+
+    .fa-comments {
+      font-size: 1.2em;
+      margin-right: $spacing-big;
+    }
+  }
+}

@@ -1,0 +1,84 @@
+@import 'bourbon';
+@import 'neat';
+@import '../../utils/variables';
+
+.comment {
+  $avatar-size: 32px;
+
+  padding: $spacing-medium;
+  position: relative;
+  border-bottom: 1px solid #CCC;
+  &:first-child {
+    border-top: solid 1px #CCC;
+  }
+
+  &:last-child {
+    border-bottom: 0 none;
+  }
+  &-avatar {
+    position: absolute;
+    top: $spacing-medium;
+    left: $spacing-medium;
+    display: block;
+    border-radius: 3px;
+  }
+
+  &-content {
+    width: 100%;
+    padding: 0 0 0 ($spacing-medium + $avatar-size);
+    color: black;
+    font-size: .85em;
+    font-weight: $font-regular;
+    word-break: break-word;
+    line-height: 1.3em;
+
+    &-author {
+      display: inline-block;
+      margin-right: $spacing-small;
+      color: $primary-color;
+      font-weight: $font-bold;
+      text-decoration: none;
+    }
+  }
+
+  &-date {
+    display: inline-block;
+    padding-left: ($spacing-medium + $avatar-size);
+    margin-right: $spacing-small;
+    color: rgba(0, 0, 0, .6);
+    font-size: .8em;
+  }
+
+  &-spank {
+    display: inline-block;
+    margin-left: $spacing-small;
+    padding: 0;
+    font-size: .8em;
+    font-weight: $font-bold;
+    color: $main-red;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    opacity: .3;
+    background: transparent;
+    cursor: pointer;
+    @include transition(opacity .2s ease-in-out);
+
+    &.spanked {
+      color: $main-red;
+      opacity: 1;
+
+      path {fill: $main-red}
+    }
+
+    &:hover {
+      opacity: .6;
+    }
+
+    &-icon {
+      @include position(relative, 2px auto auto auto);
+      @include size(14px);
+      margin-right: 3px;
+    }
+  }
+}

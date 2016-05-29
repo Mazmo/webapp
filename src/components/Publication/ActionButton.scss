@@ -1,0 +1,40 @@
+@import 'bourbon';
+@import 'neat';
+@import '../../utils/variables';
+
+.action {
+  text-decoration: none;
+  display: inline-block;
+  opacity: .3;
+  @include transition(opacity .2s ease-in-out);
+  margin-right: 15px;
+  font-weight: bold;
+
+  &.active {
+    opacity: 1;
+
+    svg {
+      fill: $main-red;
+    }
+
+    span {
+      color: $main-red;
+    }
+
+  }
+
+  &:hover {
+    opacity: 0.6
+  }
+
+  svg {
+    @include size(18px);
+    vertical-align: text-bottom;
+  }
+
+  span {
+      color: #000;
+      text-decoration: none;
+      font-size: 13px
+  }
+}
