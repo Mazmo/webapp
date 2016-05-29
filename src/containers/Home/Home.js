@@ -17,12 +17,14 @@ import { Publication } from '../../components';
 ])
 @connect(
   state => ({
+    me: state.auth.user,
     loadingPublications: state.publications.loading,
     publications: state.publications.data
   })
 )
 export default class Home extends Component {
   static propTypes = {
+    me: PropTypes.object.isRequired,
     loadingPublications: PropTypes.bool.isRequired,
     publications: PropTypes.array.isRequired
   };
@@ -39,7 +41,9 @@ export default class Home extends Component {
             return (
               <Publication
                 key={i}
-                data={publication} />
+                me={this.props.me}
+                data={publication}
+              />
             );
           })}
         </div>

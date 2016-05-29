@@ -147,39 +147,4 @@
       }
     }
   }
-
-  .feed-comment-create {
-    padding: $spacing-medium;
-    position: relative;
-    background: #EEE;
-    border-top: 1px solid #CCC;
-    border-radius: 0 0 3px 3px;
-
-    &-avatar {
-      @include position(absolute, $spacing-medium auto auto $spacing-medium);
-      display: block;
-      border-radius: 3px;
-    }
-
-    &-textarea {
-      $offset: $spacing-big * 2;
-      width: calc(100% - #{$offset});
-      display: block;
-      margin-left: $offset;
-      height: $avatar-size;
-      padding: 6px $spacing-medium;
-      border: solid 1px #CCC;
-      border-radius: 3px;
-      resize: none;
-      font-family: inherit;
-
-      &:focus {
-          border-color: #999;
-          outline: none;
-      }
-
-    }
-
-  }
-
 }

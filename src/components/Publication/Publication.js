@@ -2,10 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import Content from './Content';
 import ActionButton from './ActionButton';
 import CommentsList from './CommentsList';
+import CreateComment from './CreateComment';
 
 export default class Publication extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    me: PropTypes.object
   };
 
   render() {
@@ -35,8 +37,9 @@ export default class Publication extends Component {
 
         <div className="comments">
           <CommentsList data={publication.comments} />
-
-          {/* <CommentCreate publication={pub} createComment={this._createComment} /> */}
+          {this.props.me &&
+            <CreateComment me={this.props.me} />
+          }
         </div>
       </div>
     );
