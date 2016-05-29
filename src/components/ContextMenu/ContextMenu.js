@@ -1,16 +1,20 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
 export default class ContextMenu extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    children: PropTypes.array.isRequired,
+    visible: PropTypes.bool.isRequired
   };
-
 
   render() {
     const styles = require('./ContextMenu.scss');
+    const classes = {};
+    classes[styles.visible] = this.props.visible;
+
     return (
-      <div className={styles.container}>
-        <h1>ContextMenu</h1>
+      <div className={classnames(styles.contextMenu, classes)}>
+        {this.props.children}
       </div>
     );
   }

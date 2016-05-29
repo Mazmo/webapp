@@ -9,7 +9,7 @@ export default class Avatar extends Component {
 
   render() {
     const size = this.props.size ? this.props.size : 32;
-    const src = this.props.user.avatar.replace('150x150', size + 'x' + size);
+    const src = this.props.user.avatar.replace(/150x150|::dimension::/gi, size + 'x' + size);
     return (
 			<img className={this.props.className} src={src} width={size} height={size} />
     );

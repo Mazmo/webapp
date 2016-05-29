@@ -1,0 +1,65 @@
+@import 'bourbon';
+@import 'neat';
+@import '../../../utils/variables';
+
+.rsvp {
+  text-align: center;
+  background-image: repeating-linear-gradient(135deg, #ED5737 0px, #ED5737 50px, transparent 50px, transparent 80px, #2F57B7 80px, #2F57B7 130px, transparent 130px, transparent 160px);
+
+  .rsvp-header {
+    position: relative;
+    padding: 20px 10px 50px;
+    background: $almost-black;
+    color: white;
+
+    .rsvp-title {
+      margin-bottom:5px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .rsvp-date {
+      margin-bottom: 20px;
+      color: #999;
+      font-style: italic;
+    }
+
+    .rsvp-avatar {
+      @include position(absolute, auto 0 -50px 0);
+      margin: auto;
+      z-index: 1;
+      border-radius: 4px;
+      box-shadow: 0 2px 2px rgba($almost-black, .4);
+    }
+
+  }
+
+  .rsvp-bottom {
+    padding: 50px 10px 20px;
+    background: #FFF;
+    margin: 10px;
+
+    .rsvp-going {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $primary-color;
+    }
+
+    .rsvp-description {
+      padding: 20px 50px;
+
+      p {
+        color: #666;
+        font-size: 18px;
+        line-height: 26px;
+
+        & + p {
+          margin-top: 1em;
+        }
+
+      }
+    }
+  }
+}
