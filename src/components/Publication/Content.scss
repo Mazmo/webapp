@@ -141,11 +141,11 @@
     }
 
     // Nested publication
-    // .feed-item {
-    //   &-options {
-    //     display: none;
-    //   }
-    // }
+    .feed-item {
+      &-options {
+        display: none;
+      }
+    }
   }
 
   .feed-comment-create {
