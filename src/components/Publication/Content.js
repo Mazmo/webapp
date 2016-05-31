@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
-import { injectIntl, intlShape, FormattedRelative } from 'react-intl';
+import { FormattedRelative } from 'react-intl';
 import { Avatar, Icon, ContextMenu } from '../';
 import { Rsvp, LinkImage, Pictures, Video } from './';
 
-class Content extends Component {
+export default class Content extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired,
-    intl: intlShape.isRequired
+    data: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -68,5 +67,3 @@ class Content extends Component {
     );
   }
 }
-
-export default injectIntl(Content);
