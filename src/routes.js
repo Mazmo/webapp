@@ -12,7 +12,7 @@ import {
 export default (store) => {
   const isLogged = () => {
     const { auth: { user }} = store.getState();
-    return user !== null;
+    return user !== null && typeof user !== 'undefined';
   };
 
   const requireLogin = (nextState, replace, cb) => {
