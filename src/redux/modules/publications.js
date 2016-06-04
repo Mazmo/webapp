@@ -4,6 +4,10 @@ const LOAD = 'mazmo/publications/LOAD';
 const LOAD_SUCCESS = 'mazmo/publications/LOAD_SUCCESS';
 const LOAD_FAIL = 'mazmo/publications/LOAD_FAIL';
 
+const CREATE_COMMENT = 'mazmo/publications/CREATE_COMMENT';
+const CREATE_COMMENT_SUCCESS = 'mazmo/publications/CREATE_COMMENT_SUCCESS';
+const CREATE_COMMENT_FAIL = 'mazmo/publications/CREATE_COMMENT_FAIL';
+
 const initialState = {
   loaded: false,
   loading: false,
@@ -61,5 +65,13 @@ export function load() {
         });
       }
     });
+  };
+}
+
+export function createComment(publicationId, comment) {
+  console.log(publicationId + ' : ' + comment);
+  return {
+    types: [CREATE_COMMENT, CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAIL],
+    promise: () => Promise.resolve()
   };
 }

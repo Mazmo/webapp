@@ -7,7 +7,8 @@ import CreateComment from './CreateComment';
 export default class Publication extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    me: PropTypes.object
+    me: PropTypes.object,
+    createComment: PropTypes.func.isRequired
   };
 
   render() {
@@ -38,7 +39,10 @@ export default class Publication extends Component {
         <div className="comments">
           <CommentsList data={publication.comments} />
           {this.props.me &&
-            <CreateComment me={this.props.me} />
+            <CreateComment
+              me={this.props.me}
+              createComment={this.props.createComment}
+            />
           }
         </div>
       </div>

@@ -10,11 +10,6 @@ import {
   } from 'containers';
 
 export default (store) => {
-  const isLogged = () => {
-    const { auth: { user }} = store.getState();
-    return user !== null && typeof user !== 'undefined';
-  };
-
   const requireLogin = (nextState, replace, cb) => {
     function checkAuth() {
       const { auth: { user }} = store.getState();
@@ -39,10 +34,19 @@ export default (store) => {
     <Route path="/" component={App}>
       { /* Home (main) route */ }
       <IndexRoute getComponent={(nextState, cb) => {
-        if (isLogged()) {
-          cb(null, Home);
+        function isAuth() {
+          const { auth: { user }} = store.getState();
+          if (!user) {
+            cb(null, Landing);
+          } else {
+            cb(null, Home);
+          }
+        }
+
+        if (!isAuthLoaded(store.getState())) {
+          store.dispatch(loadAuth()).then(isAuth);
         } else {
-          cb(null, Landing);
+          isAuth();
         }
       }} />
 

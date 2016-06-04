@@ -2,7 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-async-connect';
 import Helmet from 'react-helmet';
-import { isLoaded as arePublicationsLoaded, load as loadPublications } from 'redux/modules/publications';
+import {
+  isLoaded as arePublicationsLoaded,
+  load as loadPublications,
+  createComment
+} from 'redux/modules/publications';
 import { Publication } from '../../components';
 
 @asyncConnect([
@@ -20,13 +24,14 @@ import { Publication } from '../../components';
     me: state.auth.user,
     loadingPublications: state.publications.loading,
     publications: state.publications.data
-  })
+  }), { createComment }
 )
 export default class Home extends Component {
   static propTypes = {
     me: PropTypes.object.isRequired,
     loadingPublications: PropTypes.bool.isRequired,
-    publications: PropTypes.array.isRequired
+    publications: PropTypes.array.isRequired,
+    createComment: PropTypes.func.isRequired
   };
 
   render() {
@@ -43,6 +48,7 @@ export default class Home extends Component {
                 key={i}
                 me={this.props.me}
                 data={publication}
+                createComment={this.props.createComment}
               />
             );
           })}
