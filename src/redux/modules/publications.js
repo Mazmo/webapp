@@ -11,10 +11,22 @@ const CREATE_COMMENT_FAIL = 'mazmo/publications/CREATE_COMMENT_FAIL';
 const initialState = {
   loaded: false,
   loading: false,
+  creatingComment: false,
   data: []
 };
 
 export default function reducer(state = initialState, action = {}) {
+  function getIndex(publicationId) {
+    let index = 0;
+    state.data.map((publication, i) => {
+      if (publication.id === publicationId) {
+        index = i;
+      }
+    });
+
+    return index;
+  }
+
   switch (action.type) {
     case LOAD:
       return {
@@ -33,6 +45,29 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         error: action.error
+      };
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        creatingComment: true
+      };
+    case CREATE_COMMENT_SUCCESS:
+      const index = getIndex(action.result.publication.id);
+      console.log(index);
+      return {
+        ...state,
+        creatingComment: false,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...action.result.publication,
+            comments: [
+              ...state.data[index].comments,
+              action.result
+            ]
+          },
+          ...state.data.slice(index + 1)
+        ]
       };
     default:
       return state;
@@ -69,9 +104,12 @@ export function load() {
 }
 
 export function createComment(publicationId, comment) {
-  console.log(publicationId + ' : ' + comment);
   return {
     types: [CREATE_COMMENT, CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAIL],
-    promise: () => Promise.resolve()
+    promise: (client) => client.post(`/publications/${publicationId}/comments`, {
+      data: {
+        comment
+      }
+    })
   };
 }

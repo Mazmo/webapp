@@ -23,7 +23,8 @@ import { Publication } from '../../components';
   state => ({
     me: state.auth.user,
     loadingPublications: state.publications.loading,
-    publications: state.publications.data
+    publications: state.publications.data,
+    canCreateComment: !state.publications.creatingComment
   }), { createComment }
 )
 export default class Home extends Component {
@@ -31,7 +32,8 @@ export default class Home extends Component {
     me: PropTypes.object.isRequired,
     loadingPublications: PropTypes.bool.isRequired,
     publications: PropTypes.array.isRequired,
-    createComment: PropTypes.func.isRequired
+    createComment: PropTypes.func.isRequired,
+    canCreateComment: PropTypes.bool.isRequired
   };
 
   render() {
@@ -49,6 +51,7 @@ export default class Home extends Component {
                 me={this.props.me}
                 data={publication}
                 createComment={this.props.createComment}
+                canCreateComment={this.props.canCreateComment}
               />
             );
           })}

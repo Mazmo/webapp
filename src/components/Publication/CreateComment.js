@@ -4,11 +4,18 @@ import { Avatar } from '../';
 export default class CreateComment extends Component {
   static propTypes = {
     me: PropTypes.object.isRequired,
-    createComment: PropTypes.func.isRequired
+    createComment: PropTypes.func.isRequired,
+    disabled: PropTypes.bool.isRequired
   };
 
-  keyUp = (e) => {
-    console.log(e);
+  changed = (e) => {
+    const keyCode = (e.keyCode || e.which);
+    const message = this.refs.message.value;
+
+    if (keyCode === 13 && !e.shiftKey & message.length > 0) {
+      e.preventDefault();
+      this.props.createComment(message);
+    }
   }
 
   render() {
@@ -18,9 +25,10 @@ export default class CreateComment extends Component {
         <Avatar className={styles.createAvatar} size={32} user={this.props.me} />
         <textarea
           className={styles.createTextarea}
-          ref="commentcontainer"
+          ref="message"
           placeholder="Escribe un comentario"
-          onKeyUp={this.keyUp}
+          onKeyPress={this.changed}
+          disabled={this.props.disabled}
         ></textarea>
       </form>
     );

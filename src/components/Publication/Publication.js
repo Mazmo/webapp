@@ -8,8 +8,13 @@ export default class Publication extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     me: PropTypes.object,
-    createComment: PropTypes.func.isRequired
+    createComment: PropTypes.func.isRequired,
+    canCreateComment: PropTypes.bool.isRequired
   };
+
+  createComment = (message) => {
+    this.props.createComment(this.props.data.id, message);
+  }
 
   render() {
     const styles = require('./Publication.scss');
@@ -37,11 +42,15 @@ export default class Publication extends Component {
         </div>
 
         <div className="comments">
-          <CommentsList data={publication.comments} />
+          <CommentsList
+            me={this.props.me}
+            data={publication.comments}
+          />
           {this.props.me &&
             <CreateComment
               me={this.props.me}
-              createComment={this.props.createComment}
+              createComment={this.createComment}
+              disabled={!this.props.canCreateComment}
             />
           }
         </div>

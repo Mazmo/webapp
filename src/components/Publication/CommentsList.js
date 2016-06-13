@@ -4,37 +4,40 @@ import LoadMoreComments from './LoadMoreComments';
 
 export default class CommentsList extends Component {
   static propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
+    me: PropTypes.object
   };
 
   constructor(props) {
     super(props);
+    let notShowing = this.props.data.length;
+    if (typeof this.props.me !== 'undefined' && this.props.data.length > 0 && this.props.data[this.props.data.length - 1].user.id === this.props.me.id) {
+      notShowing--;
+    }
     this.state = {
-      showing: 0
+      notShowing
     };
   }
 
   showAll = () => {
-    this.setState({ showing: this.props.data.length });
+    this.setState({ notShowing: 0 });
   }
 
   render() {
     const styles = require('./CommentsList.scss');
-    const notShowing = this.props.data.length - this.state.showing;
+    const comments = this.props.data;
 
     return (
       <div>
-        {notShowing > 0 &&
+        {this.state.notShowing > 0 &&
           <LoadMoreComments
-            count={notShowing}
+            count={this.state.notShowing}
             showAll={this.showAll}
           />
         }
         <ul className={styles.comments}>
-          {this.props.data.map((comment, i) => {
-            if (i < this.state.showing) {
-              return <Comment key={i} data={comment} />;
-            }
+          {comments.slice(this.state.notShowing, comments.length).map((comment, i) => {
+            return <Comment key={i} data={comment} />;
           })}
         </ul>
       </div>
