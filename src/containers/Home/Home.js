@@ -5,7 +5,9 @@ import Helmet from 'react-helmet';
 import {
   isLoaded as arePublicationsLoaded,
   load as loadPublications,
-  createComment
+  createComment,
+  reactToPublication,
+  reactToComment
 } from 'redux/modules/publications';
 import { Publication } from '../../components';
 
@@ -25,7 +27,7 @@ import { Publication } from '../../components';
     loadingPublications: state.publications.loading,
     publications: state.publications.data,
     canCreateComment: !state.publications.creatingComment
-  }), { createComment }
+  }), { createComment, reactToPublication, reactToComment }
 )
 export default class Home extends Component {
   static propTypes = {
@@ -33,7 +35,9 @@ export default class Home extends Component {
     loadingPublications: PropTypes.bool.isRequired,
     publications: PropTypes.array.isRequired,
     createComment: PropTypes.func.isRequired,
-    canCreateComment: PropTypes.bool.isRequired
+    canCreateComment: PropTypes.bool.isRequired,
+    reactToPublication: PropTypes.func.isRequired,
+    reactToComment: PropTypes.func.isRequired
   };
 
   render() {
@@ -50,8 +54,10 @@ export default class Home extends Component {
                 key={i}
                 me={this.props.me}
                 data={publication}
+                react={this.props.reactToPublication}
                 createComment={this.props.createComment}
                 canCreateComment={this.props.canCreateComment}
+                reactToComment={this.props.reactToComment}
               />
             );
           })}

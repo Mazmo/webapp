@@ -5,7 +5,8 @@ import LoadMoreComments from './LoadMoreComments';
 export default class CommentsList extends Component {
   static propTypes = {
     data: PropTypes.array.isRequired,
-    me: PropTypes.object
+    me: PropTypes.object,
+    react: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -37,7 +38,13 @@ export default class CommentsList extends Component {
         }
         <ul className={styles.comments}>
           {comments.slice(this.state.notShowing, comments.length).map((comment, i) => {
-            return <Comment key={i} data={comment} />;
+            return (
+              <Comment
+                key={i}
+                data={comment}
+                react={this.props.react}
+              />
+            );
           })}
         </ul>
       </div>

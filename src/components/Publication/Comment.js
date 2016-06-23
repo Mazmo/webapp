@@ -5,8 +5,13 @@ import classNames from 'classnames';
 
 export default class Comment extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    react: PropTypes.func.isRequired
   };
+
+  react = () => {
+    this.props.react(this.props.data.id, 'SPANK');
+  }
 
   render() {
     const styles = require('./Comment.scss');
@@ -24,8 +29,9 @@ export default class Comment extends Component {
             <p className={styles.text}>{data.comment}</p>
           </div>
           <div className={styles.bottom}>
-            <button className={classNames(styles.spankButton, {[styles.spanked]: data.isSpanked})} onClick={this.spankHandler} title={spankLabel}>
+            <button className={classNames(styles.spankButton, {[styles.spanked]: data.isSpanked})} onClick={this.react} title={spankLabel}>
               <Icon className={styles.spankIcon} name="spank" />
+              {data.reacting && '...'}
               {spankCount}
             </button>
           </div>

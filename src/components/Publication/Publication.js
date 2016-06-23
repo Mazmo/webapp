@@ -9,11 +9,21 @@ export default class Publication extends Component {
     data: PropTypes.object.isRequired,
     me: PropTypes.object,
     createComment: PropTypes.func.isRequired,
-    canCreateComment: PropTypes.bool.isRequired
+    canCreateComment: PropTypes.bool.isRequired,
+    react: PropTypes.func.isRequired,
+    reactToComment: PropTypes.func.isRequired
   };
 
   createComment = (message) => {
     this.props.createComment(this.props.data.id, message);
+  }
+
+  createReaction = () => {
+    this.props.react(this.props.data.id, 'SPANK');
+  }
+
+  createReactionToComment = (commentId, type) => {
+    this.props.reactToComment(this.props.data.id, commentId, type);
   }
 
   render() {
@@ -32,7 +42,9 @@ export default class Publication extends Component {
           <ActionButton
             icon="spank"
             counter={publication.spank_count > 0 ? publication.spank_count : null}
-            active={false}
+            active={publication.is_spanked}
+            loading={publication.reacting}
+            action={this.createReaction}
           />
           <ActionButton
             icon="share"
@@ -45,6 +57,7 @@ export default class Publication extends Component {
           <CommentsList
             me={this.props.me}
             data={publication.comments}
+            react={this.createReactionToComment}
           />
           {this.props.me &&
             <CreateComment
