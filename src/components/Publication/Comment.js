@@ -4,8 +4,13 @@ import { Avatar, Icon } from '../';
 
 export default class Comment extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    react: PropTypes.func.isRequired
   };
+
+  react = () => {
+    this.props.react(this.props.data.id, 'SPANK');
+  }
 
   render() {
     const styles = require('./Comment.scss');
@@ -17,8 +22,9 @@ export default class Comment extends Component {
           {this.props.data.comment}
         </p>
         <span className={styles.commentDate}>{/* moment(this.props.data.created_at.date).fromNow() */}</span>
-        <button onClick={this.spankHandler} title={this.props.data.isSpanked ? 'Quitar spank' : 'Spank it'}>
+        <button onClick={this.react} title={this.props.data.isSpanked ? 'Quitar spank' : 'Spank it'}>
           <Icon className={styles.commentSpankIcon} name="spank" />
+          {this.props.data.reacting && '...'}
           {this.props.data.spank_count > 0 ? this.props.data.spank_count : null}
         </button>
       </li>

@@ -8,6 +8,14 @@ const CREATE_COMMENT = 'mazmo/publications/CREATE_COMMENT';
 const CREATE_COMMENT_SUCCESS = 'mazmo/publications/CREATE_COMMENT_SUCCESS';
 const CREATE_COMMENT_FAIL = 'mazmo/publications/CREATE_COMMENT_FAIL';
 
+const CREATE_PUB_REACTION = 'mazmo/publications/CREATE_PUB_REACTION';
+const CREATE_PUB_REACTION_SUCCESS = 'mazmo/publications/CREATE_PUB_REACTION_SUCCESS';
+const CREATE_PUB_REACTION_FAIL = 'mazmo/publications/CREATE_PUB_REACTION_FAIL';
+
+const CREATE_CMNT_REACTION = 'mazmo/publications/CREATE_CMNT_REACTION';
+const CREATE_CMNT_REACTION_SUCCESS = 'mazmo/publications/CREATE_CMNT_REACTION_SUCCESS';
+const CREATE_CMNT_REACTION_FAIL = 'mazmo/publications/CREATE_CMNT_REACTION_FAIL';
+
 const initialState = {
   loaded: false,
   loading: false,
@@ -26,6 +34,19 @@ export default function reducer(state = initialState, action = {}) {
 
     return index;
   }
+  function getCommentIndex(publicationIndex, commentId) {
+    let index = 0;
+    state.data[publicationIndex].comments.map((comment, i) => {
+      if (comment.id === commentId) {
+        index = i;
+      }
+    });
+
+    return index;
+  }
+
+  let index = 0;
+  let cmntIndex = 0;
 
   switch (action.type) {
     case LOAD:
@@ -52,8 +73,7 @@ export default function reducer(state = initialState, action = {}) {
         creatingComment: true
       };
     case CREATE_COMMENT_SUCCESS:
-      const index = getIndex(action.result.publication.id);
-      console.log(index);
+      index = getIndex(action.result.publication.id);
       return {
         ...state,
         creatingComment: false,
@@ -64,6 +84,102 @@ export default function reducer(state = initialState, action = {}) {
             comments: [
               ...state.data[index].comments,
               action.result
+            ]
+          },
+          ...state.data.slice(index + 1)
+        ]
+      };
+    case CREATE_PUB_REACTION:
+      index = getIndex(action.publicationId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...state.data[index],
+            reacting: true
+          },
+          ...state.data.slice(index + 1)
+        ]
+      };
+    case CREATE_PUB_REACTION_SUCCESS:
+      index = getIndex(action.publicationId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          action.result,
+          ...state.data.slice(index + 1)
+        ]
+      };
+    case CREATE_PUB_REACTION_FAIL:
+      index = getIndex(action.publicationId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...state.data[index],
+            reacting: false
+          },
+          ...state.data.slice(index + 1)
+        ]
+      };
+    case CREATE_CMNT_REACTION:
+      index = getIndex(action.publicationId);
+      cmntIndex = getCommentIndex(index, action.commentId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...state.data[index],
+            comments: [
+              ...state.data[index].comments.slice(0, cmntIndex),
+              {
+                ...state.data[index].comments[cmntIndex],
+                reacting: true
+              },
+              ...state.data[index].comments.slice(cmntIndex + 1)
+            ]
+          },
+          ...state.data.slice(index + 1)
+        ]
+      };
+    case CREATE_CMNT_REACTION_SUCCESS:
+      index = getIndex(action.publicationId);
+      cmntIndex = getCommentIndex(index, action.commentId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...state.data[index],
+            comments: [
+              ...state.data[index].comments.slice(0, cmntIndex),
+              action.result,
+              ...state.data[index].comments.slice(cmntIndex + 1)
+            ]
+          },
+          ...state.data.slice(index + 1)
+        ]
+      };
+    case CREATE_CMNT_REACTION_FAIL:
+      index = getIndex(action.publicationId);
+      cmntIndex = getCommentIndex(index, action.commentId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...state.data[index],
+            comments: [
+              ...state.data[index].comments.slice(0, cmntIndex),
+              {
+                ...state.data[index].comments[cmntIndex],
+                reacting: false
+              },
+              ...state.data[index].comments.slice(cmntIndex + 1)
             ]
           },
           ...state.data.slice(index + 1)
@@ -109,6 +225,31 @@ export function createComment(publicationId, comment) {
     promise: (client) => client.post(`/publications/${publicationId}/comments`, {
       data: {
         comment
+      }
+    })
+  };
+}
+
+export function reactToPublication(publicationId, reactionType) {
+  return {
+    publicationId,
+    types: [CREATE_PUB_REACTION, CREATE_PUB_REACTION_SUCCESS, CREATE_PUB_REACTION_FAIL],
+    promise: (client) => client.post(`/publications/${publicationId}/spanks`, {
+      data: {
+        type: reactionType
+      }
+    })
+  };
+}
+
+export function reactToComment(publicationId, commentId, reactionType) {
+  return {
+    publicationId,
+    commentId,
+    types: [CREATE_CMNT_REACTION, CREATE_CMNT_REACTION_SUCCESS, CREATE_CMNT_REACTION_FAIL],
+    promise: (client) => client.post(`/publications/${publicationId}/comments/${commentId}/spanks`, {
+      data: {
+        type: reactionType
       }
     })
   };
