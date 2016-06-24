@@ -3,18 +3,33 @@
 @import '../../utils/variables';
 
 .load-more {
-  display: block;
-  padding: 15px 20px;
-  background: #fff;
+  @include display(flex);
+  @include align-items(center);
+  width: 100%;
+  padding: $spacing-medium $spacing-big;
+  background: white;
+  border: none;
   color: $primary-color;
   text-decoration: none;
   font-size: .8em;
   font-weight: 700;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    background: rgba($primary-color, 0.05);
+    text-decoration: underline;
+  }
 
   .icon {
-    height: 18px;
-    width: 18px;
-    margin-right: 20px;
+    @include display(flex);
+    @include size(16px);
+    margin-right: $spacing-medium;
     fill: $primary-color;
   }
+
+  .label {
+    @include display(flex);
+  }
+
 }

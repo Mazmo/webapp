@@ -17,7 +17,7 @@ export default class Comment extends Component {
     const styles = require('./Comment.scss');
     const data = this.props.data;
     const user = data.user;
-    const spankLabel = data.isSpanked ? 'Quitar spank' : 'Spank it';
+    const spankLabel = data.is_spanked ? 'Quitar spank' : 'Spank it';
     const spankCount = data.spank_count > 0 ? data.spank_count : null;
 
     return (
@@ -26,13 +26,13 @@ export default class Comment extends Component {
         <div className={styles.content}>
           <div className={styles.top}>
             <Link className={styles.author} to={'/' + user.username}>{user.displayname}</Link>
-            <p className={styles.text}>{data.comment}</p>
+            <span className={styles.text}>{data.comment}</span>
           </div>
           <div className={styles.bottom}>
-            <button className={classNames(styles.spankButton, {[styles.spanked]: data.isSpanked})} onClick={this.react} title={spankLabel}>
+            <button className={classNames(styles.spankButton, {[styles.spanked]: data.is_spanked})} onClick={this.react} title={spankLabel}>
               <Icon className={styles.spankIcon} name="spank" />
               {data.reacting && '...'}
-              {spankCount}
+              <span className={styles.spankLabel}>{spankCount}</span>
             </button>
           </div>
         </div>

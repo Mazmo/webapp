@@ -8,20 +8,17 @@
   @include align-items(stretch);
   position: relative;
   padding: $spacing-medium 0;
-  outline: solid 1px blue;
 
   .avatar {
+    $size: 32px;
     @include display(flex);
-    @include flex(0 0);
-    @include size(32px);
+    @include flex(0 0 $size);
+    @include size($size);
     margin: 0 $spacing-medium;
     border-radius: 3px;
   }
 
   .content {
-    @include display(flex);
-    @include flex-direction(column);
-    @include flex-grow(1);
     margin-right: $spacing-medium;
     color: black;
     font-size: .85em;
@@ -30,25 +27,25 @@
     line-height: 1.3em;
 
     .top {
-      @include display(flex);
 
       .author {
+        display: inline-block;
         margin-right: $spacing-small;
         color: $primary-color;
         font-weight: $font-bold;
         text-decoration: none;
       }
 
-      .text {
-        margin: 0;
-      }
-
     }
 
     .bottom {
       @include display(flex);
+      @include align-items(center);
+      margin-top: $spacing-small;
 
       .spank-button {
+        @include display(flex);
+        @include align-items(center);
         @include transition(opacity .2s ease-in-out);
         margin-left: $spacing-small;
         padding: 0;
@@ -63,8 +60,13 @@
         cursor: pointer;
 
         .spank-icon {
+          @include display(flex);
           @include size(14px);
           margin-right: 3px;
+        }
+
+        .spank-label {
+          @include display(flex);
         }
 
         &.spanked {
