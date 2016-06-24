@@ -3,7 +3,7 @@ import { asyncConnect } from 'redux-async-connect';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 import { Avatar, Icon } from '../../components';
-
+console.log('RENDERIZANDO ESTA MIERDA???');
 @asyncConnect([
   {
     deferred: false,

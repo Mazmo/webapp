@@ -14,6 +14,22 @@ export default class Publication extends Component {
     reactToComment: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    const comments = this.props.data.comments;
+    let notShowing = comments.length;
+    if (typeof this.props.me !== 'undefined' && comments.length > 0 && comments[comments.length - 1].user.id === this.props.me.id) {
+      notShowing--;
+    }
+    this.state = {
+      notShowing
+    };
+  }
+
+  showAll = () => {
+    this.setState({ notShowing: 0 });
+  }
+
   createComment = (message) => {
     this.props.createComment(this.props.data.id, message);
   }
@@ -38,6 +54,7 @@ export default class Publication extends Component {
             icon="comments"
             counter={publication.comment_count}
             active={false}
+            action={this.showAll}
           />
           <ActionButton
             icon="spank"
@@ -58,6 +75,8 @@ export default class Publication extends Component {
             me={this.props.me}
             data={publication.comments}
             react={this.createReactionToComment}
+            notShowing={this.state.notShowing}
+            showAll={this.showAll}
           />
           {this.props.me &&
             <CreateComment

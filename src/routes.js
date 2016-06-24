@@ -5,9 +5,10 @@ import {
   App,
   Home,
   Landing,
+  ProfileContainer,
+  ProfileInfo,
   NotFound
 } from 'containers';
-import Profile from './containers/Profile';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -56,8 +57,11 @@ export default (store) => {
       </Route>
 
       { /* Routes */ }
-      <Route path=":username" component={Profile.Container}>
-        <IndexRoute component={Profile.Info} />
+      <Route path="/:username" getCcomponent={(nextState, cb) => {
+        console.log(nextState);
+        cb(null, ProfileContainer);
+      }}>
+        <IndexRoute component={ProfileInfo} />
       </Route>
 
       { /* Catch all route */ }
