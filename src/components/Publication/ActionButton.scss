@@ -9,6 +9,7 @@
   @include transition(opacity .2s ease-in-out);
   margin-right: 15px;
   font-weight: bold;
+  cursor: pointer;
 
   &.active {
     opacity: 1;

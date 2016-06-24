@@ -82,8 +82,8 @@
 
   &-options {
     @include position(absolute, 0 0 auto auto);
-    @include size(35px);
-    padding: 10px 5px;
+    @include size(30px);
+    padding: 10px 0;
     cursor: pointer;
 
     .context-menu {
@@ -114,6 +114,7 @@
   &-content {
 
     &-text {
+      margin: 0;
       padding: $spacing-medium;
       font-size: 1em;
       font-weight: $font-regular;
