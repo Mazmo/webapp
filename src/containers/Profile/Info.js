@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-export default class Profile extends Component {
+export default class Info extends Component {
   render() {
-    const styles = require('./Profile.scss');
+    const styles = require('./Info.scss');
     return (
       <div className={styles.container}>
-        <h1>Profile</h1>
+        <h1>Info</h1>
       </div>
     );
   }
