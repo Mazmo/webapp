@@ -15,13 +15,14 @@ export default class CreateComment extends Component {
     if (keyCode === 13 && !e.shiftKey & message.length > 0) {
       e.preventDefault();
       this.props.createComment(message);
+      this.refs.form.reset();
     }
   }
 
   render() {
     const styles = require('./CreateComment.scss');
     return (
-      <form className={styles.create}>
+      <form className={styles.create} ref="form">
         <Avatar className={styles.createAvatar} size={32} user={this.props.me} />
         <textarea
           className={styles.createTextarea}
