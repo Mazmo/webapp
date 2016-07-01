@@ -12,7 +12,7 @@ export default class CreateComment extends Component {
     const keyCode = (e.keyCode || e.which);
     const message = this.refs.message.value;
 
-    if (keyCode === 13 && !e.shiftKey & message.length > 0) {
+    if (keyCode === 13 && !e.shiftKey && message.length > 0) {
       e.preventDefault();
       this.props.createComment(message);
       this.refs.form.reset();
