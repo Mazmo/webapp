@@ -57,10 +57,7 @@ export default (store) => {
       </Route>
 
       { /* Routes */ }
-      <Route path="/:username" getCcomponent={(nextState, cb) => {
-        console.log(nextState);
-        cb(null, ProfileContainer);
-      }}>
+      <Route path=":username" component={ProfileContainer}>
         <IndexRoute component={ProfileInfo} />
       </Route>
 

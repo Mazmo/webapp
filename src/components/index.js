@@ -7,3 +7,4 @@ export Avatar from './Avatar/Avatar';
 export ContextMenu from './ContextMenu/ContextMenu';
 export Messages from './Messages/Messages';
 export Publication from './Publication/Publication';
+export Modal from './Modal/Modal';
