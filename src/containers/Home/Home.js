@@ -7,7 +7,8 @@ import {
   load as loadPublications,
   createComment,
   reactToPublication,
-  reactToComment
+  reactToComment,
+  loadReactions
 } from 'redux/modules/publications';
 import { Publication } from '../../components';
 
@@ -27,7 +28,7 @@ import { Publication } from '../../components';
     loadingPublications: state.publications.loading,
     publications: state.publications.data,
     canCreateComment: !state.publications.creatingComment
-  }), { createComment, reactToPublication, reactToComment }
+  }), { createComment, reactToPublication, reactToComment, loadReactions }
 )
 export default class Home extends Component {
   static propTypes = {
@@ -37,7 +38,8 @@ export default class Home extends Component {
     createComment: PropTypes.func.isRequired,
     canCreateComment: PropTypes.bool.isRequired,
     reactToPublication: PropTypes.func.isRequired,
-    reactToComment: PropTypes.func.isRequired
+    reactToComment: PropTypes.func.isRequired,
+    loadReactions: PropTypes.func.isRequired
   };
 
   render() {
@@ -58,6 +60,7 @@ export default class Home extends Component {
                 createComment={this.props.createComment}
                 canCreateComment={this.props.canCreateComment}
                 reactToComment={this.props.reactToComment}
+                loadReactions={this.props.loadReactions}
               />
             );
           })}

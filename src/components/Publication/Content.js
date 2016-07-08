@@ -8,7 +8,8 @@ import ModalReactions from './Modals/Reactions';
 
 export default class Content extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    loadReactions: PropTypes.func
   };
 
   constructor(props) {
@@ -41,8 +42,14 @@ export default class Content extends Component {
     }
   }
 
-  openModalReactions = () => this.setState({ modals: { reactions: true }});
   closeModalReactions = () => this.setState({ modals: { reactions: false }});
+  openModalReactions = () => {
+    const publication = this.props.data;
+    if (this.props.loadReactions && (!publication.reactions || (!publication.reactions.data && !publication.reactions.loading))) {
+      this.props.loadReactions(publication.id);
+    }
+    this.setState({ modals: { reactions: true }});
+  }
 
   render() {
     const styles = require('./Content.scss');
@@ -89,6 +96,7 @@ export default class Content extends Component {
           {this.state.modals.reactions &&
             <ModalReactions
               close={this.closeModalReactions}
+              data={this.props.data.reactions}
             />
           }
         </div>

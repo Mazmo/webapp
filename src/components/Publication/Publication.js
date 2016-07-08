@@ -11,7 +11,8 @@ export default class Publication extends Component {
     createComment: PropTypes.func.isRequired,
     canCreateComment: PropTypes.bool.isRequired,
     react: PropTypes.func.isRequired,
-    reactToComment: PropTypes.func.isRequired
+    reactToComment: PropTypes.func.isRequired,
+    loadReactions: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -47,7 +48,10 @@ export default class Publication extends Component {
     const publication = this.props.data;
     return (
       <div className={styles.item}>
-        <Content data={publication} />
+        <Content
+          data={publication}
+          loadReactions={this.props.loadReactions}
+        />
 
         <div className={styles.itemActions}>
           <ActionButton

@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { Modal } from '../../';
+import { Modal, Loading } from '../../';
 
 export default class Reactions extends Component {
   static propTypes = {
+    data: PropTypes.object,
     close: PropTypes.func.isRequired
   };
-
-  clos
 
   render() {
     // const styles = require('./Reactions.scss');
@@ -15,7 +14,18 @@ export default class Reactions extends Component {
         active
         close={this.props.close}
       >
-        <h1>Reactions</h1>
+        <div>
+          {this.props.data && this.props.data.loading && <Loading />}
+          {this.props.data && this.props.data.data &&
+            <ul>
+              {this.props.data.data.map((reaction) => {
+                return (
+                  <li>{reaction.displayname}</li>
+                );
+              })}
+            </ul>
+          }
+        </div>
       </Modal>
     );
   }

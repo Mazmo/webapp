@@ -16,6 +16,10 @@ const CREATE_CMNT_REACTION = 'mazmo/publications/CREATE_CMNT_REACTION';
 const CREATE_CMNT_REACTION_SUCCESS = 'mazmo/publications/CREATE_CMNT_REACTION_SUCCESS';
 const CREATE_CMNT_REACTION_FAIL = 'mazmo/publications/CREATE_CMNT_REACTION_FAIL';
 
+const LOAD_PUB_REACTIONS = 'mazmo/publications/LOAD_PUB_REACTIONS';
+const LOAD_PUB_REACTIONS_SUCCESS = 'mazmo/publications/LOAD_PUB_REACTIONS_SUCCESS';
+const LOAD_PUB_REACTIONS_FAIL = 'mazmo/publications/LOAD_PUB_REACTIONS_FAIL';
+
 const initialState = {
   loaded: false,
   loading: false,
@@ -185,6 +189,57 @@ export default function reducer(state = initialState, action = {}) {
           ...state.data.slice(index + 1)
         ]
       };
+    case LOAD_PUB_REACTIONS:
+      index = getIndex(action.publicationId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...state.data[index],
+            reactions: {
+              loading: true,
+              error: null,
+              data: null
+            }
+          },
+          ...state.data.slice(index + 1)
+        ]
+      };
+    case LOAD_PUB_REACTIONS_SUCCESS:
+      index = getIndex(action.publicationId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...state.data[index],
+            reactions: {
+              loading: false,
+              error: null,
+              data: action.result
+            }
+          },
+          ...state.data.slice(index + 1)
+        ]
+      };
+    case LOAD_PUB_REACTIONS_FAIL:
+      index = getIndex(action.publicationId);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, index),
+          {
+            ...state.data[index],
+            reactions: {
+              loading: false,
+              error: action.result,
+              data: null
+            }
+          },
+          ...state.data.slice(index + 1)
+        ]
+      };
     default:
       return state;
   }
@@ -252,5 +307,13 @@ export function reactToComment(publicationId, commentId, reactionType) {
         type: reactionType
       }
     })
+  };
+}
+
+export function loadReactions(publicationId) {
+  return {
+    publicationId,
+    types: [LOAD_PUB_REACTIONS, LOAD_PUB_REACTIONS_SUCCESS, LOAD_PUB_REACTIONS_FAIL],
+    promise: (client) => client.get(`/publications/${publicationId}/spanks`)
   };
 }
