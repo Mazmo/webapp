@@ -18,9 +18,9 @@ export default class Reactions extends Component {
           {this.props.data && this.props.data.loading && <Loading />}
           {this.props.data && this.props.data.data &&
             <ul>
-              {this.props.data.data.map((reaction) => {
+              {this.props.data.data.map((reaction, i) => {
                 return (
-                  <li>{reaction.displayname}</li>
+                  <li key={i}>{reaction.displayname}</li>
                 );
               })}
             </ul>
