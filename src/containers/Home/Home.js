@@ -28,7 +28,7 @@ import { Publication } from '../../components';
     loadingPublications: state.publications.loading,
     publications: state.publications.data,
     canCreateComment: !state.publications.creatingComment
-  }), { createComment, reactToPublication, reactToComment, loadReactions }
+  }), { createComment, reactToPublication, reactToComment, loadReactions, loadPublications }
 )
 export default class Home extends Component {
   static propTypes = {
@@ -39,8 +39,19 @@ export default class Home extends Component {
     canCreateComment: PropTypes.bool.isRequired,
     reactToPublication: PropTypes.func.isRequired,
     reactToComment: PropTypes.func.isRequired,
-    loadReactions: PropTypes.func.isRequired
+    loadReactions: PropTypes.func.isRequired,
+    loadPublications: PropTypes.func.isRequired
   };
+
+  componentDidMount = () => {
+    document.addEventListener('scroll', (e) => {
+      const gap = 200;
+      const body = e.target.body;
+      if (!this.props.loadingPublications && body.scrollTop + body.offsetHeight > body.scrollHeight - gap) {
+        this.props.loadPublications();
+      }
+    });
+  }
 
   render() {
     const styles = require('./Home.scss');

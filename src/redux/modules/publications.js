@@ -260,9 +260,13 @@ export function load() {
         };
 
         if (publications.length) {
+          const lastPublication = publications[publications.length - 1];
+          const t = lastPublication.created_at.date.split(/[- :]/);
+          const date = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
           query = {
             ...query,
-            id: publications[publications.length - 1].id
+            id: lastPublication.id,
+            time: date.getTime()
           };
         }
 
