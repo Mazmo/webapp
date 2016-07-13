@@ -5,6 +5,7 @@ import {
   App,
   Home,
   Landing,
+  Compose,
   ProfileContainer,
   ProfileInfo,
   NotFound
@@ -53,7 +54,7 @@ export default (store) => {
 
       { /* Routes requiring login */ }
       <Route onEnter={requireLogin}>
-        { /* <Route path="loginSuccess" component={LoginSuccess}/> */ }
+        <Route path="compose" component={Compose} />
       </Route>
 
       { /* Routes */ }

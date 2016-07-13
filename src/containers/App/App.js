@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { chgIcon as chgNavIcon, chgTitle as chgNavTitle, chgAction as chgNavAction } from 'redux/modules/nav';
 import { routeActions } from 'react-router-redux';
 import config from '../../config';
 import { asyncConnect } from 'redux-async-connect';
@@ -11,7 +10,10 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import locales from '../../utils/locales';
 import {
   Navbar,
-  Aside
+  Aside,
+  FullDropdown,
+  Messages,
+  Notifications
 } from '../../components';
 
 const locale = 'es';
@@ -31,19 +33,14 @@ const messages = locales(locale);
 }])
 @connect(
   state => ({
-    user: state.auth.user,
-    nav: state.nav
+    user: state.auth.user
   }),
-  {logout, chgNavIcon, chgNavTitle, chgNavAction, pushState: routeActions.push})
+  {logout, pushState: routeActions.push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
-    nav: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
-    chgNavIcon: PropTypes.func.isRequired,
-    chgNavTitle: PropTypes.func.isRequired,
-    chgNavAction: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
 
@@ -54,7 +51,11 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      aside: false
+      aside: false,
+      dropdowns: {
+        notifications: false,
+        messages: false
+      }
     };
   }
 
@@ -66,43 +67,49 @@ export default class App extends Component {
       // logout
       this.props.pushState('/');
     }
-
-    if (!this.props.nav.action && nextProps.nav.action && this.state.aside) {
-      // Hide aside if another nav icon is triggered
-      this.setState({ aside: false });
-    }
   }
 
-  toggleAside = () => {
-    this.setState({ aside: !this.state.aside });
-  }
+  toggleAside = () => { this.setState({ aside: !this.state.aside }); }
+  toggleNotifications = () => { this.setState({ dropdowns: { notifications: !this.state.dropdowns.notifications, messages: false } }); };
+  toggleMessages = () => { this.setState({ dropdowns: { notifications: false, messages: !this.state.dropdowns.messages } }); };
 
   render() {
     const { user } = this.props;
     const styles = require('./App.scss');
-    const navAction = this.props.nav.action ? this.props.nav.action : this.toggleAside;
 
     return (
       <IntlProvider locale={locale} messages={messages}>
         <div className={styles.app}>
           <Helmet {...config.app.head}/>
-          {user &&
+          {user && !this.props.children.type.avoidMainNavbar &&
             <Navbar
-              user={user}
-              icon={this.props.nav.icon}
-              title={this.props.nav.title}
-              logo={this.props.nav.logo}
-              action={navAction}
-              chgTitle={this.props.chgNavTitle}
-              chgIcon={this.props.chgNavIcon}
-              chgAction={this.props.chgNavAction} />
+              icon={'nav'}
+              action={this.toggleAside}
+              buttons={[
+                {icon: 'message', active: this.state.dropdowns.messages, action: this.toggleMessages},
+                {icon: 'bell', active: this.state.dropdowns.notifications, action: this.toggleNotifications}
+              ]}
+            />
           }
           {user &&
-            <Aside
-              user={user}
-              visible={this.state.aside}
-              toggle={this.toggleAside}
-              logout={this.props.logout} />
+            <div>
+              <Aside
+                user={user}
+                visible={this.state.aside}
+                toggle={this.toggleAside}
+                logout={this.props.logout}
+              />
+              <FullDropdown
+                active={this.state.dropdowns.notifications}
+              >
+                <Notifications user={this.props.user} />
+              </FullDropdown>
+              <FullDropdown
+                active={this.state.dropdowns.messages}
+              >
+                <Messages user={this.props.user} />
+              </FullDropdown>
+            </div>
           }
 
           <div className={styles.content}>
