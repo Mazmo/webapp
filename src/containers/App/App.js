@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { routeActions } from 'react-router-redux';
@@ -112,7 +113,7 @@ export default class App extends Component {
             </div>
           }
 
-          <div className={styles.content}>
+          <div className={classnames({[styles.content]: !this.props.children.type.avoidMainNavbar})}>
             {this.props.children}
           </div>
         </div>

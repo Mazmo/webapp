@@ -19,6 +19,8 @@ export default class Container extends Component {
     children: PropTypes.object.isRequired
   };
 
+  static avoidMainNavbar = true;
+
   render() {
     const styles = require('./Container.scss');
     const user = this.props.profile;
@@ -32,7 +34,7 @@ export default class Container extends Component {
 
         <div className={styles.profileHeader} style={coverStyle}>
 
-          <Avatar className={styles.profileHeaderAvatar} size="100" user={user} />
+          <Avatar className={styles.profileHeaderAvatar} size={100} user={user} />
           <h1 className={styles.profileHeaderName}>{user.displayname}</h1>
           <p className={styles.profileHeaderLocation}>{user.location}</p>
           <button className={classNames(styles.profileHeaderFollow, 'btn', 'style-blue')}>Seguir</button>

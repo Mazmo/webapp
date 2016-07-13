@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 import Button from './Button';
 import { Icon } from '../';
 
 export default class Navbar extends Component {
   static propTypes = {
+    background: PropTypes.string,
     icon: PropTypes.string.isRequired,
     title: PropTypes.string,
     action: PropTypes.func.isRequired,
@@ -14,7 +16,7 @@ export default class Navbar extends Component {
     const styles = require('./Navbar.scss');
 
     return (
-      <header className={styles.header}>
+      <header className={classnames(styles.header, {[styles.transparent]: this.props.background === 'transparent'})}>
         <div className={styles.container}>
 
           <button className={styles.button} onClick={this.props.action}>

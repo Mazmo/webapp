@@ -13,6 +13,10 @@
 	height: $header-height;
   top: 0;
 
+	&.transparent {
+		background: transparent;
+	}
+
 	.container {
 		@include display(flex);
 		@include flex-grow(1);

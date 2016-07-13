@@ -42,6 +42,7 @@ export default class Compose extends Component {
         <Helmet title="Crear nueva publicación" />
 
         <Navbar
+          background={'transparent'}
           title={'Publicar'}
           icon={'back'}
           action={this.back}

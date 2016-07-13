@@ -58,7 +58,7 @@ export default (store) => {
       </Route>
 
       { /* Routes */ }
-      <Route path=":username" component={ProfileContainer}>
+      <Route path="/:username" component={ProfileContainer}>
         <IndexRoute component={ProfileInfo} />
       </Route>
 
