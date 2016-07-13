@@ -1,4 +1,4 @@
-@import '../../../utils/variables';
+@import '../../utils/variables';
 @import 'bourbon';
 @import 'neat';
 
@@ -9,13 +9,6 @@
   @include transition(box-shadow 150ms);
   width: $header-height;
   cursor: pointer;
-
-  svg {
-    @include display(flex);
-    @include size($header-height);
-    padding: $header-height/4;
-    fill: white;
-  }
 
   .content {
     @include display(flex);

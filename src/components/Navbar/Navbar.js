@@ -1,20 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import {
-  Icon,
-  Notifications,
-  Messages
-} from '../';
-import Dropdown from './Dropdown/Dropdown';
+import Button from './Button';
+import { Icon } from '../';
 
 export default class Navbar extends Component {
   static propTypes = {
-    user: PropTypes.object,
     icon: PropTypes.string.isRequired,
     title: PropTypes.string,
     action: PropTypes.func.isRequired,
-    chgIcon: PropTypes.func.isRequired,
-    chgTitle: PropTypes.func.isRequired,
-    chgAction: PropTypes.func.isRequired
+    buttons: PropTypes.array
   };
 
   render() {
@@ -24,7 +17,9 @@ export default class Navbar extends Component {
       <header className={styles.header}>
         <div className={styles.container}>
 
-          <button className={styles.button} onClick={this.props.action}><Icon className={styles.icon} name={this.props.icon} /></button>
+          <button className={styles.button} onClick={this.props.action}>
+            <Icon className={styles.icon} name={this.props.icon} />
+          </button>
 
           <div className={styles.bar}>
             {this.props.title &&
@@ -33,27 +28,20 @@ export default class Navbar extends Component {
             {!this.props.title &&
               <div className={styles.logo}></div>
             }
-            <Dropdown
-              name="notifications"
-              title="Notificaciones"
-              icon="bell"
-              counter={this.props.user.alerts_unread}
-              chgNavIcon={this.props.chgIcon}
-              chgNavTitle={this.props.chgTitle}
-              chgNavAction={this.props.chgAction}>
-              <Notifications user={this.props.user} />
-            </Dropdown>
-            <Dropdown
-              name="messages"
-              title="Mensajes"
-              icon="message"
-              counter={this.props.user.messages_unread}
-              chgNavIcon={this.props.chgIcon}
-              chgNavTitle={this.props.chgTitle}
-              chgNavAction={this.props.chgAction}>
-              <Messages user={this.props.user} />
-            </Dropdown>
           </div>
+
+          {this.props.buttons &&
+            <div className={styles.buttons}>
+              {this.props.buttons.map((button, i) => {
+                return (
+                  <Button
+                    key={i}
+                    data={button}
+                  />
+                );
+              })}
+            </div>
+          }
 
         </div>
     	</header>

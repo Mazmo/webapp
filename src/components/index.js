@@ -8,3 +8,4 @@ export ContextMenu from './ContextMenu/ContextMenu';
 export Messages from './Messages/Messages';
 export Publication from './Publication/Publication';
 export Modal from './Modal/Modal';
+export FullDropdown from './FullDropdown/FullDropdown';

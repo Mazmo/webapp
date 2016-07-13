@@ -98,3 +98,10 @@
 		display: none;
 	}
 }
+
+.buttons svg {
+	@include display(flex);
+	@include size($header-height);
+	padding: $header-height/4;
+	fill: white;
+}

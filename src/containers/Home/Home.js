@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-async-connect';
+import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import {
   isLoaded as arePublicationsLoaded,
@@ -61,6 +62,7 @@ export default class Home extends Component {
         <Helmet title="Home"/>
 
         <div className={styles.feedList}>
+          <Link to={`/compose`}>Crear publicación</Link>
           {this.props.publications.map((publication, i) => {
             return (
               <Publication

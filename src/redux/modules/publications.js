@@ -4,6 +4,10 @@ const LOAD = 'mazmo/publications/LOAD';
 const LOAD_SUCCESS = 'mazmo/publications/LOAD_SUCCESS';
 const LOAD_FAIL = 'mazmo/publications/LOAD_FAIL';
 
+const CREATE = 'mazmo/publications/CREATE';
+const CREATE_SUCCESS = 'mazmo/publications/CREATE_SUCCESS';
+const CREATE_FAIL = 'mazmo/publications/CREATE_FAIL';
+
 const CREATE_COMMENT = 'mazmo/publications/CREATE_COMMENT';
 const CREATE_COMMENT_SUCCESS = 'mazmo/publications/CREATE_COMMENT_SUCCESS';
 const CREATE_COMMENT_FAIL = 'mazmo/publications/CREATE_COMMENT_FAIL';
@@ -23,6 +27,7 @@ const LOAD_PUB_REACTIONS_FAIL = 'mazmo/publications/LOAD_PUB_REACTIONS_FAIL';
 const initialState = {
   loaded: false,
   loading: false,
+  creating: false,
   creatingComment: false,
   data: []
 };
@@ -70,6 +75,23 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         error: action.error
+      };
+    case CREATE:
+      return {
+        ...state,
+        creating: true,
+        creatingError: null
+      };
+    case CREATE_SUCCESS:
+      return {
+        ...state,
+        creating: false
+      };
+    case CREATE_FAIL:
+      return {
+        ...state,
+        creating: false,
+        creatingError: action.error.error
       };
     case CREATE_COMMENT:
       return {
@@ -321,3 +343,12 @@ export function loadReactions(publicationId) {
     promise: (client) => client.get(`/publications/${publicationId}/spanks`)
   };
 }
+
+export const create = (payload) => ({
+  types: [CREATE, CREATE_SUCCESS, CREATE_FAIL],
+  promise: (client) => client.post(`/publications`, {
+    data: {
+      ...payload
+    }
+  })
+});
