@@ -5,7 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var assetsPath = path.resolve(__dirname, '../static/dist');
-var host = (process.env.HOST || 'localhost');
+var host = (process.env.HOST || require('my-local-ip')());
 var port = (+process.env.PORT + 1) || 3001;
 
 var bourbonIncludePaths = require('node-bourbon').includePaths;
