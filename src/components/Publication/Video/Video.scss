@@ -29,6 +29,7 @@
 
   &-title {
     @include position(absolute, 0 0 0 0);
+    margin: 0;
     padding: 10px;
     z-index: 10;
     font-weight: bold;

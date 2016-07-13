@@ -33,7 +33,7 @@ export default class Video extends Component {
     return (
       <div className={styles.videoContainer} onClick={this.playVideo}>
         <h3 className={styles.videoTitle}>{this.props.data.link_title}</h3>
-        <Icon context={styles.videoPlay} name="play" />
+        <Icon className={styles.videoPlay} name="play" />
         <img className={styles.videoImage} src={this.props.data.link_image} />
       </div>
     );
