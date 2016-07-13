@@ -1,0 +1,213 @@
+@import 'bourbon';
+@import 'neat';
+@import '../../utils/variables';
+
+.container {
+
+  .cover {
+    @include display(flex);
+    @include flex-direction(column);
+    @include align-items(center);
+    @include justify-content(center);
+    @include size(100% 250px);
+    padding: 2em 0;
+    background: #222;
+
+    .avatar {
+      @include display(flex);
+      border-radius: 5px;
+    }
+
+    .username {
+      @include display(flex);
+      margin: 1em auto;
+      font-weight: 400;
+    }
+
+    .location {
+      @include display(flex);
+      margin: 0;
+      color: rgba(white, 0.5);
+    }
+
+  }
+
+}
+
+.section-profile {
+
+  .profile {
+
+    &-header {
+
+      $avatar-size: 90px;
+
+      @include display(flex);
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+      padding-top: $avatar-size;
+      position: relative;
+      background-position: center;
+      background-size: cover;
+
+      &-avatar {
+        @include display(flex);
+        @include size($avatar-size);
+        border-radius: 10px;
+      }
+
+      &-name {
+        margin: $spacing-big 0 $spacing-medium;
+        font-size: 28px;
+        font-weight: $font-bold;
+      }
+
+      &-location {
+        width: 100%;
+        color: #777;
+        text-align: center;
+      }
+
+      &-follow {
+        width: 130px;
+        background: $main-red-alt;
+        border-color: $main-red-alt;
+        margin-top: $spacing-big;
+        font-size: .9em;
+      }
+
+      &-counters {
+        @include display(flex);
+        @include justify-content(center);
+        width: 100%;
+        margin: $spacing-big 0;
+
+        &-item {
+          @include display(flex);
+          @include flex-direction(column);
+          @include justify-content(center);
+          @include flex(1 0);
+          width: 33.3333%;
+          font-size: 1.6em;
+          text-align: center;
+
+          &::after {
+            display: block;
+            width: 100%;
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            content: attr(data-label);
+            text-align: inherit;
+          }
+
+        }
+
+      }
+
+      &-tabs {
+        @include display(flex);
+        margin: 0;
+        padding: 0;
+
+        &-item {
+          @include flex(1 0);
+          width: 75px;
+          border-bottom: 1px solid #333;
+
+          :global(.icon) {
+              @include size(30px);
+              vertical-align: text-bottom;
+              fill: white;
+              opacity: 0.6;
+          }
+
+          &-link {
+              display: block;
+              padding: $spacing-big 0;
+              font-size: .9em;
+              color: inherit;
+              text-decoration: inherit;
+              text-align: center;
+
+              &:hover {
+                  background: rgba(255, 255, 255, .05);
+              }
+          }
+
+          &.active {
+
+              :global(.icon) {
+                  opacity: 1;
+              }
+
+              a {
+                  border-bottom: solid $spacing-small white;
+                  padding-bottom: $spacing-big - $spacing-small;
+              }
+          }
+
+        }
+
+      }
+
+    }
+
+    &-content {
+
+      &-box {
+        overflow: auto;
+        margin: $spacing-big $spacing-medium;
+        background: white;
+        color: $charcoal;
+        border-radius: 5px;
+        border-top: 5px solid $main-red-alt;
+
+        &-title {
+          font-weight: bold;
+          margin: $spacing-big $spacing-big;
+
+          &:last-child {
+            margin-bottom: $spacing-big;
+          }
+        }
+
+        &-about {
+          padding: 0 $spacing-big $spacing-big;
+          line-height: 22px;
+          color: #777;
+        }
+
+        &-list {
+
+          &-item {
+            @include display(flex);
+            @include align-items(center);
+            padding: $spacing-medium $spacing-big;
+            font-weight: bold;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+
+            &-icon {
+              @include display(flex);
+              @include size(20px);
+              margin-right: $spacing-medium;
+              fill: #999;
+            }
+
+            &-label {
+              @include display(flex);
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
