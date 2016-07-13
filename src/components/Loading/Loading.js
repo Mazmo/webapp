@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 export default class Loading extends Component {
   static propTypes = {
@@ -10,17 +10,18 @@ export default class Loading extends Component {
 
   render() {
     const styles = require('./Loading.scss');
-    const classSet = {};
-    classSet[styles.loader] = true;
-    classSet[styles.loaderPosAbs] = this.props.position === 'absolute';
-    classSet[styles.loaderPosRel] = this.props.position === 'relative';
-    classSet[styles.loaderLight] = this.props.theme === 'light';
-    classSet[styles.loaderDark] = this.props.theme === 'dark';
-    classSet[styles.loaderSmall] = this.props.size === 'small';
-    classSet[styles.loaderMedium] = this.props.size === 'medium';
-    classSet[styles.loaderBig] = this.props.size === 'big';
+    const classes = classnames({
+      [styles.loader]: true,
+      [styles.loaderPosAbs]: this.props.position === 'absolute',
+      [styles.loaderPosRel]: this.props.position === 'relative',
+      [styles.loaderLight]: this.props.theme === 'light',
+      [styles.loaderDark]: this.props.theme === 'dark',
+      [styles.loaderSmall]: this.props.size === 'small',
+      [styles.loaderMedium]: this.props.size === 'medium',
+      [styles.loaderBig]: this.props.size === 'big'
+    });
     return (
-      <div className={classNames(classSet)} />
+      <div className={classes} />
     );
   }
 }

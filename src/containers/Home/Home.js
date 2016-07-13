@@ -11,7 +11,7 @@ import {
   reactToComment,
   loadReactions
 } from 'redux/modules/publications';
-import { Publication } from '../../components';
+import { Publication, Loading } from '../../components';
 
 @asyncConnect([
   {
@@ -78,7 +78,13 @@ export default class Home extends Component {
             );
           })}
         </div>
-        {this.props.loadingPublications && <div>Loading...</div>}
+        {this.props.loadingPublications &&
+          <Loading
+            theme={'light'}
+            size={'medium'}
+            position={this.props.publications.length > 0 ? 'relative' : 'absolute'}
+          />
+        }
       </div>
     );
   }
