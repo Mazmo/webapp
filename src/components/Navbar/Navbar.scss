@@ -8,7 +8,7 @@
 	@include justify-content(center);
 	@include size(100% $header-height);
 	position: fixed;
-	z-index: 10;
+	z-index: 20;
 	background: $main-red;
 	height: $header-height;
   top: 0;
