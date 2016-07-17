@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cn from 'classnames';
-import { Icon } from '../';
+import { Navbar } from '../';
 
 export default class Modal extends Component {
   static propTypes = {
@@ -15,21 +15,25 @@ export default class Modal extends Component {
 
     return (
       <div className={cn(styles.modal, { [styles.active]: this.props.active })}>
-        <div>
-          <Icon className={styles.closeIcon} name="close" onClick={this.props.close} />
-        </div>
-        <div>
-          {this.props.children}
-        </div>
-        {this.props.buttons &&
+        <Navbar
+          background="transparent"
+          mainButton={{icon: 'back', action: this.props.close}}
+        />
+
+        <div className="content">
           <div>
-            {this.props.buttons.map((button) => {
-              return (
-                <button onClick={button.action}>{button.label}</button>
-              );
-            })}
+            {this.props.children}
           </div>
-        }
+          {this.props.buttons &&
+            <div>
+              {this.props.buttons.map((button) => {
+                return (
+                  <button onClick={button.action}>{button.label}</button>
+                );
+              })}
+            </div>
+          }
+        </div>
       </div>
     );
   }

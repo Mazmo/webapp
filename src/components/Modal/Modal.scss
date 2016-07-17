@@ -1,25 +1,20 @@
+@import '../../utils/variables';
+
 .modal {
+	background-color: $main-dark;
+	color: #fff;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	position: fixed;
-	background-color :#FFFFFF;
 	z-index: 932;
 	opacity: 0;
 	-webkit-transform-origin: center center;
 	transform-origin: center center;
-	top: 20%;
-	left: auto;
+
 	&.active {
 		opacity: 1;
 		pointer-events: initial;
-	}
-	.close-icon {
-		fill: #9B9B9B;
-		width: 15px;
-		height: 15px;
-		position: absolute;
-		z-index: 3;
-		cursor: pointer;
-		&:hover {
-			fill: darken(#9B9B9B, 100%);
-		}
 	}
 }

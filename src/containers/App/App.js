@@ -84,8 +84,8 @@ export default class App extends Component {
           <Helmet {...config.app.head}/>
           {user && !this.props.children.type.avoidMainNavbar &&
             <Navbar
-              icon={'nav'}
-              action={this.toggleAside}
+              logo
+              mainButton={{icon: 'nav', action: this.toggleAside}}
               buttons={[
                 {icon: 'message', active: this.state.dropdowns.messages, action: this.toggleMessages},
                 {icon: 'bell', active: this.state.dropdowns.notifications, action: this.toggleNotifications}
@@ -113,7 +113,7 @@ export default class App extends Component {
             </div>
           }
 
-          <div className={classnames({[styles.content]: !this.props.children.type.avoidMainNavbar})}>
+          <div className={classnames({content: !this.props.children.type.avoidMainNavbar})}>
             {this.props.children}
           </div>
         </div>

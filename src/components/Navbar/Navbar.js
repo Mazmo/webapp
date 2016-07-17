@@ -5,10 +5,10 @@ import { Icon } from '../';
 
 export default class Navbar extends Component {
   static propTypes = {
+    mainButton: PropTypes.object.isRequired,
     background: PropTypes.string,
-    icon: PropTypes.string.isRequired,
     title: PropTypes.string,
-    action: PropTypes.func.isRequired,
+    logo: PropTypes.bool,
     buttons: PropTypes.array
   };
 
@@ -19,15 +19,15 @@ export default class Navbar extends Component {
       <header className={classnames(styles.header, {[styles.transparent]: this.props.background === 'transparent'})}>
         <div className={styles.container}>
 
-          <button className={styles.button} onClick={this.props.action}>
-            <Icon className={styles.icon} name={this.props.icon} />
+          <button className={styles.button} onClick={this.props.mainButton.action}>
+            <Icon className={styles.icon} name={this.props.mainButton.icon} />
           </button>
 
           <div className={styles.bar}>
             {this.props.title &&
               <div className={styles.title}>{this.props.title}</div>
             }
-            {!this.props.title &&
+            {this.props.logo &&
               <div className={styles.logo}></div>
             }
           </div>

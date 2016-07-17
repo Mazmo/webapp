@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { asyncConnect } from 'redux-async-connect';
+import { connect } from 'react-redux';
+import { routeActions } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-import { Avatar, Icon } from '../../components';
+import { Avatar, Icon, Navbar } from '../../components';
 import classNames from 'classnames';
 
 console.log('RENDERIZANDO ESTA MIERDA???');
@@ -13,10 +15,13 @@ console.log('RENDERIZANDO ESTA MIERDA???');
     promise: ({params: { username }, helpers: { client }}) => client.get(`/users/${username}`)
   }
 ])
+@connect(null, {goBack: routeActions.goBack}
+)
 export default class Container extends Component {
   static propTypes = {
     profile: PropTypes.object.isRequired,
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    goBack: PropTypes.func.isRequired
   };
 
   static avoidMainNavbar = true;
@@ -33,33 +38,38 @@ export default class Container extends Component {
         <Helmet title={user.displayname} />
 
         <div className={styles.profileHeader} style={coverStyle}>
+          <Navbar
+            background={'transparent'}
+            mainButton={{icon: 'back', action: this.props.goBack}}
+          />
 
-          <Avatar className={styles.profileHeaderAvatar} size={100} user={user} />
-          <h1 className={styles.profileHeaderName}>{user.displayname}</h1>
-          <p className={styles.profileHeaderLocation}>{user.location}</p>
-          <button className={classNames(styles.profileHeaderFollow, 'btn', 'style-blue')}>Seguir</button>
+          <div>
+            <Avatar className={styles.profileHeaderAvatar} size={100} user={user} />
+            <h1 className={styles.profileHeaderName}>{user.displayname}</h1>
+            <p className={styles.profileHeaderLocation}>{user.location}</p>
+            <button className={classNames(styles.profileHeaderFollow, 'btn', 'style-blue')}>Seguir</button>
 
-          <div className={styles.profileHeaderCounters}>
-            <div className={styles.profileHeaderCountersItem} data-label="Seguidores">{user.followed_count}</div>
-            <div className={styles.profileHeaderCountersItem} data-label="Conocidos">{user.known}</div>
-            <div className={styles.profileHeaderCountersItem} data-label="Eventos">{user.event_count}</div>
+            <div className={styles.profileHeaderCounters}>
+              <div className={styles.profileHeaderCountersItem} data-label="Seguidores">{user.followed_count}</div>
+              <div className={styles.profileHeaderCountersItem} data-label="Conocidos">{user.known}</div>
+              <div className={styles.profileHeaderCountersItem} data-label="Eventos">{user.event_count}</div>
+            </div>
+
+            <ul className={styles.profileHeaderTabs}>
+              <div className={styles.profileHeaderTabsItem} name="info">
+                <Link className={styles.profileHeaderTabsItemLink} to="profile" params={{ username: user.username }}><Icon name="userinfo" /></Link>
+              </div>
+              <div className={styles.profileHeaderTabsItem} name="publications">
+                <Link className={styles.profileHeaderTabsItemLink} to="profile_wall" params={{ username: user.username }}><Icon name="feed" /></Link>
+              </div>
+              <div className={styles.profileHeaderTabsItem} name="pictures">
+                <Link className={styles.profileHeaderTabsItemLink} to="profile_pictures" params={{ username: user.username }}><Icon name="photos" /></Link>
+              </div>
+              <div className={styles.profileHeaderTabsItem} name="checklist">
+                <Link className={styles.profileHeaderTabsItemLink} to="profile_checklist" params={{ username: user.username }}><Icon name="checklist" /></Link>
+              </div>
+            </ul>
           </div>
-
-          <ul className={styles.profileHeaderTabs}>
-            <div className={styles.profileHeaderTabsItem} name="info">
-              <Link className={styles.profileHeaderTabsItemLink} to="profile" params={{ username: user.username }}><Icon name="userinfo" /></Link>
-            </div>
-            <div className={styles.profileHeaderTabsItem} name="publications">
-              <Link className={styles.profileHeaderTabsItemLink} to="profile_wall" params={{ username: user.username }}><Icon name="feed" /></Link>
-            </div>
-            <div className={styles.profileHeaderTabsItem} name="pictures">
-              <Link className={styles.profileHeaderTabsItemLink} to="profile_pictures" params={{ username: user.username }}><Icon name="photos" /></Link>
-            </div>
-            <div className={styles.profileHeaderTabsItem} name="checklist">
-              <Link className={styles.profileHeaderTabsItemLink} to="profile_checklist" params={{ username: user.username }}><Icon name="checklist" /></Link>
-            </div>
-          </ul>
-
         </div>
 
         <div className="profile-content">

@@ -44,20 +44,21 @@ export default class Compose extends Component {
         <Navbar
           background={'transparent'}
           title={'Publicar'}
-          icon={'back'}
-          action={this.back}
+          mainButton={{icon: 'back', action: this.back}}
         />
 
-        {this.props.creatingError &&
-          <div>ERROR: {this.props.creatingError}</div>
-        }
+        <div className="content">
+          {this.props.creatingError &&
+            <div>ERROR: {this.props.creatingError}</div>
+          }
 
-        <textarea
-          ref="message"
-          placeholder="¿Qué está pasando por tu sucia mente?"
-          disabled={this.props.creating}
-        ></textarea>
-        <button onClick={this.publish} disabled={this.props.creating}>{this.props.creating ? 'Publicando...' : 'Publicar'}</button>
+          <textarea
+            ref="message"
+            placeholder="¿Qué está pasando por tu sucia mente?"
+            disabled={this.props.creating}
+            ></textarea>
+          <button onClick={this.publish} disabled={this.props.creating}>{this.props.creating ? 'Publicando...' : 'Publicar'}</button>
+        </div>
       </div>
     );
   }

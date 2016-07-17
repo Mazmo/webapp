@@ -50,11 +50,13 @@
       position: relative;
       background-position: center;
       background-size: cover;
+      text-align: center;
 
       &-avatar {
         @include display(flex);
         @include size($avatar-size);
         border-radius: 10px;
+        margin: 0 auto;
       }
 
       &-name {
