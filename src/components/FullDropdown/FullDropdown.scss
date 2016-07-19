@@ -19,6 +19,7 @@
     @include transition(height 250ms);
     background: white;
     overflow: hidden;
+    z-index: 15;
   }
 
   &.active {
