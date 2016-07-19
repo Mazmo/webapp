@@ -103,9 +103,22 @@
 	}
 }
 
-.buttons svg {
+.buttons {
 	@include display(flex);
-	@include size($header-height);
-	padding: $header-height/4;
-	fill: white;
+	@include flex-direction(row-reverse);
+
+	button {
+		@include display(flex);
+		padding: 0;
+		background: transparent;
+		border: none;
+		outline: none;
+	}
+
+	svg {
+		@include display(flex);
+		@include size($header-height);
+		padding: $header-height/4;
+		fill: white;
+	}
 }
