@@ -39,7 +39,7 @@ export default class Aside extends Component {
   render() {
     const styles = require('./Aside.scss');
     const classes = {};
-    const coverImage = {backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%,rgba(26,26,26,1) 100%,rgba(0,0,0,0.5) 100%), url(' + this.props.user.cover + ')'};
+    const coverImage = this.props.user.cover ? {backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%,rgba(26,26,26,1) 100%,rgba(0,0,0,0.5) 100%), url(' + this.props.user.cover + ')'} : null;
 
     classes[styles.navOpen] = this.props.visible;
 

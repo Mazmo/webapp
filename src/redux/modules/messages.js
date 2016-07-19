@@ -1,3 +1,5 @@
+import io from 'utils/socket';
+
 const LOAD = 'mazmo/messages/LOAD';
 const LOAD_SUCCESS = 'mazmo/messages/LOAD_SUCCESS';
 const LOAD_FAIL = 'mazmo/messages/LOAD_FAIL';
@@ -40,6 +42,11 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/users/messages')
+    promise: () => {
+      io.emit('messages:load', (result) => {
+        console.log(result);
+      });
+      return Promise.resolve([]);
+    }
   };
 }

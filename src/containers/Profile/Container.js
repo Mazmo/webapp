@@ -7,7 +7,6 @@ import { Link } from 'react-router';
 import { Avatar, Icon, Navbar } from '../../components';
 import classNames from 'classnames';
 
-console.log('RENDERIZANDO ESTA MIERDA???');
 @asyncConnect([
   {
     deferred: false,
@@ -21,7 +20,8 @@ export default class Container extends Component {
   static propTypes = {
     profile: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired,
-    goBack: PropTypes.func.isRequired
+    goBack: PropTypes.func.isRequired,
+    params: PropTypes.object
   };
 
   static avoidMainNavbar = true;
@@ -29,9 +29,9 @@ export default class Container extends Component {
   render() {
     const styles = require('./Container.scss');
     const user = this.props.profile;
-    const coverStyle = {
+    const coverStyle = user.cover ? {
       backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(26,26,26,1) 100%,rgba(0,0,0,0.65) 100%), url(' + user.cover + ')'
-    };
+    } : null;
 
     return (
       <div className={styles.sectionProfile}>

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Modal, Loading } from '../../';
+import { Link } from 'react-router';
+import { Modal, Loading, Avatar } from '../../';
 
 export default class Reactions extends Component {
   static propTypes = {
@@ -26,7 +27,15 @@ export default class Reactions extends Component {
             <ul>
               {this.props.data.data.map((reaction, i) => {
                 return (
-                  <li key={i}>{reaction.displayname}</li>
+                  <li key={i}>
+                    <Avatar
+                      user={reaction}
+                      size={32}
+                    />
+                    <Link to={`/${reaction.username}`}>
+                      {reaction.displayname}
+                    </Link>
+                  </li>
                 );
               })}
             </ul>
