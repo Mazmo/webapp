@@ -1,42 +1,64 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { Avatar } from '../';
+import { connect } from 'react-redux';
+import { load } from 'redux/modules/users';
+import { Avatar } from 'components';
 
+@connect(
+  state => ({
+    me: state.auth.user,
+    users: state.users
+  }), { load })
 export default class Message extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    me: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired,
+    load: PropTypes.func.isRequired,
+    open: PropTypes.func.isRequired
   };
 
-  subscribers = (subscribers) => {
-    const con = [];
+  open = () => {
+    this.props.open(this.props.data.id);
+  }
 
-    let j = 0;
-    for (let i = 0; i < subscribers.length; i++) {
-      const subscriber = subscribers[i];
-      if (subscriber.user.id === this.props.user.id) {
-        continue;
+  title = () => {
+    const users = [];
+    this.props.data.users.map((user) => {
+      if (user.id !== this.props.me.id) {
+        if (!this.props.users[user.username]) {
+          this.props.load(user.username);
+          users.push(user.username);
+        } else {
+          users.push(this.props.users[user.username].displayname);
+        }
       }
+    });
 
-      con[j] = subscriber.user.displayname;
-      j++;
+    if (users.length === 0) {
+      return '';
+    }
+    return users.join(', ');
+  }
+
+  avatarUser = () => {
+    if (this.props.data.users[0].id === this.props.me.id) {
+      return this.props.users[this.props.data.users[1].username];
     }
 
-    return con.join(', ');
+    return this.props.users[this.props.data.users[0].username];
   }
 
   render() {
     const styles = require('./Message.scss');
+    const avatarUser = this.avatarUser();
 
     return (
-      <li className={styles.message}>
-        <Link className="messages-list-item-link" to="message" params={{message_id: this.props.data.id}}>
-  				<Avatar context="messages-list-item-avatar" size={32} user={this.props.data.author} />
-  				<p className="messages-list-item-action">
-  					<strong>{this.props.data.subject}</strong>
-            <span>Con <strong>{this.subscribers(this.props.data.subscribers)}</strong></span>
-  				</p>
-  			</Link>
+      <li className={styles.message} onClick={this.open}>
+				{avatarUser && <Avatar context="messages-list-item-avatar" size={32} user={avatarUser} />}
+				<p className="messages-list-item-action">
+					<strong>{this.title()}</strong>
+          <span>{this.props.data.lastMessage}</span>
+				</p>
 			</li>
     );
   }

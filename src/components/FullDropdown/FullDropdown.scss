@@ -14,7 +14,7 @@
     @include display(flex);
     @include flex-direction(column);
     @include align-items(flex-start);
-    @include position(absolute, $header-height 0 0 auto);
+    @include position(fixed, $header-height 0 0 auto);
     @include size(100vw 0);
     @include transition(height 250ms);
     background: white;

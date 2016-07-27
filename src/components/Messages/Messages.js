@@ -8,19 +8,21 @@ import Message from './Message';
   state => ({
     loaded: state.messages.loaded,
     loading: state.messages.loading,
-    messages: state.messages.data,
+    list: state.messages.list,
+    chats: state.messages.chats,
     error: state.messages.error
   }),
   messagesActions)
 
-export default class List extends Component {
+export default class Messages extends Component {
   static propTypes = {
     loaded: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
-    messages: PropTypes.array,
+    list: PropTypes.array,
+    chats: PropTypes.object,
     error: PropTypes.string,
     load: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired
+    open: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
@@ -34,11 +36,20 @@ export default class List extends Component {
 
     return (
 			<div className={styles.messagesListContainer}>
-				{this.props.loading && <Loading />}
+				{this.props.loading && <Loading position="absolute" size="medium" theme="dark" />}
+        {this.props.error &&
+          <div>Ocurrió un error: {this.props.error}</div>
+        }
 				{this.props.loaded &&
           <ul>
-            {this.props.messages.map((message, i) => {
-              return <Message key={i} data={message} user={this.props.user} />;
+            {this.props.list.map((id, i) => {
+              return (
+                <Message
+                  key={i}
+                  data={this.props.chats[id]}
+                  open={this.props.open}
+                />
+              );
             })}
           </ul>
         }

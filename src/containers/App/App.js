@@ -8,14 +8,16 @@ import config from '../../config';
 import { asyncConnect } from 'redux-async-connect';
 import es from 'react-intl/locale-data/es';
 import { addLocaleData, IntlProvider } from 'react-intl';
-import locales from '../../utils/locales';
+import locales from 'utils/locales';
+import io from 'utils/socket';
 import {
   Navbar,
   Aside,
   FullDropdown,
   Messages,
-  Notifications
-} from '../../components';
+  Notifications,
+  Loading
+} from 'components';
 
 const locale = 'es';
 addLocaleData([...es]);
@@ -56,8 +58,22 @@ export default class App extends Component {
       dropdowns: {
         notifications: false,
         messages: false
-      }
+      },
+      handshaked: false
     };
+  }
+
+  componentDidMount = () => {
+    if (__CLIENT__ && this.props.user) {
+      io.emit('handshake:send', this.props.user.jwt, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log('handshake established');
+          this.setState({ handshaked: true });
+        }
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -77,6 +93,18 @@ export default class App extends Component {
   render() {
     const { user } = this.props;
     const styles = require('./App.scss');
+
+    if (!this.state.handshaked) {
+      return (
+        <div>
+          <Loading
+            theme={'dark'}
+            size={'large'}
+            position={'absolute'}
+          />
+        </div>
+      );
+    }
 
     return (
       <IntlProvider locale={locale} messages={messages}>

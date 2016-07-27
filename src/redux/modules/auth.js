@@ -1,9 +1,13 @@
+import { add as addToUsers } from 'redux/modules/users';
+
 const LOAD = 'mazmo/auth/LOAD';
 const LOAD_SUCCESS = 'mazmo/auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'mazmo/auth/LOAD_FAIL';
+
 const LOGIN = 'mazmo/auth/LOGIN';
 const LOGIN_SUCCESS = 'mazmo/auth/LOGIN_SUCCESS';
 const LOGIN_FAIL = 'mazmo/auth/LOGIN_FAIL';
+
 const LOGOUT = 'mazmo/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'mazmo/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'mazmo/auth/LOGOUT_FAIL';
@@ -75,18 +79,23 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-function doLogin(client, username, password) {
+function doLogin(client, dispatch, data) {
   return client.post('/login', {
-    data: {
-      username,
-      password
-    }
+    data
   }).then((result) => {
     if (__CLIENT__) {
-      document.cookie = 'auth=' + JSON.stringify(result);
-      document.cookie = 'username=' + username;
-      document.cookie = 'password=' + password;
+      document.cookie = 'phpsessid=' + result.sessid;
+      document.cookie = 'jwt=' + result.jwt;
     }
+
+    const users = [];
+    Object.keys(result.follow_lists).map((i) => {
+      Object.keys(result.follow_lists[i].users).map((j) => {
+        users.push(result.follow_lists[i].users[j]);
+      });
+    });
+    dispatch(addToUsers(users));
+
     return result;
   });
 }
@@ -96,27 +105,41 @@ export function isLoaded(globalState) {
 }
 
 export function load() {
-  return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => {
-      if (client.getReq()) {
-        const username = client.getReq().cookies.username;
-        const password = client.getReq().cookies.password;
+  return (dispatch) => {
+    return dispatch({
+      types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+      promise: (client) => {
+        if (client.getReq()) {
+          const phpsessid = client.getReq().cookies.phpsessid;
+          const jwt = client.getReq().cookies.jwt;
 
-        if (username && password) {
-          return doLogin(client, username, password);
+          if (phpsessid || jwt) {
+            const data = {
+              phpsessid,
+              jwt
+            };
+            return doLogin(client, dispatch, data);
+          }
         }
-      }
 
-      return Promise.resolve();
-    }
+        return Promise.resolve();
+      }
+    });
   };
 }
 
 export function login(username, password) {
-  return {
-    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => doLogin(client, username, password)
+  return (dispatch) => {
+    return dispatch({
+      types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+      promise: (client) => {
+        const data = {
+          username,
+          password
+        };
+        return doLogin(client, dispatch, data);
+      }
+    });
   };
 }
 
@@ -128,6 +151,8 @@ export function logout() {
         document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
         document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
         document.cookie = 'password=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        document.cookie = 'phpsessid=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
       }
       return Promise.resolve();
     }
