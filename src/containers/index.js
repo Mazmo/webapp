@@ -4,4 +4,5 @@ export Landing from './Landing/Landing';
 export Compose from './Compose/Compose';
 export ProfileContainer from './Profile/Container';
 export ProfileInfo from './Profile/Info';
+export Messenger from './Messenger/Messenger';
 export NotFound from './NotFound/NotFound';

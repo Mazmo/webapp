@@ -1,0 +1,80 @@
+.message {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  max-width: 100%;
+  margin: 10px;
+
+  &.sending {
+    opacity: .5;
+  }
+
+  &.created-by-me {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    div {
+      background: #7F30FF;
+      color: white;
+      &:before {
+        right: -12px;
+        bottom: .6em;
+        left: auto;
+        border: 6px solid transparent;
+        border-left-color: #7F30FF;
+      }
+
+    }
+  }
+
+  .avatar {
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    z-index: 1;
+    height: 32px;
+    width: 32px;
+    border-radius: 25px;
+  }
+
+  .content {
+    position: relative;
+    margin: 0 12px;
+   background-color: #ddd;
+    padding: .5em .75em;
+    border-radius: 4px;
+    max-width: 70%;
+    font-size: 0.9em;
+    line-height: 1.3em;
+    font-weight: 600;
+
+    &:before {
+      position: absolute;
+      right: auto;
+      bottom: .6em;
+      left: -12px;
+      height: 0;
+      content: '';
+      border: 6px solid transparent;
+      border-right-color: #ddd;
+      z-index: 2;
+    }
+
+  }
+}

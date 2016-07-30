@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { injectIntl, intlShape, FormattedRelative } from 'react-intl';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { load } from 'redux/modules/users';
 import { Avatar } from 'components';
 
@@ -8,16 +10,18 @@ import { Avatar } from 'components';
     me: state.auth.user,
     users: state.users
   }), { load })
-export default class Message extends Component {
+class Message extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     me: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired,
-    open: PropTypes.func.isRequired
+    open: PropTypes.func.isRequired,
+    intl: intlShape.isRequired
   };
 
   open = () => {
+    // Use for desktop only
     this.props.open(this.props.data.id);
   }
 
@@ -49,17 +53,22 @@ export default class Message extends Component {
   }
 
   render() {
-    const styles = require('./Message.scss');
+    const styles = require('../Notifications/Notification.scss');
     const avatarUser = this.avatarUser();
+    const messages = this.props.data.messages;
+    const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
 
     return (
-      <li className={styles.message} onClick={this.open}>
-				{avatarUser && <Avatar context="messages-list-item-avatar" size={32} user={avatarUser} />}
-				<p className="messages-list-item-action">
-					<strong>{this.title()}</strong>
-          <span>{this.props.data.lastMessage}</span>
-				</p>
-			</li>
+      <Link to={`/messenger/${this.props.data.id}`} className={styles.notification}>
+        {avatarUser && <Avatar className={styles.image}size={100} user={avatarUser} />}
+        <p className={styles.text}>
+          <strong className={styles.nick}>{this.title()}</strong><br />
+          {lastMessage && lastMessage.content && <span className={styles.notificationDescription}>{lastMessage.content}</span>}
+          {lastMessage && lastMessage.createdAt && <time className={styles.time}><FormattedRelative value={lastMessage.createdAt} /></time>}
+        </p>
+      </Link>
     );
   }
 }
+
+export default injectIntl(Message);

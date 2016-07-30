@@ -65,13 +65,10 @@ export default class App extends Component {
 
   componentDidMount = () => {
     if (__CLIENT__ && this.props.user) {
-      io.emit('handshake:send', this.props.user.jwt, (err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log('handshake established');
-          this.setState({ handshaked: true });
-        }
+      this.handshake();
+
+      io.on('reconnect', () => {
+        this.handshake();
       });
     }
   }
@@ -86,6 +83,16 @@ export default class App extends Component {
     }
   }
 
+  handshake = () => {
+    io.emit('handshake:send', this.props.user.jwt, (err) => {
+      if (err) {
+        //
+      } else {
+        this.setState({ handshaked: true });
+      }
+    });
+  }
+
   toggleAside = () => { this.setState({ aside: !this.state.aside }); }
   toggleNotifications = () => { this.setState({ dropdowns: { notifications: !this.state.dropdowns.notifications, messages: false } }); };
   toggleMessages = () => { this.setState({ dropdowns: { notifications: false, messages: !this.state.dropdowns.messages } }); };
@@ -94,7 +101,7 @@ export default class App extends Component {
     const { user } = this.props;
     const styles = require('./App.scss');
 
-    if (!this.state.handshaked) {
+    if (user && !this.state.handshaked) {
       return (
         <div>
           <Loading

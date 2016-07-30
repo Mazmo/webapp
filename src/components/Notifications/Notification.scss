@@ -8,6 +8,7 @@
   @include align-items(center);
   @include size(100% auto);
   padding: 10px;
+  text-decoration: none;
 
   &:nth-child(even) {
     background: #f8f8f8;

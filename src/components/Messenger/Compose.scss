@@ -1,0 +1,15 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  border: 0;
+  border-top: 1px solid #CCC;
+  width: 100%;
+  padding: 15px;
+  height: 45px;
+  resize: none;
+  z-index: 2;
+
+  &:focus {
+      outline: 0;
+  }
+}

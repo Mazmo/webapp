@@ -32,16 +32,16 @@ export default class Messages extends Component {
   }
 
   render() {
-    const styles = require('./Messages.scss');
+    const styles = require('../Notifications/Notifications.scss');
 
     return (
-			<div className={styles.messagesListContainer}>
+      <div className={styles.container} ref="main">
 				{this.props.loading && <Loading position="absolute" size="medium" theme="dark" />}
         {this.props.error &&
           <div>Ocurrió un error: {this.props.error}</div>
         }
 				{this.props.loaded &&
-          <ul>
+          <ul className={styles.notificationsListContainer}>
             {this.props.list.map((id, i) => {
               return (
                 <Message
@@ -53,7 +53,7 @@ export default class Messages extends Component {
             })}
           </ul>
         }
-			</div>
+      </div>
     );
   }
 }
