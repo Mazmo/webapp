@@ -66,6 +66,7 @@
     "classnames": "^2.2.3",
     "compression": "^1.6.0",
     "cookie-parser": "^1.4.1",
+    "emoji-mart": "^0.2.3",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "file-loader": "^0.8.5",
