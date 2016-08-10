@@ -13,3 +13,26 @@
     padding: $spacing-big $spacing-medium;
   }
 }
+
+.floating-buttons {
+  @include position(fixed, auto 10px 10px auto);
+  @include display(flex);
+  z-index: 10;
+
+  .button {
+    @include display(flex);
+    @include align-items(center);
+    @include justify-content(center);
+    @include size(70px);
+    background: $primary-color;
+    border-radius: 100%;
+
+    svg {
+      @include size(25px);
+
+      path {
+        fill: white;
+      }
+    }
+  }
+}

@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-async-connect';
-import { Link } from 'react-router';
 import Helmet from 'react-helmet';
+import { Link } from 'react-router';
+import { Publication, Loading, Icon } from '../../components';
 import {
   isLoaded as arePublicationsLoaded,
   load as loadPublications,
@@ -11,7 +12,6 @@ import {
   reactToComment,
   loadReactions
 } from 'redux/modules/publications';
-import { Publication, Loading } from '../../components';
 
 @asyncConnect([
   {
@@ -61,8 +61,13 @@ export default class Home extends Component {
       <div>
         <Helmet title="Home"/>
 
+        <div className={styles.floatingButtons}>
+          <Link className={styles.button} to={'/compose'}>
+            <Icon name="pencil" />
+          </Link>
+        </div>
+
         <div className={styles.feedList}>
-          <Link to={`/compose`}>Crear publicación</Link>
           {this.props.publications.map((publication, i) => {
             return (
               <Publication
