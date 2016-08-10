@@ -1,0 +1,22 @@
+@import 'bourbon';
+@import 'neat';
+@import '../../utils/variables';
+
+.button {
+  position: relative;
+
+  &.active {
+    background: rgba(black, .1);
+  }
+
+  .counter {
+    @include position(absolute, 6px auto auto 22px);
+    padding: 2px 5px;
+    background: white;
+    color: $primary-color;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+}
