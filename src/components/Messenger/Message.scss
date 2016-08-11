@@ -76,5 +76,10 @@
       z-index: 2;
     }
 
+    :global(.emojione) {
+      width: 16px;
+      margin: 0 3px;
+    }
+
   }
 }

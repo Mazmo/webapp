@@ -1,0 +1,21 @@
+@import '../../utils/variables';
+@import 'bourbon';
+@import '../../utils/grid-settings';
+@import 'neat';
+
+.counter {
+  position: absolute;
+  top: 3px;
+  left: 20px;
+  font-size: 0.7rem;
+  color: $main-red;
+  background: #fff;
+  border: solid 2px $main-red;
+  border-radius: 5px;
+  line-height: 15px;
+  padding: 0 5px;
+  font-weight: $font-bold;
+  text-shadow: none;
+
+  @include transition(all .3s ease-in-out);
+}

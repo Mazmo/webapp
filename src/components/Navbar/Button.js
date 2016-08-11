@@ -20,6 +20,7 @@ export default class Button extends Component {
         onClick={this.props.data.action}
         >
         <Icon name={this.props.data.icon} />
+        <span className={styles.counter}>{this.props.data.badge}</span>
       </button>
     );
   }

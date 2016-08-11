@@ -10,6 +10,7 @@ const SEND = 'mazmo/messages/SEND';
 const SEND_SUCCESS = 'mazmo/messages/SEND_SUCCESS';
 
 const RECEIVED = 'mazmo/messages/RECEIVED';
+const READ = 'mazmo/messages/READ';
 
 const initialState = {
   loaded: false,
@@ -92,10 +93,34 @@ export default function reducer(state = initialState, action = {}) {
           ...state.chats,
           [action.message.chat_id]: {
             ...state.chats[action.message.chat_id],
+            users: {
+              ...state.chats[action.message.chat_id].users,
+              [action.myId]: {
+                ...state.chats[action.message.chat_id].users[action.myId],
+                unread: true
+              }
+            },
             messages: [
               ...state.chats[action.message.chat_id].messages,
               action.message
             ]
+          }
+        }
+      };
+    case READ:
+      return {
+        ...state,
+        chats: {
+          ...state.chats,
+          [action.chatId]: {
+            ...state.chats[action.chatId],
+            users: {
+              ...state.chats[action.chatId].users,
+              [action.myId]: {
+                ...state.chats[action.chatId].users[action.myId],
+                unread: false
+              }
+            }
           }
         }
       };
@@ -107,7 +132,7 @@ export default function reducer(state = initialState, action = {}) {
 export const isLoaded = (globalState) => globalState.messages && globalState.messages.loaded;
 
 export const load = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({ type: LOAD });
     io.emit('messages:load', (err, result) => {
       if (err) {
@@ -124,7 +149,7 @@ export const load = () => {
     });
 
     io.on('messages:new', (message) => {
-      dispatch({ type: RECEIVED, message });
+      dispatch({ type: RECEIVED, message, myId: getState().auth.user.id });
     });
   };
 };
@@ -152,6 +177,17 @@ export const send = (id, content) => {
           createdAt: result.createdAt
         });
       }
+    });
+  };
+};
+
+export const read = (id) => {
+  return (dispatch, getState) => {
+    const me = getState().auth.user;
+    dispatch({
+      type: READ,
+      myId: me.id,
+      chatId: id
     });
   };
 };
