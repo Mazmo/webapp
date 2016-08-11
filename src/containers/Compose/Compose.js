@@ -53,11 +53,12 @@ export default class Compose extends Component {
           }
 
           <textarea
+            className={styles.input}
             ref="message"
             placeholder="¿Qué está pasando por tu sucia mente?"
             disabled={this.props.creating}
             ></textarea>
-          <button onClick={this.publish} disabled={this.props.creating}>{this.props.creating ? 'Publicando...' : 'Publicar'}</button>
+          <button className={styles.button} onClick={this.publish} disabled={this.props.creating}>{this.props.creating ? 'Publicando...' : 'Publicar'}</button>
         </div>
       </div>
     );
