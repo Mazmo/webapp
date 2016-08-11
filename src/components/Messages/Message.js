@@ -27,8 +27,9 @@ class Message extends Component {
 
   title = () => {
     const users = [];
-    this.props.data.users.map((user) => {
-      if (user.id !== this.props.me.id) {
+    this.props.data.participants.map((id) => {
+      if (id !== this.props.me.id) {
+        const user = this.props.data.users[id];
         if (!this.props.users[user.username]) {
           this.props.load(user.username);
           users.push(user.username);
@@ -45,11 +46,12 @@ class Message extends Component {
   }
 
   avatarUser = () => {
-    if (this.props.data.users[0].id === this.props.me.id) {
-      return this.props.users[this.props.data.users[1].username];
+    const participants = this.props.data.participants;
+    if (participants[0] === this.props.me.id) {
+      return this.props.users[this.props.data.users[participants[1]].username];
     }
 
-    return this.props.users[this.props.data.users[0].username];
+    return this.props.users[this.props.data.users[participants[0]].username];
   }
 
   render() {

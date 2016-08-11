@@ -36,13 +36,15 @@ const messages = locales(locale);
 }])
 @connect(
   state => ({
-    user: state.auth.user
+    user: state.auth.user,
+    chats: state.messages.chats
   }),
   {logout, pushState: routeActions.push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
+    chats: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
@@ -113,6 +115,19 @@ export default class App extends Component {
       );
     }
 
+    const chats = this.props.chats;
+    let unreadMessages = 0;
+    if (user) {
+      Object.keys(chats).map((key) => {
+        const index = chats[key].participants.indexOf(user.id);
+        if (index > -1) {
+          if (chats[key].users[user.id].unread) {
+            unreadMessages++;
+          }
+        }
+      });
+    }
+
     return (
       <IntlProvider locale={locale} messages={messages}>
         <div className={styles.app}>
@@ -122,7 +137,7 @@ export default class App extends Component {
               logo
               mainButton={{icon: 'nav', action: this.toggleAside}}
               buttons={[
-                {icon: 'message', active: this.state.dropdowns.messages, action: this.toggleMessages},
+                {icon: 'message', active: this.state.dropdowns.messages, action: this.toggleMessages, badge: unreadMessages},
                 {icon: 'bell', active: this.state.dropdowns.notifications, action: this.toggleNotifications}
               ]}
             />
