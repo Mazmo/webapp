@@ -10,7 +10,7 @@ export default class Button extends Component {
   render() {
     const styles = require('./Button.scss');
     const buttonClasses = classnames({
-      [styles.icon]: true,
+      [styles.button]: true,
       [styles.active]: this.props.data.active
     });
 
@@ -20,6 +20,7 @@ export default class Button extends Component {
         onClick={this.props.data.action}
         >
         <Icon name={this.props.data.icon} />
+        <span className={styles.counter}>1</span>
       </button>
     );
   }

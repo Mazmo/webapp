@@ -82,8 +82,8 @@
 
   &-options {
     @include position(absolute, 0 0 auto auto);
-    @include size(30px);
-    padding: 10px 0;
+    @include size(20px);
+    margin: 10px 0;
     cursor: pointer;
 
     .context-menu {

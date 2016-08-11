@@ -1,3 +1,39 @@
 @import 'bourbon';
 @import 'neat';
 @import '../../utils/variables';
+
+.input {
+  @include size(100% 140px);
+  padding: 1em;
+  font-size: 16px;
+  font-family: inherit;
+  background: rgba(black, .2);
+  color: white;
+  border: 0;
+
+  @include placeholder {
+    color: rgba(white, .25);
+  }
+}
+
+.button {
+  display: block;
+  float: right;
+  margin: 10px;
+  padding: $spacing-medium $spacing-big * 2;
+  border: none;
+  background: $attention-color;
+  color: white;
+  font-size: .9em;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: darken($attention-color, 5%);
+  }
+
+  &.active {
+    background: lighten($attention-color, 5%);
+    pointer-events: none;
+  }
+}
