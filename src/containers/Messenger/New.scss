@@ -1,0 +1,16 @@
+.container {
+  position: absolute;
+  width: 100%;
+  top: 48px;
+  background: #fff;
+}
+.search {
+  font-size: 20px;
+  padding: 5px 10px;
+  width: 100%;
+  margin-bottom: 1px;
+
+  &:active {
+    outline: none;
+  }
+}

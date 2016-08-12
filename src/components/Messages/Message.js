@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { load } from 'redux/modules/users';
 import { Avatar } from 'components';
+import emojione from 'emojione';
 
 @connect(
   state => ({
@@ -59,13 +60,14 @@ class Message extends Component {
     const avatarUser = this.avatarUser();
     const messages = this.props.data.messages;
     const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
+    const parsedText = emojione.shortnameToImage(lastMessage.content);
 
     return (
       <Link to={`/messenger/${this.props.data.id}`} className={styles.notification}>
         {avatarUser && <Avatar className={styles.image}size={100} user={avatarUser} />}
         <p className={styles.text}>
           <strong className={styles.nick}>{this.title()}</strong><br />
-          {lastMessage && lastMessage.content && <span className={styles.notificationDescription}>{lastMessage.content}</span>}
+          {lastMessage && lastMessage.content && <span className={styles.notificationDescription} dangerouslySetInnerHTML={{ __html: parsedText}} />}
           {lastMessage && lastMessage.createdAt && <time className={styles.time}><FormattedRelative value={lastMessage.createdAt} /></time>}
         </p>
       </Link>

@@ -53,7 +53,7 @@ export default class Messenger extends Component {
   }
 
   handleRead = () => {
-    if (this.props.chats[this.props.params.id].users[this.props.me.id].unread) {
+    if (this.props.chats[this.props.params.id] && this.props.chats[this.props.params.id].users[this.props.me.id].unread) {
       this.props.read(this.props.params.id);
     }
   }

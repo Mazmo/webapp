@@ -30,6 +30,10 @@
       color: $main-red;
     }
 
+    .notificationDescription img {
+      @include size(16px);
+    }
+
     .time {
       display: block;
       font-size: 12px;

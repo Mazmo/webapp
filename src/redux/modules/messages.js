@@ -183,6 +183,7 @@ export const send = (id, content) => {
 
 export const read = (id) => {
   return (dispatch, getState) => {
+    io.emit('messages:read', { id });
     const me = getState().auth.user;
     dispatch({
       type: READ,

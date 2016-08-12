@@ -158,7 +158,10 @@ export default class App extends Component {
               <FullDropdown
                 active={this.state.dropdowns.messages}
               >
-                <Messages user={this.props.user} />
+                <Messages
+                  user={this.props.user}
+                  toggle={this.toggleMessages}
+                />
               </FullDropdown>
             </div>
           }

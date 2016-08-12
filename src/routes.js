@@ -11,6 +11,7 @@ import {
   Messenger,
   NotFound
 } from 'containers';
+import MessengerNew from 'containers/Messenger/New';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -56,6 +57,7 @@ export default (store) => {
       { /* Routes requiring login */ }
       <Route onEnter={requireLogin}>
         <Route path="compose" component={Compose} />
+        <Route path="messenger/new" component={MessengerNew} />
         <Route path="messenger/:id" component={Messenger} />
       </Route>
 
