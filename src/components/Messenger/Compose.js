@@ -1,10 +1,17 @@
 import React, { Component, PropTypes } from 'react';
+import io from 'utils/socket';
 
 export default class Compose extends Component {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     to: PropTypes.string.isRequired,
     send: PropTypes.func.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    this.timer = null;
+  }
 
   componentDidMount = () => {
     this.refs.content.focus();
@@ -20,7 +27,19 @@ export default class Compose extends Component {
       const content = this.refs.content;
       this.props.send(content.value);
       content.value = '';
+    } else {
+      if (!this.timer) {
+        io.emit('messages:typing:start', { id: this.props.id });
+      } else {
+        clearTimeout(this.timer);
+      }
+      this.timer = setTimeout(this.stopTyping, 3000);
     }
+  }
+
+  stopTyping = () => {
+    this.timer = null;
+    io.emit('messages:typing:end', { id: this.props.id });
   }
 
   render() {

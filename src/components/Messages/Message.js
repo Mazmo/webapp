@@ -60,14 +60,13 @@ class Message extends Component {
     const avatarUser = this.avatarUser();
     const messages = this.props.data.messages;
     const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
-    const parsedText = emojione.shortnameToImage(lastMessage.content);
 
     return (
       <Link to={`/messenger/${this.props.data.id}`} className={styles.notification}>
-        {avatarUser && <Avatar className={styles.image}size={100} user={avatarUser} />}
+        {avatarUser && !avatarUser.loading && <Avatar className={styles.image} size={100} user={avatarUser} />}
         <p className={styles.text}>
           <strong className={styles.nick}>{this.title()}</strong><br />
-          {lastMessage && lastMessage.content && <span className={styles.notificationDescription} dangerouslySetInnerHTML={{ __html: parsedText}} />}
+          {lastMessage && lastMessage.content && <span className={styles.notificationDescription} dangerouslySetInnerHTML={{ __html: emojione.shortnameToImage(lastMessage.content)}} />}
           {lastMessage && lastMessage.createdAt && <time className={styles.time}><FormattedRelative value={lastMessage.createdAt} /></time>}
         </p>
       </Link>

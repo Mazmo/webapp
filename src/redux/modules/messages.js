@@ -12,10 +12,14 @@ const SEND_SUCCESS = 'mazmo/messages/SEND_SUCCESS';
 const RECEIVED = 'mazmo/messages/RECEIVED';
 const READ = 'mazmo/messages/READ';
 
+const TYPING_START = 'mazmo/messages/TYPING_START';
+const TYPING_END = 'mazmo/messages/TYPING_END';
+
 const initialState = {
   loaded: false,
   loading: false,
   opened: [],
+  list: [],
   chats: {}
 };
 
@@ -31,8 +35,14 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        list: action.list,
-        chats: action.chats
+        list: [
+          ...state.list,
+          ...action.list
+        ],
+        chats: {
+          ...state.chats,
+          ...action.chats
+        }
       };
     case LOAD_FAIL:
       return {
@@ -124,12 +134,48 @@ export default function reducer(state = initialState, action = {}) {
           }
         }
       };
+    case TYPING_START:
+      return {
+        ...state,
+        chats: {
+          ...state.chats,
+          [action.data.chatId]: {
+            ...state.chats[action.data.chatId],
+            users: {
+              ...state.chats[action.data.chatId].users,
+              [action.data.userId]: {
+                ...state.chats[action.data.chatId].users[action.data.userId],
+                typing: true
+              }
+            }
+          }
+        }
+      };
+    case TYPING_END:
+      return {
+        ...state,
+        chats: {
+          ...state.chats,
+          [action.data.chatId]: {
+            ...state.chats[action.data.chatId],
+            users: {
+              ...state.chats[action.data.chatId].users,
+              [action.data.userId]: {
+                ...state.chats[action.data.chatId].users[action.data.userId],
+                typing: false
+              }
+            }
+          }
+        }
+      };
     default:
       return state;
   }
 }
 
 export const isLoaded = (globalState) => globalState.messages && globalState.messages.loaded;
+
+export const isIdLoaded = (globalState, id) => globalState.messages && globalState.messages.chats[id];
 
 export const load = () => {
   return (dispatch, getState) => {
@@ -150,6 +196,58 @@ export const load = () => {
 
     io.on('messages:new', (message) => {
       dispatch({ type: RECEIVED, message, myId: getState().auth.user.id });
+    });
+    io.on('messages:typing:start', (data) => {
+      const chat = getState().messages.chats[data.chatId];
+      if (chat && chat.users[data.userId]) {
+        dispatch({ type: TYPING_START, data });
+      }
+    });
+    io.on('messages:typing:end', (data) => {
+      const chat = getState().messages.chats[data.chatId];
+      if (chat && chat.users[data.userId]) {
+        dispatch({ type: TYPING_END, data });
+      }
+    });
+  };
+};
+
+export const loadById = (id) => {
+  return (dispatch) => {
+    io.emit('messenger:getChatById', id, (err, result) => {
+      if (err) {
+        dispatch({ type: LOAD_FAIL, error: err.msg });
+      } else {
+        if (!result.messages) {
+          result.messages = [];
+        }
+        dispatch({
+          type: LOAD_SUCCESS,
+          chats: { [result.id]: result },
+          list: []
+        });
+      }
+    });
+  };
+};
+
+export const loadByUsername = (username, cb) => {
+  return (dispatch) => {
+    io.emit('messenger:getChatByUsername', username, (err, result) => {
+      if (err) {
+        dispatch({ type: LOAD_FAIL, error: err.msg });
+        cb(err);
+      } else {
+        if (!result.messages) {
+          result.messages = [];
+        }
+        dispatch({
+          type: LOAD_SUCCESS,
+          chats: { [result.id]: result },
+          list: []
+        });
+        cb(null, result.id);
+      }
     });
   };
 };

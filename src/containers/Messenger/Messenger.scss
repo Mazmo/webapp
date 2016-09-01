@@ -8,14 +8,14 @@
   color: #333;
   width: 100%;
   height: 100%;
-  margin: 0 0 55px;
+  margin: 0 0 75px;
   padding: 0;
   list-style: none;
 }
 .emoji-trigger {
   position: absolute;
   right: 8px;
-  bottom: 10px;
+  bottom: 30px;
   z-index: 3;
   width: 24px;
   cursor: pointer;
@@ -24,6 +24,18 @@
   &.selected {
     opacity: 1;
   }
+}
+.typing {
+  background: #fff;
+  width: 100%;
+  height: 20px;
+  bottom: 0;
+  position: fixed;
+  color: #333;
+  z-index: 2;
+  font-size: 13px;
+  padding: 0 7px;
+  line-height: 18px;
 }
 
 :global(.emoji-dialog) {

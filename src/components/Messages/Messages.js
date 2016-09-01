@@ -60,7 +60,7 @@ export default class Messages extends Component {
                     key={i}
                     data={this.props.chats[id]}
                     open={this.props.open}
-                    />
+                  />
                 );
               })}
             </ul>

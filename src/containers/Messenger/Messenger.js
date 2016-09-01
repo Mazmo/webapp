@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import cn from 'classnames';
 import EmojiPicker from 'emojione-picker';
-import { send, read } from 'redux/modules/messages';
+import { send, read, loadById } from 'redux/modules/messages';
 import Message from 'components/Messenger/Message';
 import Compose from 'components/Messenger/Compose';
 import Loading from 'components/Loading/Loading';
@@ -14,7 +14,7 @@ import Loading from 'components/Loading/Loading';
     chats: state.messages.chats,
     users: state.users,
     me: state.auth.user
-  }), { send, read })
+  }), { send, read, loadById })
 export default class Messenger extends Component {
   static propTypes = {
     loaded: PropTypes.bool.isRequired,
@@ -23,7 +23,8 @@ export default class Messenger extends Component {
     me: PropTypes.object.isRequired,
     params: PropTypes.object,
     send: PropTypes.func.isRequired,
-    read: PropTypes.func.isRequired
+    read: PropTypes.func.isRequired,
+    loadById: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -83,13 +84,32 @@ export default class Messenger extends Component {
   }
 
   render() {
-    if (!this.props.loaded) {
+    const styles = require('./Messenger.scss');
+    const chat = this.props.chats[this.props.params.id];
+
+    if (this.props.loaded && !chat) {
+      this.props.loadById(this.props.params.id);
+    }
+
+    if (!this.props.loaded || !chat || !chat.participants) {
       return <Loading />;
     }
 
-    const styles = require('./Messenger.scss');
-    const chat = this.props.chats[this.props.params.id];
     const user = this.getUser();
+
+    if (typeof user === 'undefined') {
+      return <Loading />;
+    }
+
+    const typingUsers = [];
+    chat.participants.map((id) => {
+      if (id !== this.props.me.id && chat.users[id].typing) {
+        const username = chat.users[id].username;
+        const displayname = this.props.users[username] ? this.props.users[username].displayname : username;
+        typingUsers.push(displayname);
+      }
+    });
+    const typing = typingUsers.length > 0 ? typingUsers.join(', ') + ' está' + (typingUsers.length === 1 ? '' : 'n') + ' escribiendo...' : '';
 
     return (
       <div className={styles.container} onFocus={this.handleRead}>
@@ -109,6 +129,7 @@ export default class Messenger extends Component {
         </ul>
         <Compose
           ref="compose"
+          id={this.props.params.id}
           to={user}
           send={this.send}
         />
@@ -122,6 +143,7 @@ export default class Messenger extends Component {
             onChange={this.emojiSelected}
           />
         }
+        <div className={styles.typing}>{typing}</div>
       </div>
     );
   }
