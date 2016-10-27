@@ -112,6 +112,7 @@
     "clean-webpack-plugin": "^0.1.6",
     "concurrently": "^0.1.1",
     "css-loader": "^0.23.1",
+    "emojione-picker": "^1.1.0",
     "eslint": "1.10.3",
     "eslint-config-airbnb": "0.1.0",
     "eslint-loader": "^1.0.0",
