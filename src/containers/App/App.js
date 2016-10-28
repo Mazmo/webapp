@@ -72,6 +72,13 @@ export default class App extends Component {
       io.on('reconnect', () => {
         this.handshake();
       });
+
+      io.on('users:connect', (data) => {
+        console.log('👤➡️ user connected', data);
+      });
+      io.on('users:disconnect', (data) => {
+        console.log('⬅️👤 user left', data);
+      });
     }
   }
 
@@ -86,10 +93,23 @@ export default class App extends Component {
   }
 
   handshake = () => {
-    io.emit('handshake:send', this.props.user.jwt, (err) => {
+    // Get unique following users ids
+    let ids = [];
+    Object.keys(this.props.user.follow_lists).map((listId) => {
+      const list = this.props.user.follow_lists[listId];
+      ids = ids.concat(Object.keys(list.users));
+    });
+    //
+
+    const data = {
+      jwt: this.props.user.jwt,
+      followingUsers: Array.from(new Set(ids))
+    };
+    io.emit('handshake:send', data, (err, payload) => {
       if (err) {
         //
       } else {
+        console.log(payload);
         this.setState({ handshaked: true });
       }
     });
