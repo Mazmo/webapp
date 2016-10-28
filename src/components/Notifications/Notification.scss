@@ -1,12 +1,9 @@
 @import '../../utils/variables';
-@import 'bourbon';
-@import '../../utils/grid-settings';
-@import 'neat';
 
 .notification {
-  @include display(flex);
-  @include align-items(center);
-  @include size(100% auto);
+  display: flex;
+  align-items: center;
+  width: 100%;
   padding: 10px;
   text-decoration: none;
 
@@ -15,8 +12,9 @@
   }
 
   .image {
-    @include display(flex);
-    @include size(48px);
+    display: flex;
+    width: 48px;
+    height: 48px;
     border-radius: 100%;
   }
 
@@ -31,7 +29,8 @@
     }
 
     .notificationDescription img {
-      @include size(16px);
+      width: 16px;
+      height: 16px;
     }
 
     .time {

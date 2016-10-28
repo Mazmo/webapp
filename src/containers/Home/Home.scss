@@ -1,34 +1,38 @@
-@import 'bourbon';
-@import 'neat';
 @import '../../utils/variables';
 
 .feed-list {
   padding: $spacing-big;
 
+  /*
   @media #{$tablet} {
     padding: $spacing-big 15%;
   }
+  */
 
-  @media #{$mobile} {
-    padding: $spacing-big $spacing-medium;
-  }
+  // @media #{$mobile} {
+  padding: $spacing-big $spacing-medium;
+  // }
 }
 
 .floating-buttons {
-  @include position(fixed, auto 10px 10px auto);
-  @include display(flex);
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
   z-index: 10;
 
   .button {
-    @include display(flex);
-    @include align-items(center);
-    @include justify-content(center);
-    @include size(70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
     background: $primary-color;
     border-radius: 100%;
 
     svg {
-      @include size(25px);
+      width: 25px;
+      height: 25px;
 
       path {
         fill: white;

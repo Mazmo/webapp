@@ -1,5 +1,3 @@
-@import 'bourbon';
-@import 'neat';
 @import '../../utils/variables';
 
 .button {
@@ -10,7 +8,9 @@
   }
 
   .counter {
-    @include position(absolute, 6px auto auto 22px);
+    position: absolute;
+    top: 6px;
+    left: 22px;
     padding: 2px 5px;
     background: white;
     color: $primary-color;

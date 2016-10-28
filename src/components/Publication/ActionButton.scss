@@ -1,12 +1,10 @@
-@import 'bourbon';
-@import 'neat';
 @import '../../utils/variables';
 
 .action {
   text-decoration: none;
   display: inline-block;
   opacity: .3;
-  @include transition(opacity .2s ease-in-out);
+  transition: opacity .2s ease-in-out;
   margin-right: 15px;
   font-weight: bold;
   cursor: pointer;
@@ -29,7 +27,8 @@
   }
 
   svg {
-    @include size(18px);
+    width: 18px;
+    height: 18px;
     vertical-align: text-bottom;
   }
 

@@ -1,6 +1,3 @@
-@import 'bourbon';
-@import 'neat';
-
 .context-menu {
   position: absolute;
   top: 20px;
@@ -11,11 +8,11 @@
   text-align: left;
   pointer-events: none;
   opacity: 0;
-  @include transform(translateY(40px));
-  @include transition(transform 300ms, opacity 200ms 100ms);
+  transition: transform 300ms, opacity 200ms 100ms;
+  transform: translateY(40px);
 
   &.visible {
-    @include transform(translateY(0));
+    transform: translateY(0);
     opacity: 1;
     pointer-events: all;
   }

@@ -348,7 +348,7 @@
 		font-weight: $font-bold;
 		text-shadow: none;
 
-		@include transition(all .3s ease-in-out);
+		transition: all .3s ease-in-out;
 	}
 
 	&-counter[data-counter=""]::after,
@@ -356,14 +356,18 @@
 		opacity: 0;
 	}
 
-	.icon {
-		@include size(24px);
+  .icon {
+    width: 48px;
 	}
+
 }
 
 @mixin header-bar-dropdown($context) {
 	display: none;
-	@include position(fixed, $header-height 0 auto 0);
+  position: fixed;
+  top: $header-height;
+  right: 0;
+  left: 0;
 	width: 100%;
 	min-height: $header-bar-element-size + ($spacing-medium * 2);
 	max-height: 80%;
@@ -373,19 +377,24 @@
 	font-size: .65em;
 	text-align: left;
 
+  /*
 	@include media($tablet) {
 		@include position(absolute, $header-height 0 auto auto);
 		width: 300px;
 		border-radius: 3px;
 	}
+  */
 
 	&.visible {
 		display: block;
 	}
 
 	&:after {
-		@include position(absolute, -15px $spacing-medium * 1.5 auto auto);
-		@include size(0px);
+    position: absolute;
+    top: -15px;
+    right: $spacing-medium * 1.5;
+    width: 0px;
+    height: 0px;
 		border: solid transparent;
 		content: " ";
 		pointer-events: none;
@@ -396,9 +405,11 @@
 		@if $context == 'notifications' {
 			right: 59px;
 
+      /*
 			@include media($tablet) {
 				right: 15px;
 			}
+      */
 		}
 	}
 

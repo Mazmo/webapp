@@ -1,5 +1,3 @@
-@import 'bourbon';
-@import 'neat';
 @import '../../../utils/variables';
 
 .rsvp {
@@ -25,7 +23,10 @@
     }
 
     .rsvp-avatar {
-      @include position(absolute, auto 0 -50px 0);
+      position: absolute;
+      right: 0;
+      bottom: -50px;
+      left: 0;
       margin: auto;
       z-index: 1;
       border-radius: 4px;

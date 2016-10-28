@@ -1,22 +1,24 @@
 @import '../../utils/variables';
-@import 'bourbon';
-@import 'neat';
 
 .dropdown {
-  @include display(flex);
-  @include justify-content(center);
-  @include align-items(center);
-  @include transition(box-shadow 150ms);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow 150ms;
   width: $header-height;
   cursor: pointer;
 
   .content {
-    @include display(flex);
-    @include flex-direction(column);
-    @include align-items(flex-start);
-    @include position(fixed, $header-height 0 0 auto);
-    @include size(100vw 0);
-    @include transition(height 250ms);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    top: $header-height;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 0;
+    transition: height 250ms;
     background: white;
     overflow: hidden;
     z-index: 15;

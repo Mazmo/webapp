@@ -1,10 +1,8 @@
-@import 'bourbon';
-@import 'neat';
 @import '../../utils/variables';
 
 .load-more {
-  @include display(flex);
-  @include align-items(center);
+  display: flex;
+  align-items: center;
   width: 100%;
   padding: $spacing-medium $spacing-big;
   background: white;
@@ -22,14 +20,15 @@
   }
 
   .icon {
-    @include display(flex);
-    @include size(16px);
+    display: flex;
+    width: 16px;
+    height: 16px;
     margin-right: $spacing-medium;
     fill: $primary-color;
   }
 
   .label {
-    @include display(flex);
+    display: flex;
   }
 
 }

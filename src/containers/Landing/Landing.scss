@@ -1,7 +1,10 @@
-@import '../../utils/styles';
+@import '../../utils/variables';
 
 .login_form {
-	@include absolute-center;
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 	text-align: center;
 
 	input {

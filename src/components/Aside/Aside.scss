@@ -1,42 +1,45 @@
 @import '../../utils/variables';
-@import 'bourbon';
-@import 'neat';
 
 .nav {
-  @include position(fixed, 0 auto 0 0);
-  @include size($nav-width 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $nav-width;
+  height: 100%;
   margin: auto;
   z-index: 20;
   background: white;
   color: #333;
   will-change: transform;
-  @include transform(translateX(-100%));
-  @include transition(all 150ms);
+  transform: translateX(-100%);
+  transition: all 150ms;
 
 	&.nav-open {
-    @include transform(translateX(0));
-    box-shadow: 0 1px 0 2000px rgba(0, 0, 0, 0.8);
+    transform: translateX(0);
+    box-shadow: 0 1px 0 2000px rgba(black, 0.8);
   }
 
   .header {
-    @include display(flex);
-    @include flex-direction(column);
-    @include align-items(center);
-    @include justify-content(center);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
     background-color: #111;
     background-size: cover;
     background-position: center;
 
     .avatar {
-      @include display(flex);
-      @include size(75px);
+      display: flex;
+      width: 75px;
+      height: 75px;
       margin-bottom: 10px;
       border-radius: 4px;
     }
 
     .stats {
-      @include display(flex);
+      display: flex;
       list-style-type: none;
       margin: 0;
       padding: 0;
@@ -71,8 +74,8 @@
     }
 
     .link {
-      @include display(flex);
-      @include align-items(center);
+      display: flex;
+      align-items: center;
       width: 100%;
       padding: 10px 20px;
       color: #333;
@@ -86,15 +89,16 @@
 
       .label,
       .button {
-        @include display(flex);
+        display: flex;
         color: inherit;
         font-size: 12px;
         font-weight: inherit;
       }
 
       svg {
-        @include display(flex);
-        @include size(22px);
+        display: flex;
+        width: 22px;
+        height: 22px;
         margin-right: 10px;
         fill: #757575;
         font-weight: 300;

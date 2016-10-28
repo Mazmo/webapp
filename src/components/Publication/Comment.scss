@@ -1,19 +1,18 @@
-@import 'bourbon';
-@import 'neat';
 @import '../../utils/variables';
 
 
 .comment {
-  @include display(flex);
-  @include align-items(stretch);
+  display: flex;
+  align-items: stretch;
   position: relative;
   padding: $spacing-medium 0;
 
   .avatar {
     $size: 32px;
-    @include display(flex);
-    @include flex(0 0 $size);
-    @include size($size);
+    display: flex;
+    flex: 0 0 $size;
+    width: $size;
+    height: $size;
     margin: 0 $spacing-medium;
     border-radius: 3px;
   }
@@ -39,14 +38,14 @@
     }
 
     .bottom {
-      @include display(flex);
-      @include align-items(center);
+      display: flex;
+      align-items: center;
       margin-top: $spacing-small;
 
       .spank-button {
-        @include display(flex);
-        @include align-items(center);
-        @include transition(opacity .2s ease-in-out);
+        display: flex;
+        align-items: center;
+        transition: opacity .2s ease-in-out;
         margin-left: $spacing-small;
         padding: 0;
         font-size: .8em;
@@ -60,13 +59,14 @@
         cursor: pointer;
 
         .spank-icon {
-          @include display(flex);
-          @include size(14px);
+          display: flex;
+          width: 14px;
+          height: 14px;
           margin-right: 3px;
         }
 
         .spank-label {
-          @include display(flex);
+          display: flex;
         }
 
         &.spanked {

@@ -1,11 +1,9 @@
 @import '../../utils/variables';
-@import "bourbon";
-@import '../../utils/grid-settings';
-@import "neat";
 @import '../../utils/base';
 
 .app {
-  @include size(100% 100vh);
+  width: 100%;
+  height: 100vh;
 }
 
 :global(.content) {
