@@ -1,4 +1,4 @@
-$primary-color: #B02B2C;
+var(--primary-color): #B02B2C;
 $cdn: '';
 
 @mixin font-face($style-name, $file, $family, $category:"") {

@@ -30,7 +30,7 @@
       .author {
         display: inline-block;
         margin-right: $spacing-small;
-        color: $primary-color;
+        color: var(--primary-color);
         font-weight: $font-bold;
         text-decoration: none;
       }
@@ -125,7 +125,7 @@
     &-author {
       display: inline-block;
       margin-right: $spacing-small;
-      color: $primary-color;
+      color: var(--primary-color);
       font-weight: $font-bold;
       text-decoration: none;
     }

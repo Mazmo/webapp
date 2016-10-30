@@ -45,7 +45,7 @@
       }
 
       &.user {
-        color: $primary-color;
+        color: var(--primary-color);
         text-decoration: none;
 
         // @media #{$not-desktop} {

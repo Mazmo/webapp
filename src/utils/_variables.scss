@@ -30,8 +30,8 @@ $m-desktop:    "(min-width: 1170px)";
 $b-desktop:    "(min-width: 1600px)";
 
 $bright-red:      #FF3B30;
-//$primary-color:            	$bright-red;
-$primary-color:   #ff3b30;
+//var(--primary-color):            	$bright-red;
+// var(--primary-color):   #ff3b30;
 $main-dark:       #212121;
 $light-grey:      #EEEEEE;
 $almost-black:    #404040;
@@ -60,3 +60,7 @@ $header-bar-icon-size:    18px;
 /* aside */
 $aside-width:            250px;
 $aside-background-color: #2F2F2F;
+
+:root {
+  --primary-color: #ff3b30;
+}

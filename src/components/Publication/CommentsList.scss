@@ -10,7 +10,7 @@
     display: block;
     padding: ($spacing-medium * 1.5) $spacing-big;
     background: white;
-    color: $primary-color;
+    color: var(--primary-color);
     text-decoration: none;
     font-size: .8em;
     font-weight: $font-bold;

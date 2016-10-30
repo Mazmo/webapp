@@ -23,7 +23,7 @@
                 font-size: .85em;
                 margin-left: $spacing-small / 2;
                 font-weight: $font-bold;
-                color: $primary-color;
+                color: var(--primary-color);
                 text-decoration: none;
             }
         }

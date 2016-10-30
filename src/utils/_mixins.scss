@@ -416,7 +416,7 @@
 	&-header {
 		font-size: 1.2em;
 		font-weight: $font-bold;
-		color: $primary-color;
+		color: var(--primary-color);
 		padding: 0 $spacing-medium;
 	}
 
@@ -454,7 +454,7 @@
 				margin: auto;
 				width: 8px;
 				height: 8px;
-				background: $primary-color;
+				background: var(--primary-color);
 				border-radius: 100%;
 				opacity: .7;
 			}
@@ -504,7 +504,7 @@
 
 				& > strong {
 					display: block;
-					color: $primary-color;
+					color: var(--primary-color);
 				}
 
 			}
