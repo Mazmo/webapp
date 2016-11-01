@@ -43,6 +43,17 @@
       .row-label {
         display: flex;
         flex-grow: 1;
+        white-space: pre-wrap;
+      }
+
+      .row-link {
+        color: var(--primary-color);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
       }
 
     }

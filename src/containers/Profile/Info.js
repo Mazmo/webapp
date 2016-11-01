@@ -28,6 +28,13 @@ export default class Info extends Component {
           <h3 className={styles.title}>{`Sobre ${user.displayname}`}</h3>
           <p className={styles.bio}>{user.about_me}</p>
           <div className={styles.row}>
+            <Icon className={styles.rowIcon} name="user" />
+            <span className={styles.rowLabel}>
+              {`Sumisa de `}
+              <a className={styles.rowLink} href="#">Andrés Torres</a>
+            </span>
+          </div>
+          <div className={styles.row}>
             <Icon className={styles.rowIcon} name="birthday" />
             <span className={styles.rowLabel}>{`${user.age} años`}</span>
           </div>
