@@ -64,6 +64,7 @@ export default (store) => {
       { /* Routes */ }
       <Route path="/:username" component={ProfileContainer}>
         <IndexRoute component={ProfileInfo} />
+        <Route path="/:username/info" component={ProfileInfo} />
       </Route>
 
       { /* Catch all route */ }
