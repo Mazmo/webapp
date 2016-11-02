@@ -59,8 +59,8 @@
 
     .bio {
       margin: 0;
-      padding: var(--spacing-medium);
-      color: var(--text-color-light);
+      padding: var(--spacing-medium) var(--spacing-medium) var(--spacing-big);
+      color: #666;
       white-space: pre-wrap;
       border-bottom: solid 1px var(--alt-color);
     }
