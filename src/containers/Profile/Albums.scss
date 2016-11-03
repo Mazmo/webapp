@@ -1,0 +1,41 @@
+.albums {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--spacing-medium);
+
+  .album {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    margin: var(--spacing-small);
+    position: relative;
+  }
+
+  .cover {
+    display: block;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    object-fit: cover;
+  }
+
+  .title {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: var(--spacing-small);
+    background: rgba(black, .25);
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+}
