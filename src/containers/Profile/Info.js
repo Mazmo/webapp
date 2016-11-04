@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { Icon } from 'components';
 import classNames from 'classnames';
 import { asyncConnect } from 'redux-async-connect';
+import { Link } from 'react-router';
 
 @asyncConnect([
   {
     deferred: false,
     key: 'profile',
-    promise: ({params: { username }, helpers: { client }}) => client.get(`/users/${username}`)
+    promise: ({params: { username }, helpers: { client }}) => client.get(`/users/${username}`, { params: { relationships: true }})
   }
 ])
 
@@ -40,13 +41,14 @@ export default class Info extends Component {
               <p className={styles.bio}>{user.about_me}</p>
             </div>
           }
-          <div className={styles.row}>
-            <Icon className={styles.rowIcon} name="user" />
-            <span className={styles.rowLabel}>
-              {`Sumisa de `}
-              <a className={styles.rowLink} href="#">Andrés Torres</a>
-            </span>
-          </div>
+
+          {user.relationships.map((relationship, i) => (
+            <div className={styles.row} key={i}>
+              <Icon className={styles.rowIcon} name="user" />
+              <span className={styles.rowLabel}>{relationship.type.text} de <Link className={styles.rowLink} to={`/${relationship.related_to.username}`}>{relationship.related_to.displayname}</Link></span>
+            </div>
+          ))}
+
           <div className={styles.row}>
             <Icon className={styles.rowIcon} name="birthday" />
             <span className={styles.rowLabel}>{`${user.age} años`}</span>
