@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import classnames from 'classnames';
+import cn from 'classnames';
 import { FormattedRelative } from 'react-intl';
 import { Avatar, Icon, ContextMenu } from '../';
 import { Rsvp, LinkImage, Pictures, Video } from './';
@@ -61,8 +61,8 @@ export default class Content extends Component {
           <Avatar className={styles.feedItemAvatar} size={60} user={publication.author} />
           <span className={styles.feedItemPrompt}>
             <Link className={styles.feedItemPromptLink} to={`/${this.props.data.author.username}`}>{this.props.data.author.displayname}</Link>
-            {publication.picture_count > 0 &&
-              <span className={styles.feedItemPromptExtra}> agregó una foto a su álbum <a className={classnames(styles.feedItemPromptLink, styles.album)} href="#">{this.props.data.pictures[0].album.title}</a></span>
+            {publication.picture_count > 0 && publication.pictures.length > 0 &&
+              <span className={styles.feedItemPromptExtra}> agregó una foto a su álbum <a className={cn(styles.feedItemPromptLink)} href="#">{publication.pictures[0].album.title}</a></span>
             }
             <Link className={styles.feedItemPromptDate} to={`/${this.props.data.id}`}><FormattedRelative value={publication.created_at.date} /></Link>
           </span>

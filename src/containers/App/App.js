@@ -105,11 +105,10 @@ export default class App extends Component {
       jwt: this.props.user.jwt,
       followingUsers: Array.from(new Set(ids))
     };
-    io.emit('handshake:send', data, (err, payload) => {
+    io.emit('handshake:send', data, (err) => {
       if (err) {
         //
       } else {
-        console.log(payload);
         this.setState({ handshaked: true });
       }
     });
