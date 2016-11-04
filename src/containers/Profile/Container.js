@@ -11,7 +11,7 @@ import classNames from 'classnames';
   {
     deferred: false,
     key: 'profile',
-    promise: ({params: { username }, helpers: { client }}) => client.get(`/users/${username}`)
+    promise: ({params: { username }, helpers: { client }}) => client.get(`/users/${username}`, { params: { relationships: true }})
   }
 ])
 @connect(null, {goBack: routeActions.goBack}
@@ -73,7 +73,7 @@ export default class Container extends Component {
         </div>
 
         <div className="profile-content">
-          {this.props.children}
+          {React.cloneElement(this.props.children, { profile: this.props.profile })}
         </div>
 
       </div>

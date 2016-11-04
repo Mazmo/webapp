@@ -1,16 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Icon } from 'components';
 import classNames from 'classnames';
-import { asyncConnect } from 'redux-async-connect';
 import { Link } from 'react-router';
-
-@asyncConnect([
-  {
-    deferred: false,
-    key: 'profile',
-    promise: ({params: { username }, helpers: { client }}) => client.get(`/users/${username}`, { params: { relationships: true }})
-  }
-])
 
 export default class Info extends Component {
 
