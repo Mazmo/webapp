@@ -84,13 +84,16 @@
 
       .row-label {
         display: flex;
-        flex-grow: 1;
+        flex: 1 1;
         white-space: pre-wrap;
       }
 
       .row-link {
         color: var(--primary-color);
         text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:hover {
           text-decoration: underline;

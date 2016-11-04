@@ -36,7 +36,12 @@ export default class Info extends Component {
           {user.relationships && user.relationships.map((relationship, i) => (
             <div className={styles.row} key={i}>
               <Icon className={styles.rowIcon} name="user" />
-              <span className={styles.rowLabel}>{relationship.type.text} de <Link className={styles.rowLink} to={`/${relationship.related_to.username}`}>{relationship.related_to.displayname}</Link></span>
+              <span className={styles.rowLabel}>
+                {`${relationship.type.text} de `}
+                <Link className={styles.rowLink} to={`/${relationship.related_to.username}`}>
+                  {relationship.related_to.displayname}
+                </Link>
+              </span>
             </div>
           ))}
 
@@ -55,6 +60,10 @@ export default class Info extends Component {
           <div className={styles.row}>
             <Icon className={styles.rowIcon} name="heart" />
             <span className={styles.rowLabel}>{user.role.text}</span>
+          </div>
+          <div className={styles.row}>
+            <Icon className={styles.rowIcon} name="briefcase" />
+            <span className={styles.rowLabel}>{user.work}</span>
           </div>
         </div>
 
