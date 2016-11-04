@@ -34,8 +34,12 @@ export default class Info extends Component {
               </svg>
             ))}
           </div>
-          <h3 className={styles.title}>{`Sobre ${user.displayname}`}</h3>
-          <p className={styles.bio}>{user.about_me}</p>
+          {user.about_me &&
+            <div>
+              <h3 className={styles.title}>{`Sobre ${user.displayname}`}</h3>
+              <p className={styles.bio}>{user.about_me}</p>
+            </div>
+          }
           <div className={styles.row}>
             <Icon className={styles.rowIcon} name="user" />
             <span className={styles.rowLabel}>
