@@ -42,7 +42,7 @@ export default class Info extends Component {
             </div>
           }
 
-          {user.relationships.map((relationship, i) => (
+          {user.relationships && user.relationships.map((relationship, i) => (
             <div className={styles.row} key={i}>
               <Icon className={styles.rowIcon} name="user" />
               <span className={styles.rowLabel}>{relationship.type.text} de <Link className={styles.rowLink} to={`/${relationship.related_to.username}`}>{relationship.related_to.displayname}</Link></span>

@@ -45,13 +45,19 @@ export default class Home extends Component {
   };
 
   componentDidMount = () => {
-    document.addEventListener('scroll', (e) => {
-      const gap = 200;
-      const body = e.target.body;
-      if (!this.props.loadingPublications && body.scrollTop + body.offsetHeight > body.scrollHeight - gap) {
-        this.props.loadPublications();
-      }
-    });
+    document.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount = () => {
+    document.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = (e) => {
+    const gap = 200;
+    const body = e.target.body;
+    if (!this.props.loadingPublications && body.scrollTop + body.offsetHeight > body.scrollHeight - gap) {
+      this.props.loadPublications();
+    }
   }
 
   render() {
