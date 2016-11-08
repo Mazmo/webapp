@@ -9,6 +9,7 @@ import {
   ProfileContainer,
   ProfileInfo,
   ProfileAlbums,
+  ProfileChecklist,
   Messenger,
   NotFound
 } from 'containers';
@@ -67,6 +68,7 @@ export default (store) => {
         <IndexRoute component={ProfileInfo} />
         <Route path="/:username/info" component={ProfileInfo} />
         <Route path="/:username/albums" component={ProfileAlbums} />
+        <Route path="/:username/checklist" component={ProfileChecklist} />
       </Route>
 
       { /* Catch all route */ }
