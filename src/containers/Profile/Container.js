@@ -29,6 +29,7 @@ export default class Container extends Component {
   render() {
     const styles = require('./Container.scss');
     const user = this.props.profile;
+    const profileUrl = `/${user.username}`;
     const coverStyle = user.cover ? {
       backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(26,26,26,1) 100%,rgba(0,0,0,0.65) 100%), url(' + user.cover + ')'
     } : null;
@@ -57,16 +58,16 @@ export default class Container extends Component {
 
             <ul className={styles.profileHeaderTabs}>
               <div className={styles.profileHeaderTabsItem} name="info">
-                <Link className={styles.profileHeaderTabsItemLink} to="profile" params={{ username: user.username }}><Icon name="userinfo" /></Link>
+                <Link className={styles.profileHeaderTabsItemLink} to={profileUrl} params={{ username: user.username }}><Icon name="userinfo" /></Link>
               </div>
               <div className={styles.profileHeaderTabsItem} name="publications">
-                <Link className={styles.profileHeaderTabsItemLink} to="profile_wall" params={{ username: user.username }}><Icon name="feed" /></Link>
+                <Link className={styles.profileHeaderTabsItemLink} to={profileUrl + '/wall'} params={{ username: user.username }}><Icon name="feed" /></Link>
               </div>
               <div className={styles.profileHeaderTabsItem} name="pictures">
-                <Link className={styles.profileHeaderTabsItemLink} to="profile_pictures" params={{ username: user.username }}><Icon name="photos" /></Link>
+                <Link className={styles.profileHeaderTabsItemLink} to={profileUrl + '/albums'} params={{ username: user.username }}><Icon name="photos" /></Link>
               </div>
               <div className={styles.profileHeaderTabsItem} name="checklist">
-                <Link className={styles.profileHeaderTabsItemLink} to="profile_checklist" params={{ username: user.username }}><Icon name="checklist" /></Link>
+                <Link className={styles.profileHeaderTabsItemLink} to={profileUrl + '/checklist'} params={{ username: user.username }}><Icon name="checklist" /></Link>
               </div>
             </ul>
           </div>

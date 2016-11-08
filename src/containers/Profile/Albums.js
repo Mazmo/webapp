@@ -24,7 +24,7 @@ export default class Albums extends Component {
     return (
       <div className={styles.albums}>
         {albums.map(album => (
-          <a className={styles.album} href="#">
+          <a className={styles.album} href="#" key={album.id}>
             {album.cover && <img className={styles.cover} src={album.cover.src.replace('::dimension::', '200x')} />}
             <h3 className={styles.title}>{album.title}</h3>
           </a>
