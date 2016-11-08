@@ -1,3 +1,87 @@
 .checklist {
-  
+  padding: var(--spacing-medium) var(--spacing-medium) 0;
+  color: var(--text-color-dark);
+
+  .group {
+    margin-bottom: var(--spacing-big);
+    overflow: hidden;
+    border-top: solid 5px var(--accent-color);
+    border-radius: 5px;
+    background: white;
+    font-size: 14px;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--spacing-medium);
+    }
+
+    .header-title {
+      display: flex;
+      flex: 1 1;
+      margin: 0;
+      max-width: 50%;
+      font-size: 16px;
+    }
+
+    .header-experience,
+    .header-interest {
+      display: flex;
+      width: 25%;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--spacing-medium);
+
+      + .row {
+        border-top: solid 1px var(--alt-color);
+      }
+
+      .row-label {
+        display: flex;
+        flex: 1 1;
+        max-width: 50%;
+        margin-right: var(--spacing-medium);
+      }
+
+      .row-experience,
+      .row-interest {
+        display: flex;
+        width: 25%;
+        font-size: 10px;
+        text-transform: uppercase;
+      }
+
+      .level0,
+      .level1
+       {
+        color: rgba(black, .25);
+      }
+
+      .level2 {
+        color: rgba(black, .5);
+      }
+
+      .level3 {
+        color: green;
+      }
+
+      .level4 {
+        color: orange;
+      }
+
+      .level5 {
+        color: red;
+      }
+
+    }
+
+  }
+
 }
