@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 export default class Info extends Component {
 
   static propTypes = {
-    profile: PropTypes.object.isRequired,
+    profile: PropTypes.object,
     params: PropTypes.object
   };
 
