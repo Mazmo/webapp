@@ -11,11 +11,13 @@ class BankTransaction extends Component {
   render() {
     const styles = require('../Notification.scss');
     const date = new Date(this.props.data.updated_at.date);
+    const from = this.props.data.transaction.from ? this.props.data.transaction.from.displayname : 'Bank of Mazmorra';
+    const type = this.props.data.transaction.type === 0 ? 'cobrado' : 'depositado';
     return (
       <div className={styles.notification}>
-        <Avatar className={styles.image} size={100} user={this.props.data.transaction.from} />
+        {this.props.data.transaction.from && <Avatar className={styles.image} size={100} user={this.props.data.transaction.from} />}
         <p className={styles.text}>
-          <strong className={styles.nick}>{this.props.data.transaction.from.displayname}</strong> te ha depositado la suma de <strong>§{this.props.data.transaction.amount} SADEs</strong>
+          <strong className={styles.nick}>{from}</strong> te ha {type} la suma de <strong>§{this.props.data.transaction.amount} SADEs</strong>
           <time className={styles.time}><FormattedRelative value={date} /></time>
         </p>
       </div>
