@@ -61,7 +61,7 @@ export default class Container extends Component {
                 <Link className={styles.profileHeaderTabsItemLink} to={profileUrl} params={{ username: user.username }}><Icon name="userinfo" /></Link>
               </div>
               <div className={styles.profileHeaderTabsItem} name="publications">
-                <Link className={styles.profileHeaderTabsItemLink} to={profileUrl + '/wall'} params={{ username: user.username }}><Icon name="feed" /></Link>
+                <Link className={styles.profileHeaderTabsItemLink} to={profileUrl + '/publications'} params={{ username: user.username }}><Icon name="feed" /></Link>
               </div>
               <div className={styles.profileHeaderTabsItem} name="pictures">
                 <Link className={styles.profileHeaderTabsItemLink} to={profileUrl + '/albums'} params={{ username: user.username }}><Icon name="photos" /></Link>
