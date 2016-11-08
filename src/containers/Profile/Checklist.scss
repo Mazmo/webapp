@@ -85,3 +85,11 @@
   }
 
 }
+
+.error {
+  background: rgba(black, .2);
+  color: white;
+  margin: var(--spacing-big);
+  padding: var(--spacing-big);
+  text-align: center;
+}
