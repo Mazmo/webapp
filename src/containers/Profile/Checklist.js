@@ -4,25 +4,26 @@ import { asyncConnect } from 'redux-async-connect';
 @asyncConnect([
   {
     deferred: false,
-    key: 'profile',
-    promise: ({params: { username }, helpers: { client }}) => client.get(`/users/${username}`)
+    key: 'checklist',
+    promise: ({params: { username }, helpers: { client }}) => client.get(`/users/${username}/checklist`).catch((error) => error).then((response) => response)
   }
 ])
 
 export default class Checklist extends Component {
 
   static propTypes = {
-    profile: PropTypes.object.isRequired,
-    params: PropTypes.object
+    checklist: PropTypes.object.isRequired
   };
 
   render() {
     const styles = require('./Checklist.scss');
-    // const user = this.props.profile;
+    if (this.props.checklist.error) {
+      return <div>ERROR: {this.props.checklist.error}</div>;
+    }
 
     return (
       <div className={styles.checklist}>
-        <h1>Checklist</h1>
+        <pre>{JSON.stringify(this.props.checklist.results, null, 2)}</pre>
       </div>
     );
   }
