@@ -25,7 +25,7 @@ export default class Publications extends Component {
   render() {
     const styles = require('./Publications.scss');
     return (
-      <div className={styles.container}>
+      <div className={styles.publications}>
         {this.props.data.map((publication, i) => {
           return (
             <Publication
