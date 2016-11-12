@@ -51,17 +51,23 @@ export default class Compose extends Component {
         />
 
         <div className="content">
-          {this.props.creatingError &&
-            <div>ERROR: {this.props.creatingError}</div>
-          }
-
           <textarea
             className={styles.input}
             ref="message"
             placeholder="¿Qué está pasando por tu sucia mente?"
             disabled={this.props.creating}
-            ></textarea>
-          <button className={styles.button} onClick={this.publish} disabled={this.props.creating}>{this.props.creating ? 'Publicando...' : 'Publicar'}</button>
+          ></textarea>
+          <div className={styles.imagesList}>
+            <img className={styles.image} src="https://placekitten.com/200/200" alt=""/>
+            <img className={styles.image} src="https://placekitten.com/200/500" alt=""/>
+            <img className={styles.image} src="https://placekitten.com/500/200" alt=""/>
+          </div>
+          <div className={styles.actionBar}>
+            <select className={styles.albumSelect}>
+              <option value={1}>My album</option>
+            </select>
+            <button className={styles.publishButton}>Publicar</button>
+          </div>
         </div>
       </div>
     );
