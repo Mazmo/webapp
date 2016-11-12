@@ -17,29 +17,28 @@
 
 	.container {
 		display: flex;
-		flex-grow: 1;
+		align-items: stretch;
 		width: 100%;
 		max-width: $main-width + $aside-expanded-width + $aside-collapsed-width;
 	}
 
 	.button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 48px;
+		height: 48px;
 		background: transparent;
 		border:0;
-		padding: 0 12px;
+		padding: 0;
 		margin: 0;
 		outline: 0;
 
 		svg {
-			width: 24px;
-			height: 24px;
+			width: 48px;
+			height: 48px;
 			fill: white;
-			display: inline-block;
-
-			/*
-			@include media($tablet) {
-				display: none;
-			}
-			*/
+			display: flex;
 		}
 
 		.icon {
@@ -47,20 +46,13 @@
 			height: 24px;
 			fill: white;
 			display: inline-block;
-
-			/*
-			@include media($tablet) {
-				display: none;
-			}
-			*/
-
 		}
 
 	}
 
 	.bar {
 		display: flex;
-		width: 100%;
+		flex-grow: 1;
 
 		.logo {
 			display: flex;
@@ -71,6 +63,7 @@
 			display: flex;
 			flex-grow: 1;
 			align-items: center;
+			line-height: 1em;
 		}
 
 		.messages {
