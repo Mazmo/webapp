@@ -139,6 +139,10 @@ export default class Icon extends Component {
         path = 'M17,17.25V14H10V10H17V6.75L22.25,12L17,17.25M13,2A2,2 0 0,1 15,4V8H13V4H4V20H13V16H15V20A2,2 0 0,1 13,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2H13Z';
         break;
 
+      case 'image-add':
+        path = 'M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z';
+        break;
+
       default:
         path = 'M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z';
         break;

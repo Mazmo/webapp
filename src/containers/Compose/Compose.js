@@ -45,6 +45,9 @@ export default class Compose extends Component {
           background={'transparent'}
           title={'Publicar'}
           mainButton={{icon: 'back', action: this.back}}
+          buttons={[
+            {icon: 'image-add', action: null}
+          ]}
         />
 
         <div className="content">
