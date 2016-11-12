@@ -24,13 +24,13 @@ export default class CreateComment extends Component {
     return (
       <form className={styles.create} ref="form">
         <Avatar className={styles.createAvatar} size={32} user={this.props.me} />
-        <textarea
+        <input
           className={styles.createTextarea}
           ref="message"
           placeholder="Escribe un comentario"
           onKeyPress={this.changed}
           disabled={this.props.disabled}
-        ></textarea>
+        />
       </form>
     );
   }
