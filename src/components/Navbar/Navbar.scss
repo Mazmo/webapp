@@ -17,7 +17,7 @@
 
 	.container {
 		display: flex;
-		align-items: stretch;
+		align-items: center;
 		width: 100%;
 		max-width: $main-width + $aside-expanded-width + $aside-collapsed-width;
 	}
@@ -53,6 +53,7 @@
 	.bar {
 		display: flex;
 		flex-grow: 1;
+		height: 100%;
 
 		.logo {
 			display: flex;
@@ -118,8 +119,8 @@
 
 	svg {
 		display: flex;
-		padding: $header-height/4;
+		padding: 18px;
 		fill: white;
-		width: 48px;
+		width: $header-height;
 	}
 }
