@@ -57,10 +57,23 @@ export default class Compose extends Component {
             placeholder="¿Qué está pasando por tu sucia mente?"
             disabled={this.props.creating}
           ></textarea>
-          <div className={styles.imagesList}>
+          <div className={styles.link}>
+            <img className={styles.linkImage} src="https://placekitten.com/200/200" alt=""/>
+            <h3 className={styles.linkTitle}>The tiniest and cutest kittens in the whole world</h3>
+          </div>
+          <div className={styles.images}>
+            <img className={styles.image} src="https://placekitten.com/200/200" alt=""/>
+            <img className={styles.image} src="https://placekitten.com/200/200" alt=""/>
+            <img className={styles.image} src="https://placekitten.com/200/200" alt=""/>
+            <img className={styles.image} src="https://placekitten.com/200/200" alt=""/>
+            <img className={styles.image} src="https://placekitten.com/200/200" alt=""/>
+            <img className={styles.image} src="https://placekitten.com/200/200" alt=""/>
             <img className={styles.image} src="https://placekitten.com/200/200" alt=""/>
             <img className={styles.image} src="https://placekitten.com/200/500" alt=""/>
             <img className={styles.image} src="https://placekitten.com/500/200" alt=""/>
+          </div>
+          <div className={styles.video}>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/y6120QOlsfU" frameBorder="0" allowFullscreen></iframe>
           </div>
           <div className={styles.actionBar}>
             <select className={styles.albumSelect}>

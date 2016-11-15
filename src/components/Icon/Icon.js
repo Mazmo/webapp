@@ -151,7 +151,7 @@ export default class Icon extends Component {
     const className = `icon icon_${this.props.name} ${this.props.className}`;
     return (
       <svg className={className} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" onClick={this.props.onClick}>
-        <path d={path} />
+        <path fill="inherit" d={path} />
       </svg>
     );
   }
