@@ -25,6 +25,7 @@
     width: 24pt;
     height: 24pt;
     padding: 3pt;
+    position: relative;
     background: transparent;
     outline: 0;
     border: 0;
@@ -51,6 +52,25 @@
     &.active {
       background: white;
       fill: var(--primary-color);
+    }
+
+    &[data-counter]::after {
+      position: absolute;
+      top: 0;
+      right: 12pt;
+      padding: 1pt 4pt;
+      color: var(--primary-color);
+      background: white;
+      box-shadow: 0 0 0 2pt currentColor;
+      border-radius: 3pt;
+      font-size: 8pt;
+      font-weight: bold;
+      font-family: $base-font-family, Arial;
+      content: attr(data-counter);
+    }
+
+    &[data-counter="0"]::after {
+      display: none;
     }
 
   }

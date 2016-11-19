@@ -20,6 +20,7 @@ export default class Header extends Component {
         name={button.icon}
         className={classNames(styles.button, {[styles.active]: button.active})}
         onClick={button.action}
+        data-counter={button.counter}
       >
         <Icon className={styles.icon} name={button.icon} />
       </button>
