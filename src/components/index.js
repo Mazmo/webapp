@@ -1,4 +1,4 @@
-export Navbar from './Navbar/Navbar';
+export Header from './Header/Header';
 export Aside from './Aside/Aside';
 export Icon from './Icon/Icon';
 export Notifications from './Notifications/Notifications';

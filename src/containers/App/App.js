@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { routeActions } from 'react-router-redux';
@@ -11,7 +10,7 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import locales from 'utils/locales';
 import io from 'utils/socket';
 import {
-  Navbar,
+  Header,
   Aside,
   FullDropdown,
   Messages,
@@ -120,6 +119,7 @@ export default class App extends Component {
 
   render() {
     const { user } = this.props;
+    const { dropdowns } = this.state;
     const styles = require('./App.scss');
 
     if (user && !this.state.handshaked) {
@@ -147,20 +147,26 @@ export default class App extends Component {
       });
     }
 
+    const dropdownActive = dropdowns.notifications || dropdowns.messages;
+    let headerLabel;
+    if (dropdowns.notifications) headerLabel = 'Notifications';
+    if (dropdowns.messages) headerLabel = 'Messages';
+
     return (
       <IntlProvider locale={locale} messages={messages}>
         <div className={styles.app}>
           <Helmet {...config.app.head}/>
-          {user && !this.props.children.type.avoidMainNavbar &&
-            <Navbar
-              logo
-              mainButton={{icon: 'nav', action: this.toggleAside}}
-              buttons={[
-                {icon: 'message', active: this.state.dropdowns.messages, action: this.toggleMessages, badge: unreadMessages},
-                {icon: 'bell', active: this.state.dropdowns.notifications, action: this.toggleNotifications}
-              ]}
-            />
-          }
+
+          {user && <Header context={{
+            logo: !dropdownActive,
+            label: headerLabel,
+            buttons: [
+              {icon: 'nav', side: 'left', action: this.toggleAside},
+              {icon: 'bell', side: 'right', active: dropdowns.notifications, action: this.toggleNotifications},
+              {icon: 'message', side: 'right', active: dropdowns.messages, action: this.toggleMessages}
+            ]
+          }} />}
+
           {user &&
             <div>
               <Aside
@@ -185,9 +191,8 @@ export default class App extends Component {
             </div>
           }
 
-          <div className={classnames({content: !this.props.children.type.avoidMainNavbar})}>
-            {this.props.children}
-          </div>
+          {this.props.children}
+
         </div>
       </IntlProvider>
     );

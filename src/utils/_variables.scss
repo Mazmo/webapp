@@ -9,7 +9,7 @@ $main-width:            650px;
 $aside-collapsed-width: 60px;
 $aside-expanded-width:  300px;
 $nav-width:             75%;
-$header-height:         60px;
+$header-height:         40pt;
 
 /* wrappers */
 $width-wide:  650px;
@@ -62,6 +62,8 @@ $aside-width:            250px;
 $aside-background-color: #2F2F2F;
 
 :root {
+  --desktop-width: 1000px;
+
   --primary-color: #ff3b30;
   --accent-color: #e91e63;
   --attention-color: #7F30FF;

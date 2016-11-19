@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { routeActions } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import { create } from 'redux/modules/publications';
-import { Navbar } from '../../components';
+import { Header } from '../../components';
 
 @connect(
   state => ({
@@ -18,8 +18,6 @@ export default class Compose extends Component {
     create: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired
   };
-
-  static avoidMainNavbar = true;
 
   back = () => {
     // this.props.pushState('/');
@@ -41,14 +39,13 @@ export default class Compose extends Component {
       <div className={styles.container}>
         <Helmet title="Crear nueva publicación" />
 
-        <Navbar
-          background={'transparent'}
-          title={'Publicar'}
-          mainButton={{icon: 'back', action: this.back}}
-          buttons={[
-            {icon: 'image-add', action: null}
-          ]}
-        />
+        <Header context={{
+          label: 'Publicar',
+          buttons: [
+            {icon: 'back', side: 'left', action: this.back},
+            {icon: 'image-add', side: 'right', action: null}
+          ]
+        }} />
 
         <div className="content">
           <textarea

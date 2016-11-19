@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cn from 'classnames';
-import { Navbar } from '../';
+import { Header } from 'components';
 
 export default class Modal extends Component {
   static propTypes = {
@@ -15,10 +15,11 @@ export default class Modal extends Component {
 
     return (
       <div className={cn(styles.modal, { [styles.active]: this.props.active })}>
-        <Navbar
-          background="transparent"
-          mainButton={{icon: 'back', action: this.props.close}}
-        />
+        <Header context={{
+          buttons: [
+            {icon: 'back', side: 'left', action: this.props.close}
+          ]
+        }} />
 
         <div className="content">
           <div>

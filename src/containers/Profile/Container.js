@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { routeActions } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-import { Avatar, Icon, Navbar } from '../../components';
+import { Avatar, Icon, Header } from 'components';
 import classNames from 'classnames';
 
 @asyncConnect([
@@ -24,8 +24,6 @@ export default class Container extends Component {
     params: PropTypes.object
   };
 
-  static avoidMainNavbar = true;
-
   render() {
     const styles = require('./Container.scss');
     const user = this.props.profile;
@@ -35,16 +33,20 @@ export default class Container extends Component {
     } : null;
 
     return (
-      <div className={styles.sectionProfile}>
-        <Helmet title={user.displayname} />
+      <div>
 
-        <div className={styles.profileHeader} style={coverStyle}>
-          <Navbar
-            background={'transparent'}
-            mainButton={{icon: 'back', action: this.props.goBack}}
-          />
+        <Header context={{
+          label: user.displayname,
+          buttons: [
+            {icon: 'back', side: 'left', action: this.props.goBack},
+            {icon: 'bell', side: 'right'}
+          ]
+        }} />
 
-          <div>
+        <div className={styles.sectionProfile}>
+          <Helmet title={user.displayname} />
+
+          <div className={styles.profileHeader} style={coverStyle}>
             <Avatar className={styles.profileHeaderAvatar} size={100} user={user} />
             <h1 className={styles.profileHeaderName}>{user.displayname}</h1>
             <p className={styles.profileHeaderLocation}>{user.location}</p>
@@ -71,12 +73,12 @@ export default class Container extends Component {
               </div>
             </ul>
           </div>
-        </div>
 
-        <div className="profile-content">
-          {React.cloneElement(this.props.children, { profile: this.props.profile })}
-        </div>
+          <div className="profile-content">
+            {React.cloneElement(this.props.children, { profile: this.props.profile })}
+          </div>
 
+        </div>
       </div>
     );
   }
