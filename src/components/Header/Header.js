@@ -16,7 +16,11 @@ export default class Header extends Component {
     const rightSideButtons = buttons.filter(button => button.side === 'right');
 
     const Button = button => (
-      <button className={classNames(styles.button, {[styles.active]: button.active})} onClick={button.action}>
+      <button
+        name={button.icon}
+        className={classNames(styles.button, {[styles.active]: button.active})}
+        onClick={button.action}
+      >
         <Icon className={styles.icon} name={button.icon} />
       </button>
     );

@@ -20,15 +20,6 @@ $spacing-small:  4px;
 $spacing-medium: 10px;
 $spacing-big:    20px;
 
-/* media queries */
-$s-mobile:     "(max-width: 400px)";
-$mobile:       "(max-width: 649px)";
-$tablet:       "(min-width: 650px) and (max-width: 869px)";
-$not-desktop:  "(max-width: 869px)";
-$s-desktop:    "(min-width: 870px)";
-$m-desktop:    "(min-width: 1170px)";
-$b-desktop:    "(min-width: 1600px)";
-
 $bright-red:      #FF3B30;
 //var(--primary-color):            	$bright-red;
 // var(--primary-color):   #ff3b30;
@@ -76,3 +67,6 @@ $aside-background-color: #2F2F2F;
   --spacing-medium: 10px;
   --spacing-big: 20px;
 }
+
+/* media queries */
+$tablet: "(min-width: 768px)";
