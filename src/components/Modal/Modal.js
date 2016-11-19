@@ -16,6 +16,7 @@ export default class Modal extends Component {
     return (
       <div className={cn(styles.modal, { [styles.active]: this.props.active })}>
         <Header context={{
+          label: 'Spanks',
           buttons: [
             {icon: 'back', side: 'left', action: this.props.close}
           ]

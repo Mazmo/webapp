@@ -9,38 +9,23 @@ export default class Reactions extends Component {
   };
 
   render() {
-    // const styles = require('./Reactions.scss');
+    const styles = require('./Reactions.scss');
+
     return (
-      <Modal
-        active
-        close={this.props.close}
-      >
-        <div>
-          {this.props.data && this.props.data.loading &&
-            <Loading
-              theme={'light'}
-              size={'big'}
-              position={'absolute'}
-            />
-          }
-          {this.props.data && this.props.data.data &&
-            <ul>
-              {this.props.data.data.map((reaction, i) => {
-                return (
-                  <li key={i}>
-                    <Avatar
-                      user={reaction}
-                      size={32}
-                    />
-                    <Link to={`/${reaction.username}`}>
-                      {reaction.displayname}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          }
-        </div>
+      <Modal active close={this.props.close}>
+        {this.props.data && this.props.data.loading &&
+          <Loading theme="light" size="big" position="absolute" />
+        }
+        {this.props.data && this.props.data.data &&
+          <ul className={styles.list}>
+            {this.props.data.data.map((user, i) => (
+              <li className={styles.item} key={i}>
+                <Avatar className={styles.avatar} user={user} size={60} />
+                <Link className={styles.link} to={`/${user.username}`}>{user.displayname}</Link>
+              </li>
+            ))}
+          </ul>
+        }
       </Modal>
     );
   }
