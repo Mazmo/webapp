@@ -1,18 +1,18 @@
 @import '../../utils/variables';
 
-.feed-list {
-  margin-top: $header-height;
-  padding: $spacing-big;
+.container {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+  max-width: var(--desktop-width);
+  margin: var(--header-height) auto 0;
+  padding: 18pt 12pt;
 
-  /*
-  @media #{$tablet} {
-    padding: $spacing-big 15%;
+  .feed {
+    max-width: 600px;
   }
-  */
 
-  // @media #{$mobile} {
-  padding: $spacing-big $spacing-medium;
-  // }
 }
 
 .floating-buttons {

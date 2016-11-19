@@ -62,10 +62,39 @@ export default class Home extends Component {
 
   render() {
     const styles = require('./Home.scss');
+    const { publications, loadingPublications } = this.props;
 
     return (
       <div>
         <Helmet title="Home"/>
+
+        <div className={styles.container}>
+          <div className={styles.feed}>
+            {publications.map((publication, i) => {
+              return (
+                <Publication
+                  key={i}
+                  me={this.props.me}
+                  data={publication}
+                  react={this.props.reactToPublication}
+                  createComment={this.props.createComment}
+                  canCreateComment={this.props.canCreateComment}
+                  reactToComment={this.props.reactToComment}
+                  loadReactions={this.props.loadReactions}
+                />
+              );
+            })}
+
+          </div>
+        </div>
+
+        {loadingPublications &&
+          <Loading
+            theme={'light'}
+            size={'medium'}
+            position={publications.length > 0 ? 'relative' : 'absolute'}
+          />
+        }
 
         <div className={styles.floatingButtons}>
           <Link className={styles.button} to={'/compose'}>
@@ -73,29 +102,6 @@ export default class Home extends Component {
           </Link>
         </div>
 
-        <div className={styles.feedList}>
-          {this.props.publications.map((publication, i) => {
-            return (
-              <Publication
-                key={i}
-                me={this.props.me}
-                data={publication}
-                react={this.props.reactToPublication}
-                createComment={this.props.createComment}
-                canCreateComment={this.props.canCreateComment}
-                reactToComment={this.props.reactToComment}
-                loadReactions={this.props.loadReactions}
-              />
-            );
-          })}
-        </div>
-        {this.props.loadingPublications &&
-          <Loading
-            theme={'light'}
-            size={'medium'}
-            position={this.props.publications.length > 0 ? 'relative' : 'absolute'}
-          />
-        }
       </div>
     );
   }
