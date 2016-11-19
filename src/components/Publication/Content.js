@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import cn from 'classnames';
 import { FormattedRelative } from 'react-intl';
-import { Avatar, Icon, ContextMenu } from '../';
 import { Rsvp, LinkImage, Pictures, Video } from './';
 import ModalReactions from './Modals/Reactions';
+import { Avatar, Icon, ContextMenu } from 'components';
 
 export default class Content extends Component {
   static propTypes = {
@@ -56,22 +55,15 @@ export default class Content extends Component {
     const publication = this.props.data;
 
     return (
-      <div>
-        <div className={styles.feedItemHeader}>
-          <Avatar className={styles.feedItemAvatar} size={60} user={publication.author} />
-          <span className={styles.feedItemPrompt}>
-            <Link className={styles.feedItemPromptLink} to={`/${this.props.data.author.username}`}>{this.props.data.author.displayname}</Link>
-            {publication.picture_count > 0 && publication.pictures.length > 0 &&
-              <span className={styles.feedItemPromptExtra}> agregó una foto a su álbum <a className={cn(styles.feedItemPromptLink)} href="#">{publication.pictures[0].album.title}</a></span>
-            }
-            <Link className={styles.feedItemPromptDate} to={`/${this.props.data.id}`}><FormattedRelative value={publication.created_at.date} /></Link>
-          </span>
-          <div className={styles.feedItemOptions} ref="contexttrigger">
-            <Icon
-              className={styles.feedItemOptionsIcon}
-              name="dots-vertical"
-              onClick={this.toggleContext}
-            />
+      <div className={styles.publication}>
+        <div className={styles.header}>
+          <Avatar className={styles.avatar} size={60} user={publication.author} />
+          <div className={styles.prompt}>
+            <Link className={styles.link} to={`/${publication.author.username}`}>{publication.author.displayname}</Link>
+            <Link className={styles.date} to={`/publications/${publication.id}`}><FormattedRelative value={publication.created_at.date} /></Link>
+          </div>
+          <div className={styles.options} ref="contexttrigger">
+            <Icon className={styles.optionsIcon} name="dots-vertical" onClick={this.toggleContext} />
             <ContextMenu visible={this.state.showContext}>
               <span onClick={this.openModalReactions}>Ver spanks</span>
               <a>Editar</a>
@@ -79,27 +71,23 @@ export default class Content extends Component {
             </ContextMenu>
           </div>
         </div>
-        <div className={styles.feedItemContent}>
+        <div className={styles.content}>
           {publication.rsvp && <Rsvp data={publication} />}
           {this.props.data.link_image && !this.props.data.video && <LinkImage data={publication} />}
           {this.props.data.picture_count > 0 && <Pictures data={publication} />}
           {this.props.data.video && <Video data={publication} />}
-          <p className={styles.feedItemContentText} dangerouslySetInnerHTML={{__html: (publication.message + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br />' + '$2')}}></p>
+          <p className={styles.text} dangerouslySetInnerHTML={{__html: (publication.message + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br />' + '$2')}}></p>
           {publication.publication_share &&
-            <div className={styles.feedItemContentShared}>
-              <div className={styles.feedItemContentSharedPublication}><Content data={publication.publication_share} /></div>
-            </div>
+            <div className={styles.shared}><Content data={publication.publication_share} /></div>
           }
         </div>
 
-        <div>
-          {this.state.modals.reactions &&
-            <ModalReactions
-              close={this.closeModalReactions}
-              data={this.props.data.reactions}
-            />
-          }
-        </div>
+        {this.state.modals.reactions &&
+          <ModalReactions
+            close={this.closeModalReactions}
+            data={this.props.data.reactions}
+          />
+        }
       </div>
     );
   }
