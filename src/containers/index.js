@@ -8,4 +8,5 @@ export ProfileAlbums from './Profile/Albums';
 export ProfileChecklist from './Profile/Checklist';
 export ProfilePublications from './Profile/Publications';
 export Messenger from './Messenger/Messenger';
+export Account from './Account/Account';
 export NotFound from './NotFound/NotFound';

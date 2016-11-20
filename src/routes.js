@@ -12,7 +12,8 @@ import {
   ProfileChecklist,
   ProfilePublications,
   Messenger,
-  NotFound
+  NotFound,
+  Account
 } from 'containers';
 import MessengerNew from 'containers/Messenger/New';
 
@@ -62,6 +63,7 @@ export default (store) => {
         <Route path="compose" component={Compose} />
         <Route path="messenger/new" component={MessengerNew} />
         <Route path="messenger/:id" component={Messenger} />
+        <Route path="account" component={Account} />
       </Route>
 
       { /* Routes */ }
