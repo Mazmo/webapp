@@ -163,7 +163,7 @@ export default class App extends Component {
               label={headerLabel}
               buttons={[
                 {icon: 'nav', side: 'left', action: this.toggleAside},
-                {icon: 'bell', side: 'right', active: dropdowns.notifications, action: this.toggleNotifications},
+                {icon: 'bell', side: 'right', active: dropdowns.notifications, action: this.toggleNotifications, counter: this.props.user.alerts_unread},
                 {icon: 'message', side: 'right', active: dropdowns.messages, action: this.toggleMessages}
               ]}
             />
