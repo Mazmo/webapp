@@ -157,15 +157,17 @@ export default class App extends Component {
         <div className={styles.app}>
           <Helmet {...config.app.head}/>
 
-          {user && <Header context={{
-            logo: !dropdownActive,
-            label: headerLabel,
-            buttons: [
-              {icon: 'nav', side: 'left', action: this.toggleAside},
-              {icon: 'bell', side: 'right', active: dropdowns.notifications, action: this.toggleNotifications},
-              {icon: 'message', side: 'right', active: dropdowns.messages, action: this.toggleMessages}
-            ]
-          }} />}
+          {user &&
+            <Header
+              logo={!dropdownActive}
+              label={headerLabel}
+              buttons={[
+                {icon: 'nav', side: 'left', action: this.toggleAside},
+                {icon: 'bell', side: 'right', active: dropdowns.notifications, action: this.toggleNotifications},
+                {icon: 'message', side: 'right', active: dropdowns.messages, action: this.toggleMessages}
+              ]}
+            />
+          }
 
           {user &&
             <div>

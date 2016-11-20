@@ -39,13 +39,13 @@ export default class Compose extends Component {
       <div className={styles.container}>
         <Helmet title="Crear nueva publicación" />
 
-        <Header context={{
-          label: 'Publicar',
-          buttons: [
+        <Header
+          label={'Publicar'}
+          buttons={[
             {icon: 'back', side: 'left', action: this.back},
             {icon: 'image-add', side: 'right', action: null}
-          ]
-        }} />
+          ]}
+        />
 
         <div className="content">
           <textarea

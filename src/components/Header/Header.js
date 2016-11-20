@@ -5,13 +5,15 @@ import { Icon } from 'components';
 export default class Header extends Component {
 
   static propTypes = {
-    context: PropTypes.object.isRequired
+    buttons: PropTypes.array,
+    label: PropTypes.string,
+    logo: PropTypes.bool
   };
 
   render() {
     const styles = require('./Header.scss');
 
-    const { buttons, label, logo } = this.props.context;
+    const { buttons, label, logo } = this.props;
     const leftSideButtons = buttons.filter(button => button.side === 'left');
     const rightSideButtons = buttons.filter(button => button.side === 'right');
 

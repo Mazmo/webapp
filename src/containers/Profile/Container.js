@@ -35,13 +35,13 @@ export default class Container extends Component {
     return (
       <div>
 
-        <Header context={{
-          label: user.displayname,
-          buttons: [
+        <Header
+          label={user.displayname}
+          buttons={[
             {icon: 'back', side: 'left', action: this.props.goBack},
             {icon: 'bell', side: 'right'}
-          ]
-        }} />
+          ]}
+        />
 
         <div className={styles.sectionProfile}>
           <Helmet title={user.displayname} />
